@@ -79,6 +79,17 @@
             <joint name='boxx_ori' type='hinge' axis='1 0 0' limited='false' damping = "0.1"/>
         </body>
 
+        <body name="target_cylinder" pos="0.35 0 0" euler="0 0 0">
+            <geom name="target_cylinder" type="cylinder" size=".025 .045" friction = "2 2 2" solimp="0.99 0.99 0.01 0.5 6" rgba="1 1 1 1" material = "wood_object"/>
+            <inertial pos="0.000000 0.000000 0" mass="0.3" diaginertia="0.001 0.001 0.001"/>
+            <joint name='boxz_cylinder' type='slide' axis='0 0 1' limited='false' damping = "0.1"/>
+			<joint name='boxy_cylinder' type='slide' axis='0 1 0' limited='false' damping = "0.1"/>
+			<joint name='boxx_cylinder' type='slide' axis='1 0 0' limited='false' damping = "0.1"/>
+            <joint name='boxz_ori_cylinder' type='hinge' axis='0 0 1' limited='false' damping = "0.1"/>
+            <joint name='boxy_ori_cylinder' type='hinge' axis='0 1 0' limited='false' damping = "0.1"/>
+            <joint name='boxx_ori_cylinder' type='hinge' axis='1 0 0' limited='false' damping = "0.1"/>
+        </body>
+
         <body name="path_planner_orientation" pos="0 0 -0.15" mocap="true">
             <geom type="box" size=".02 .04 .06" rgba="0 1 1 .5" contype="32" conaffinity="32"/>
         </body>

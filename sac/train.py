@@ -21,6 +21,7 @@ from replay import ReplayBuffer
 from normalised_action import NormalizedActions
 from sac_trainer import SAC_Trainer
 from demonstration import scripted_policy
+from Randomizer import body_swap as bs
 from Randomizer.mujoco_randomizer import Randomizer
 
 import argparse
@@ -28,7 +29,7 @@ import argparse
 dir_ = os.path.dirname(os.getcwd())
 
 arm_ = "jaco2.xml"
-visualize = False
+visualize = True
 env = Mujoco_prototype(dir_,arm_, visualize)
 
 
@@ -46,7 +47,7 @@ max_episodes  = 500000
 max_steps = 5
 
 frame_idx   = 0
-batch_size  = 450
+batch_size  = 250
 explore_steps = 0  # for random action sampling in the beginning of training
 update_itr = 1
 AUTO_ENTROPY=True
@@ -72,10 +73,11 @@ randomizer = Randomizer(env.interface)
 
 #body randomizer
 #BodyID
-starting_bodyID = 2
-number_bodies = 1
-body = randomizer.body(starting_bodyID, number_bodies)
+body_cube = randomizer.body(2)
+body_cylinder = randomizer.body(3)
 light = randomizer.light()
+
+_, _, _ = bs.body_swap(body_cube, body_cylinder)
 
 
 # training loop
@@ -87,8 +89,7 @@ for eps in range(max_episodes):
     env.restart()
 
     #randomize position
-    target_pos = body.modify_xyz(starting_bodyID, [0.05, 0.05, 0])
-    target_orient = body.modify_euler(starting_bodyID ,[0, 0, 1.57])
+    target_pos, target_orient, size = bs.body_swap(body_cube, body_cylinder)
 
     light._rand_textures()
     light._rand_lights()
@@ -153,7 +154,7 @@ for eps in range(max_episodes):
         
         if len(replay_buffer) > batch_size:
             for i in range(update_itr):
-                _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.1*action_dim)
+                _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.05*action_dim)
 
 
         if done:

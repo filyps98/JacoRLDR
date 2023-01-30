@@ -8,8 +8,8 @@ class Randomizer():
         self.model = interface.model
         self.sim = interface.sim
 
-    def body(self,starting_index, number_obj):
-        return Body(self.model, starting_index, number_obj)
+    def body(self,index):
+        return Body(self.model, index)
     
     def light(self):
         return Light(self.sim)

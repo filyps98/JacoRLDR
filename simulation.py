@@ -95,7 +95,7 @@ class Mujoco_prototype():
         
             pre_grip = np.copy(self.pos_final[6:])
 
-            for i in range(3000):
+            for i in range(800):
                 
                 #generate next step of the path planner
                 pos, vel = position_planner.next()
@@ -168,18 +168,25 @@ class Mujoco_prototype():
                         reward_gripper = 1 - gripper_sum/24
 
                         #Adding Force reward and normalizing it. I include the amplitude of the fingers
-                        positive_force_x = math.sqrt(np.sum(force[0][:]**2))/30
-                        positive_force_y = math.sqrt(np.sum(force[1][:]**2))/30
-                        positive_force_z = math.sqrt(np.sum(force[2][:]**2))/30
+                        #positive_force_x = math.sqrt(np.sum(force[0][:]**2))/30
+                        #positive_force_y = math.sqrt(np.sum(force[1][:]**2))/30
+                        #positive_force_z = math.sqrt(np.sum(force[2][:]**2))/30
 
-                        reward_from_force = (positive_force_x + positive_force_y + positive_force_z)/3
+                        #reward_from_force = (positive_force_x + positive_force_y + positive_force_z)/3
 
-                        reward_from_force = reward_from_force + reward_gripper
+                        #reward_from_force = reward_from_force + reward_gripper
 
-                        #reward_from_force = reward_gripper
+                        reward_from_force = reward_gripper
 
                         #Adding Resulting Height
-                        resulting_height = target[2]
+                        #Initialize Resulting Height
+                        resulting_height = 0
+
+                        if target[2] < 0.2:
+                            resulting_height = target[2]
+                        else:
+                            resulting_height = 0.2
+
                         reward_from_height = 10*resulting_height
 
                     reward = reward_from_distance + reward_from_force + reward_from_height
@@ -232,14 +239,16 @@ class Mujoco_prototype():
 
         #image
         image = self.get_image()
-        force = self.get_gripper_forces()
-        force = np.reshape(force, -1)
+        #force = self.get_gripper_forces()
+        #force = np.reshape(force, -1)
         pos_hand = self.get_hand_pos()
         
         
         orient_hand = np.array(self.get_hand_orient())
         
-        hand_status = np.concatenate((force, pos_hand, orient_hand), axis = None)
+        #hand_status = np.concatenate((force, pos_hand, orient_hand), axis = None)
+
+        hand_status = np.concatenate((pos_hand, orient_hand), axis = None)
 
         return image, hand_status
 

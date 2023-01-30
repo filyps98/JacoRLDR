@@ -15,6 +15,7 @@ from replay import ReplayBuffer
 from normalised_action import NormalizedActions
 from sac_trainer import SAC_Trainer
 from demonstration import scripted_policy
+from Randomizer import body_swap as bs
 from Randomizer.mujoco_randomizer import Randomizer
 
 import argparse
@@ -65,10 +66,11 @@ randomizer = Randomizer(env.interface)
 
 #body randomizer
 #BodyID
-starting_bodyID = 2
-number_bodies = 1
-body = randomizer.body(starting_bodyID, number_bodies)
+body_cube = randomizer.body(2)
+body_cylinder = randomizer.body(3)
 light = randomizer.light()
+
+_, _, _ = bs.body_swap(body_cube, body_cylinder)
 
 sac_trainer.load_model(model_path)
 

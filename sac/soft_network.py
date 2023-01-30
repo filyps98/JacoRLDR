@@ -23,7 +23,7 @@ class SoftQNetwork(nn.Module):
         self.linear1 = nn.Linear(256,224)
 
         #Linear Part
-        self.linear_1 = nn.Linear(15,64)
+        self.linear_1 = nn.Linear(6,64)
         self.linear_2 = nn.Linear(64,64)
         self.linear_3 = nn.Linear(64,32)
 
