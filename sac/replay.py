@@ -1,4 +1,6 @@
 import random 
+import torch
+import os
 import numpy as np 
 
 class ReplayBuffer:
@@ -11,7 +13,15 @@ class ReplayBuffer:
         if len(self.buffer) < self.capacity:
             self.buffer.append(None)
         self.buffer[self.position] = (state_image, state_hand, action, reward, next_state_image, next_state_hand, done)
+        
+        if (int((self.position + 1) % self.capacity) == 0):
+        	if(!os.path.isfile("Dataset.pt")):
+        		torch.save(self.buffer,"Dataset.pt")
+        	else:
+        		torch.save(torch.load("Dataset.pt") + self.buffer,"Dataset.pt")
+        	
         self.position = int((self.position + 1) % self.capacity)  # as a ring buffer
+        
     
     def sample(self, batch_size):
         batch = random.sample(self.buffer, batch_size)
