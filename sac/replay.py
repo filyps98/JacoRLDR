@@ -40,22 +40,21 @@ class ReplayBuffer:
             self.buffer_complete = True
             #Create dataset if it doesn't exist
             if(os.path.isfile("Dataset.pt") == False):
-        	    torch.save(self.buffer,"Dataset.pt")
+                torch.save(self.buffer,"Dataset.pt")
             else:
                 #Or add it in the Queue
                 torch.save(torch.load("Dataset.pt") + self.buffer,"Dataset.pt")
-        	
+            
         self.position = int((self.position + 1) % self.capacity)  # as a ring buffer
         
     
     def sample(self, batch_size):
     
-    	ratio = int(math.floor((self.position+1)/self.capacity))*100
-    	
-        if(ratio%10 == 0 and self.isthereDataset):
-    	
-            if (self.buffer_complete != True):
+        ratio = int(math.floor((self.position+1)/self.capacity))*100
         
+        if(ratio%10 == 0 and self.isthereDataset):
+            if (self.buffer_complete != True):
+
                 batch_dataset = random.sample(self.dataset,self.capacity - self.position)
                 self.buffer_combined = self.buffer + batch_dataset
             
@@ -63,7 +62,7 @@ class ReplayBuffer:
             
                 batch_partition = math.floor(int((self.capacity)*self.final_partition))
                 self.buffer_combined = random.sample(self.buffer, batch_partition) + random.sample(self.dataset, self.capacity - batch_partition)
-	
+    
 
         batch = random.sample(self.buffer_combined, batch_size)
         state_image, state_hand, action, reward, next_state_image, next_state_hand, done = map(np.stack, zip(*batch)) # stack for each element

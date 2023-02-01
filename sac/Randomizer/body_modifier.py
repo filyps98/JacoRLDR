@@ -19,9 +19,6 @@ class Body():
     
     def modify_xyz(self, range_xyz):
         
-        print("Starting position")
-        print(self.starting_xyz)
-        print("end")
         target_xyz = 2*(np.random.rand(3)-0.5) * np.array(range_xyz) + self.starting_xyz
         self.model.body_pos[self.index] = target_xyz
 
@@ -49,8 +46,6 @@ class Body():
         
         if self.geom_type == 6:
             target_size = 2*(np.random.rand(3)-0.5) * np.array(range_size) + self.starting_size
-
-        print(self.model.geom_size[self.geom_ID])
 
         self.model.geom_size[self.geom_ID] = target_size
         

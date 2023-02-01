@@ -2,6 +2,7 @@ import numpy as np
 
 def body_swap(cube, cylinder):
 
+    geom_id = 0
     if np.random.rand(1) > 0.5:
 
         target_xyz = cube.modify_xyz([0.05, 0.05, 0])
@@ -9,6 +10,7 @@ def body_swap(cube, cylinder):
         size = cube.modify_size([0.01, 0.01, 0.01])
 
         cylinder.isolate_object()
+        geom_id = 4
 
         
 
@@ -18,5 +20,6 @@ def body_swap(cube, cylinder):
         size = cylinder.modify_size([0.01, 0.01, 0])
 
         cube.isolate_object()
+        geom_id = 3
 
-    return target_xyz, target_orientation, size
+    return geom_id, target_xyz, target_orientation, size

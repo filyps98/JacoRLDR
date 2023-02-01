@@ -29,7 +29,7 @@ env = Mujoco_prototype(dir_,arm_, visualize)
 wandb.init(config = {"algorithm": "JacoRL_test_time"}, project="JacoRL_test_time", entity="pippo98")
 
 
-replay_buffer_size = 2e5
+replay_buffer_size = 5000000
 replay_buffer = ReplayBuffer(replay_buffer_size)
 
 action_dim = 7
@@ -40,7 +40,7 @@ max_episodes  = 500000
 max_steps = 5
 
 frame_idx   = 0
-batch_size  = 450
+batch_size  = 500
 explore_steps = 0  # for random action sampling in the beginning of training
 update_itr = 1
 AUTO_ENTROPY=True
@@ -70,7 +70,6 @@ body_cube = randomizer.body(2)
 body_cylinder = randomizer.body(3)
 light = randomizer.light()
 
-_, _, _ = bs.body_swap(body_cube, body_cylinder)
 
 sac_trainer.load_model(model_path)
 
@@ -83,8 +82,7 @@ for eps in range(10):
     env.restart()
 
     #randomize position
-    target_pos = body.modify_xyz(starting_bodyID, [0.05, 0.05, 0])
-    target_orient = body.modify_euler(starting_bodyID,[0, 0, 1.57])
+    geom_body_ID, target_pos, target_orient, size = bs.body_swap(body_cube, body_cylinder)
 
     light._rand_textures()
     light._rand_lights()
@@ -109,7 +107,7 @@ for eps in range(10):
     scripted_action = np.resize(scripted_action,(9))
     
 
-    _, _, _, _ = env.step_sim(scripted_action, -1)
+    _, _, _, _ = env.step_sim(scripted_action, -1,  geom_body_ID, target_pos)
 
 
     action = np.zeros(9)
@@ -122,7 +120,7 @@ for eps in range(10):
         #except the fore grippers that have a greater action space
         action[6:] = ratio_residual_force*action_RL[6]*np.ones(3) + ratio_residual_force
 
-        next_state_image, next_state_hand, reward, done = env.step_sim(action, step)
+        next_state_image, next_state_hand, reward, done = env.step_sim(action, step, geom_body_ID, target_pos) 
 
 
         episode_reward += reward

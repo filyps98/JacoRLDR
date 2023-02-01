@@ -36,7 +36,7 @@ env = Mujoco_prototype(dir_,arm_, visualize)
 wandb.init(config = {"algorithm": "JacoRL2"}, project="JacoRL2", entity="pippo98")
 
 
-replay_buffer_size = 50
+replay_buffer_size = 5000000
 replay_buffer = ReplayBuffer(replay_buffer_size)
 
 action_dim = 7
@@ -48,7 +48,7 @@ max_steps = 5
 
 
 frame_idx   = 0
-batch_size  = 10
+batch_size  = 500
 explore_steps = 0  # for random action sampling in the beginning of training
 initial_update_itr = 20
 update_itr = 3
@@ -79,12 +79,9 @@ body_cube = randomizer.body(2)
 body_cylinder = randomizer.body(3)
 light = randomizer.light()
 
-_, _, _ = bs.body_swap(body_cube, body_cylinder)
 
-
-# training loop
-    
-if(len(replay_buffer) > (replay_buffer_size - 1)/2):
+# pre-training loop
+if(len(replay_buffer) > 0):
     for i in range(initial_update_itr):
         _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.05*action_dim)
 
@@ -94,7 +91,7 @@ for eps in range(max_episodes):
     env.restart()
 
     #randomize position
-    target_pos, target_orient, size = bs.body_swap(body_cube, body_cylinder)
+    geom_body_ID, target_pos, target_orient, size = bs.body_swap(body_cube, body_cylinder)
 
     light._rand_textures()
     light._rand_lights()
@@ -107,7 +104,6 @@ for eps in range(max_episodes):
     #target_estimated_pos = (target_pos + np.array([0 , 0 , 0.1])).tolist()
     target_estimated_pos = (target_pos + 0.05*np.random.rand(3)+np.array([0 , 0 , 0.1])).tolist()
     target_estimated_orientation = list(target_orient)
-    #target_estimated_orientation = [0, 0, 0]
     initial_gripper_force = [5,5,5]
 
     #I initialize and resize the first action
@@ -118,7 +114,7 @@ for eps in range(max_episodes):
     scripted_action = np.resize(scripted_action,(9))
     
 
-    _, _, _, _ = env.step_sim(scripted_action, -1)
+    _, _, _, _ = env.step_sim(scripted_action, -1,  geom_body_ID, target_pos)
 
 
     action = np.zeros(9)
@@ -143,8 +139,7 @@ for eps in range(max_episodes):
         action[6:] = ratio_residual_force*action_RL[6]*np.ones(3) + ratio_residual_force
 
 
-        next_state_image, next_state_hand, reward, done = env.step_sim(action, step)
-            # env.render()       
+        next_state_image, next_state_hand, reward, done = env.step_sim(action, step, geom_body_ID, target_pos)       
         
             
         replay_buffer.push(state_image, state_hand, action_RL, reward, next_state_image, next_state_hand, done)

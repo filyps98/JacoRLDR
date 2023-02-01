@@ -42,7 +42,6 @@ class TextureModder(mujoco_py.modder.TextureModder):
 
     def set_stripes(self, name, rgb1, rgb2):
         bitmap = self.get_texture(name).bitmap
-        print(name)
         stp1, stp2 = self.get_stripe_matrices(name)
 
         rgb1 = np.asarray(rgb1).reshape([1, 1, -1])
