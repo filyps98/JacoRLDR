@@ -1,0 +1,819 @@
+
+cuda:0
+Soft Q Network (1,2):  SoftQNetwork(
+  (batch_norm): BatchNorm2d(3, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (conv1): Conv2d(3, 64, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling1): MaxPool2d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (conv2): Conv2d(64, 128, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (conv_gen1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+  (conv3): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2))
+  (conv_gen2): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+  (linear1): Linear(in_features=256, out_features=224, bias=True)
+  (linear_1): Linear(in_features=6, out_features=64, bias=True)
+  (linear_2): Linear(in_features=64, out_features=64, bias=True)
+  (linear_3): Linear(in_features=64, out_features=32, bias=True)
+  (linear_state_combined): Linear(in_features=256, out_features=512, bias=True)
+  (linear_combined_1): Linear(in_features=550, out_features=256, bias=True)
+  (linear_combined_2): Linear(in_features=256, out_features=128, bias=True)
+  (linear_action_1): Linear(in_features=7, out_features=64, bias=True)
+  (linear_action_2): Linear(in_features=64, out_features=38, bias=True)
+  (linear_final): Linear(in_features=128, out_features=1, bias=True)
+)
+Policy Network:  PolicyNetwork(
+  (batch_norm): BatchNorm2d(3, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (conv1): Conv2d(3, 64, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling1): MaxPool2d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (conv2): Conv2d(64, 128, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (conv_gen1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+  (conv3): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2))
+  (conv_gen2): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+  (linear1): Linear(in_features=256, out_features=480, bias=True)
+  (linear_1): Linear(in_features=6, out_features=64, bias=True)
+  (linear_2): Linear(in_features=64, out_features=64, bias=True)
+  (linear_3): Linear(in_features=64, out_features=32, bias=True)
+  (linear_combined_1): Linear(in_features=512, out_features=1024, bias=True)
+  (linear_combined_2): Linear(in_features=1024, out_features=512, bias=True)
+  (mean_linear): Linear(in_features=512, out_features=7, bias=True)
+  (log_std_linear): Linear(in_features=512, out_features=7, bias=True)
+)
+Starting position
+[0.35 0.   0.  ]
+end
+[0.025 0.045 0.   ]
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01954837 0.04724373 0.        ]
+Episode:  0 | Episode Reward:  0.19683360850954998
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02948193 0.0429902  0.        ]
+Episode:  1 | Episode Reward:  -0.9132809940874846
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03283815 0.0350788  0.        ]
+Episode:  2 | Episode Reward:  -0.8519034950961806
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03206123 0.03879901 0.        ]
+Episode:  3 | Episode Reward:  0.22049238515883504
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02  0.055 0.04 ]
+Episode:  4 | Episode Reward:  1.0226401291878955
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01698097 0.04589662 0.03429583]
+floor_foam_block
+Episode:  5 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02183183 0.05231735 0.        ]
+Episode:  6 | Episode Reward:  0.19304732142205766
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01525768 0.05095752 0.        ]
+Episode:  7 | Episode Reward:  0.1983444217904457
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01478392 0.06073963 0.04887009]
+thumb_proximal
+Episode:  8 | Episode Reward:  -0.498942203746084
+Starting position
+[0.35 0.   0.  ]
+end
+[0.0286369  0.04975339 0.        ]
+floor_foam_block
+Episode:  9 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02748491 0.05300052 0.        ]
+floor_foam_block
+Episode:  10 | Episode Reward:  0.20854883397447377
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01041723 0.04645826 0.04137065]
+floor_foam_block
+Episode:  11 | Episode Reward:  7.994670864985834
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02216221 0.03675652 0.        ]
+floor_foam_block
+target
+thumb_proximal
+Episode:  12 | Episode Reward:  -0.8323266193398048
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02363554 0.03897906 0.        ]
+floor_foam_block
+target
+Episode:  13 | Episode Reward:  0.20909473161065292
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02666719 0.03650372 0.        ]
+Episode:  14 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02698868 0.05465841 0.        ]
+thumb_proximal
+Episode:  15 | Episode Reward:  -0.8540642162627385
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02960448 0.05290877 0.        ]
+Episode:  16 | Episode Reward:  0.20180438665086525
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01691965 0.05345305 0.        ]
+floor_foam_block
+Episode:  17 | Episode Reward:  0.18123371127656834
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01920696 0.06040493 0.03822513]
+Episode:  18 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01811635 0.05089586 0.04646329]
+floor_foam_block
+Episode:  19 | Episode Reward:  2.0314759264649496
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02989964 0.03554764 0.        ]
+Episode:  20 | Episode Reward:  -0.9193926429151087
+Starting position
+[0.35 0.   0.  ]
+end
+[0.0154654  0.05124188 0.04744526]
+Episode:  21 | Episode Reward:  0.8573844905559208
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02162787 0.04716145 0.0389328 ]
+Episode:  22 | Episode Reward:  -0.011146476782265768
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02643011 0.04777333 0.04050393]
+floor_foam_block
+thumb_proximal
+Episode:  23 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02045777 0.04960985 0.0427709 ]
+Episode:  24 | Episode Reward:  1.8703984987093223
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02895883 0.04561909 0.        ]
+Episode:  25 | Episode Reward:  -0.959663482714557
+Starting position
+[0.35 0.   0.  ]
+end
+[0.0246665  0.04147719 0.        ]
+floor_foam_block
+thumb_proximal
+Episode:  26 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01649225 0.06146324 0.03156259]
+floor_foam_block
+Episode:  27 | Episode Reward:  1.0268044650272237
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01613531 0.06179396 0.03260558]
+target
+Episode:  28 | Episode Reward:  1.0047172634266526
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01270566 0.05170172 0.04999923]
+Episode:  29 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01949773 0.04726204 0.        ]
+Episode:  30 | Episode Reward:  -0.9163595873316422
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01897361 0.03846268 0.        ]
+Episode:  31 | Episode Reward:  0.21881187448820508
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01693356 0.04553946 0.03563497]
+Episode:  32 | Episode Reward:  6.4148520148581225
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02113463 0.05860271 0.04942011]
+Episode:  33 | Episode Reward:  0.6427185655482393
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03043712 0.03567982 0.        ]
+Episode:  34 | Episode Reward:  0.19255407756077575
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02420457 0.04010443 0.        ]
+target
+thumb_proximal
+Episode:  35 | Episode Reward:  0.18771488775301717
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03217216 0.05155393 0.        ]
+Episode:  36 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.0308672  0.04993228 0.        ]
+Episode:  37 | Episode Reward:  0.1918508645909656
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02962263 0.06405691 0.03707816]
+Episode:  38 | Episode Reward:  0.587759824612033
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02323492 0.05938116 0.03307395]
+thumb_proximal
+Episode:  39 | Episode Reward:  0.07795347610005288
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01750211 0.0549094  0.        ]
+floor_foam_block
+target
+Episode:  40 | Episode Reward:  0.21978426499993375
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02357493 0.05237124 0.03501633]
+thumb_proximal
+Episode:  41 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02771979 0.04137562 0.        ]
+target
+Episode:  42 | Episode Reward:  0.22542038982170517
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02664258 0.05286827 0.04226083]
+floor_foam_block
+Episode:  43 | Episode Reward:  1.914070582717986
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01477049 0.05955733 0.04045014]
+thumb_proximal
+Episode:  44 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03094367 0.04672548 0.        ]
+Episode:  45 | Episode Reward:  -0.8691065545476835
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02226957 0.05016019 0.        ]
+target
+Episode:  46 | Episode Reward:  -0.9593347082542644
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01614606 0.04385743 0.        ]
+Episode:  47 | Episode Reward:  -0.9175842074288306
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02233862 0.047355   0.        ]
+Episode:  48 | Episode Reward:  0.21026820666376883
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01295727 0.05345346 0.0365301 ]
+thumb_proximal
+Episode:  49 | Episode Reward:  1.1103337226107701
+Starting position
+[0.35 0.   0.  ]
+end
+[0.020423   0.04659536 0.03961267]
+floor_foam_block
+target
+Episode:  50 | Episode Reward:  -0.7838400276757485
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02838698 0.05665927 0.03356395]
+Episode:  51 | Episode Reward:  -0.5112357069260954
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02497008 0.04116465 0.        ]
+floor_foam_block
+Episode:  52 | Episode Reward:  0.22161064032362904
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01935682 0.05657736 0.04766639]
+thumb_proximal
+Episode:  53 | Episode Reward:  1.8932786077929589
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02973133 0.04320858 0.        ]
+Episode:  54 | Episode Reward:  0.21210846532435101
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03155747 0.04676222 0.        ]
+Episode:  55 | Episode Reward:  -0.9576942201595141
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02674098 0.04222734 0.        ]
+target
+Episode:  56 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02733785 0.04158472 0.        ]
+Episode:  57 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.0328607  0.05291755 0.        ]
+target
+thumb_proximal
+Episode:  58 | Episode Reward:  -0.9606552426539634
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02740252 0.06184074 0.03151851]
+target
+Episode:  59 | Episode Reward:  -0.2681831965374165
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01293705 0.05525497 0.04775357]
+floor_foam_block
+Episode:  60 | Episode Reward:  0.40858260618556574
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02592458 0.0577491  0.0357318 ]
+floor_foam_block
+Episode:  61 | Episode Reward:  -0.2938615495071033
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01965374 0.04226347 0.        ]
+floor_foam_block
+Episode:  62 | Episode Reward:  -0.9174283536205023
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01518287 0.05453595 0.03776859]
+target
+Episode:  63 | Episode Reward:  1.5500579851297513
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01168872 0.04619458 0.03875805]
+target
+Episode:  64 | Episode Reward:  0.5205600691285088
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01844169 0.03921135 0.        ]
+floor_foam_block
+Episode:  65 | Episode Reward:  -0.9200255610360122
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02992255 0.04844603 0.        ]
+floor_foam_block
+Episode:  66 | Episode Reward:  -0.9223074827570101
+Starting position
+[0.35 0.   0.  ]
+end
+[0.0194177  0.04727827 0.        ]
+target
+Episode:  67 | Episode Reward:  0.20266994331277371
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02495699 0.05233473 0.03308118]
+thumb_proximal
+Episode:  68 | Episode Reward:  0.10399028043570402
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01835705 0.05824711 0.04372392]
+floor_foam_block
+target
+Episode:  69 | Episode Reward:  2.256772740028408
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01438194 0.06493842 0.04160458]
+Episode:  70 | Episode Reward:  0.2303687094831839
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02108353 0.04522027 0.03505373]
+Episode:  71 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01976387 0.05465034 0.        ]
+floor_foam_block
+Episode:  72 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02811844 0.04599209 0.04389317]
+target
+Episode:  73 | Episode Reward:  -0.39935458027332515
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01668366 0.05221751 0.        ]
+Episode:  74 | Episode Reward:  -0.9066140478920524
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03298656 0.03842862 0.        ]
+Episode:  75 | Episode Reward:  0.18044975071621644
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02017536 0.04611116 0.03760642]
+Episode:  76 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03131266 0.04808356 0.        ]
+Episode:  77 | Episode Reward:  -0.8800921567630383
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01985372 0.04201859 0.        ]
+Episode:  78 | Episode Reward:  0.2217532765931717
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01266667 0.0455604  0.03211937]
+target
+Episode:  79 | Episode Reward:  1.0471636051500186
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02921723 0.0506439  0.        ]
+Episode:  80 | Episode Reward:  0.23670998858812645
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01338461 0.05032352 0.03344333]
+thumb_proximal
+Episode:  81 | Episode Reward:  -0.33876039744617703
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02564033 0.04714875 0.        ]
+floor_foam_block
+Episode:  82 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.0119221  0.04882162 0.04356739]
+Episode:  83 | Episode Reward:  -0.1667466613138726
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01869378 0.04792042 0.03914213]
+Episode:  84 | Episode Reward:  -0.5159443574664875
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02616338 0.03580164 0.        ]
+target
+Episode:  85 | Episode Reward:  -0.9603074660202185
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03217065 0.03632455 0.        ]
+floor_foam_block
+Episode:  86 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03498541 0.04091083 0.        ]
+thumb_proximal
+Episode:  87 | Episode Reward:  -0.9601169554122345
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03316797 0.05012771 0.        ]
+thumb_proximal
+Episode:  88 | Episode Reward:  0.18601302224986566
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01463272 0.05447576 0.04027313]
+floor_foam_block
+Episode:  89 | Episode Reward:  0.37734193658361215
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01743529 0.05625702 0.03711461]
+thumb_proximal
+Episode:  90 | Episode Reward:  0.613578724099967
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02422226 0.0367868  0.        ]
+floor_foam_block
+Episode:  91 | Episode Reward:  -0.9115134290292177
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01573636 0.03882883 0.        ]
+Episode:  92 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02636004 0.04776348 0.        ]
+Episode:  93 | Episode Reward:  -0.8286121725687783
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02552268 0.04380397 0.        ]
+Episode:  94 | Episode Reward:  0.1911835944107783
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01015652 0.05733911 0.03573949]
+floor_foam_block
+Episode:  95 | Episode Reward:  1.710089161869238
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03199221 0.03702685 0.        ]
+Episode:  96 | Episode Reward:  0.19986345157977237
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01376335 0.05106082 0.0318472 ]
+floor_foam_block
+Episode:  97 | Episode Reward:  3.85085795944274
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01537114 0.05026453 0.        ]
+Episode:  98 | Episode Reward:  -0.9610982154154092
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01000363 0.05779253 0.03652131]
+Episode:  99 | Episode Reward:  0.44266606127115526
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02854744 0.0518718  0.        ]
+Episode:  100 | Episode Reward:  0.19951686818324577
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01806922 0.0534288  0.        ]
+Episode:  101 | Episode Reward:  0.2192669354889028
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02470281 0.04896792 0.        ]
+Episode:  102 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03467171 0.0432425  0.        ]
+Episode:  103 | Episode Reward:  0.2228282190721573
+Starting position
+[0.35 0.   0.  ]
+end
+[0.0199533  0.06024326 0.0343828 ]
+Episode:  104 | Episode Reward:  1.6299877235242253
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01514924 0.04960104 0.        ]
+Episode:  105 | Episode Reward:  0.22288406985639392
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02340323 0.0523619  0.        ]
+Episode:  106 | Episode Reward:  -0.8709156554123793
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01521041 0.06095762 0.03941978]
+floor_foam_block
+Episode:  107 | Episode Reward:  -0.3163616420400036
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01730113 0.0446774  0.        ]
+floor_foam_block
+target
+thumb_proximal
+Episode:  108 | Episode Reward:  -0.9593191755540299
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02936505 0.04671148 0.        ]
+Episode:  109 | Episode Reward:  -0.9211294209459597
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01795298 0.05257272 0.04014055]
+Episode:  110 | Episode Reward:  2.3585542390244187
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02039321 0.05859123 0.04688414]
+target
+Episode:  111 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02534158 0.03519442 0.        ]
+target
+Episode:  112 | Episode Reward:  0.24973401985536975
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01293447 0.05136677 0.04109321]
+thumb_proximal
+Episode:  113 | Episode Reward:  -0.5821752369018124
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01803791 0.05201644 0.        ]
+Episode:  114 | Episode Reward:  -0.9239870214719657
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03249235 0.04014513 0.        ]
+thumb_proximal
+Episode:  115 | Episode Reward:  -0.9078714396928348
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02051884 0.03941287 0.        ]
+Episode:  116 | Episode Reward:  0.1901535936063568
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02978142 0.05163775 0.        ]
+Episode:  117 | Episode Reward:  -0.9203492189758684
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02149254 0.05328136 0.        ]
+floor_foam_block
+Episode:  118 | Episode Reward:  -0.9571720103477344
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02306699 0.0469327  0.03029004]
+Episode:  119 | Episode Reward:  -0.25635830526307835
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01623178 0.03742576 0.        ]
+floor_foam_block
+Episode:  120 | Episode Reward:  -0.9611581414119352
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02495337 0.06389723 0.0418249 ]
+target
+thumb_proximal
+Episode:  121 | Episode Reward:  0.9392476236693127
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01970853 0.06218027 0.0441168 ]
+Episode:  122 | Episode Reward:  0.6647817553014943
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01212641 0.05662664 0.0354768 ]
+Episode:  123 | Episode Reward:  1.3157840358581818
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02597554 0.06427671 0.03634377]
+floor_foam_block
+Episode:  124 | Episode Reward:  1.189790895814935
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01653548 0.05472759 0.        ]
+Episode:  125 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01300513 0.06434508 0.03976077]
+floor_foam_block
+Episode:  126 | Episode Reward:  -0.29457364166247735
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02505017 0.04323361 0.        ]
+floor_foam_block
+thumb_proximal
+Episode:  127 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.0323885  0.04869625 0.        ]
+floor_foam_block
+Episode:  128 | Episode Reward:  0.2135700577859929
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01990096 0.04816817 0.04078835]
+floor_foam_block
+Episode:  129 | Episode Reward:  -0.2891016763878562
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03093562 0.03800723 0.        ]
+floor_foam_block
+Episode:  130 | Episode Reward:  -0.8878098559972406
+Starting position
+[0.35 0.   0.  ]
+end
+[0.0227048  0.05399486 0.03800724]
+thumb_proximal
+Episode:  131 | Episode Reward:  3.9424850567961918
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02304617 0.04502161 0.        ]
+floor_foam_block
+Episode:  132 | Episode Reward:  -0.8789676278896642
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01937556 0.04757105 0.04297311]
+target
+Episode:  133 | Episode Reward:  -0.09865735040760715
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02918278 0.05768393 0.04467426]
+target
+Episode:  134 | Episode Reward:  -0.4159477491778133
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02889719 0.04641533 0.        ]
+floor_foam_block
+Episode:  135 | Episode Reward:  -0.9171787523422348
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01059645 0.05167734 0.03203793]

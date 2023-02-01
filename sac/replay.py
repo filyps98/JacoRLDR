@@ -8,6 +8,16 @@ class ReplayBuffer:
         self.capacity = capacity
         self.buffer = []
         self.position = 0
+        self.buffer_complete = False
+        self.buffer_combined = []
+        self.final_partition = 0.7
+
+        if(os.path.isfile("Dataset.pt") == False):
+            self.buffer_combined = []
+        else:
+            self.dataset = torch.load("Dataset.pt").copy()
+            self.buffer_combined  = random.sample(self.dataset,self.capacity)
+
     
     def push(self, state_image, state_hand, action, reward, next_state_image, next_state_hand, done):
         if len(self.buffer) < self.capacity:
@@ -15,16 +25,33 @@ class ReplayBuffer:
         self.buffer[self.position] = (state_image, state_hand, action, reward, next_state_image, next_state_hand, done)
         
         if (int((self.position + 1) % self.capacity) == 0):
-        	if(!os.path.isfile("Dataset.pt")):
-        		torch.save(self.buffer,"Dataset.pt")
-        	else:
-        		torch.save(torch.load("Dataset.pt") + self.buffer,"Dataset.pt")
+
+            #the buffer is full
+            self.buffer_complete = True
+            #Create dataset if it doesn't exist
+            if(os.path.isfile("Dataset.pt") == False):
+        	    torch.save(self.buffer,"Dataset.pt")
+            else:
+                #Or add it in the Queue
+                torch.save(torch.load("Dataset.pt") + self.buffer,"Dataset.pt")
         	
         self.position = int((self.position + 1) % self.capacity)  # as a ring buffer
         
     
     def sample(self, batch_size):
-        batch = random.sample(self.buffer, batch_size)
+        if (self.buffer_complete != True):
+
+            ratio = self.position/self.capacity*100
+        
+            if(ratio%10 == 0):
+                batch_dataset = random.sample(self.dataset,self.capacity - self.position)
+                self.buffer_combined = self.buffer + batch_dataset
+            
+        else: 
+            batch_partition = int(self.capacity)*self.final_partition
+            self.buffer_combined = random.sample(self.buffer, batch_partition) + random.sample(self.dataset, self.capacity - batch_partition)
+
+        batch = random.sample(self.buffer_combined, batch_size)
         state_image, state_hand, action, reward, next_state_image, next_state_hand, done = map(np.stack, zip(*batch)) # stack for each element
         ''' 
         the * serves as unpack: sum(a,b) <=> batch=(a,b), sum(*batch) ;
@@ -35,4 +62,4 @@ class ReplayBuffer:
         return state_image, state_hand, action, reward, next_state_image, next_state_hand, done
     
     def __len__(self):
-        return len(self.buffer)
+        return len(self.buffer_combined)

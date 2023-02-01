@@ -36,7 +36,7 @@ env = Mujoco_prototype(dir_,arm_, visualize)
 wandb.init(config = {"algorithm": "JacoRL2"}, project="JacoRL2", entity="pippo98")
 
 
-replay_buffer_size = 20
+replay_buffer_size = 50000000
 replay_buffer = ReplayBuffer(replay_buffer_size)
 
 action_dim = 7
@@ -46,9 +46,11 @@ action_range = 1
 max_episodes  = 500000
 max_steps = 5
 
+
 frame_idx   = 0
-batch_size  = 50
+batch_size  = 500
 explore_steps = 0  # for random action sampling in the beginning of training
+initial_update_itr = 2000
 update_itr = 1
 AUTO_ENTROPY=True
 DETERMINISTIC=False
@@ -82,6 +84,9 @@ _, _, _ = bs.body_swap(body_cube, body_cylinder)
 
 # training loop
     
+if(len(replay_buffer) > (replay_buffer_size - 1)/2):
+    for i in range(initial_update_itr):
+        _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.05*action_dim)
 
 for eps in range(max_episodes):
     
@@ -118,6 +123,7 @@ for eps in range(max_episodes):
 
     action = np.zeros(9)
 
+    
 
     for step in range(max_steps):
 

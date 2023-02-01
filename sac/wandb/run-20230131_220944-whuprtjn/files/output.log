@@ -1,0 +1,125 @@
+/home/filippo/miniconda3/envs/robot/lib/python3.7/site-packages/torch/cuda/__init__.py:88: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+cpu
+Soft Q Network (1,2):  SoftQNetwork(
+  (batch_norm): BatchNorm2d(3, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (conv1): Conv2d(3, 64, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling1): MaxPool2d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (conv2): Conv2d(64, 128, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (conv_gen1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+  (conv3): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2))
+  (conv_gen2): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+  (linear1): Linear(in_features=256, out_features=224, bias=True)
+  (linear_1): Linear(in_features=6, out_features=64, bias=True)
+  (linear_2): Linear(in_features=64, out_features=64, bias=True)
+  (linear_3): Linear(in_features=64, out_features=32, bias=True)
+  (linear_state_combined): Linear(in_features=256, out_features=512, bias=True)
+  (linear_combined_1): Linear(in_features=550, out_features=256, bias=True)
+  (linear_combined_2): Linear(in_features=256, out_features=128, bias=True)
+  (linear_action_1): Linear(in_features=7, out_features=64, bias=True)
+  (linear_action_2): Linear(in_features=64, out_features=38, bias=True)
+  (linear_final): Linear(in_features=128, out_features=1, bias=True)
+)
+Policy Network:  PolicyNetwork(
+  (batch_norm): BatchNorm2d(3, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (conv1): Conv2d(3, 64, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling1): MaxPool2d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (conv2): Conv2d(64, 128, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (conv_gen1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+  (conv3): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2))
+  (conv_gen2): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+  (linear1): Linear(in_features=256, out_features=480, bias=True)
+  (linear_1): Linear(in_features=6, out_features=64, bias=True)
+  (linear_2): Linear(in_features=64, out_features=64, bias=True)
+  (linear_3): Linear(in_features=64, out_features=32, bias=True)
+  (linear_combined_1): Linear(in_features=512, out_features=1024, bias=True)
+  (linear_combined_2): Linear(in_features=1024, out_features=512, bias=True)
+  (mean_linear): Linear(in_features=512, out_features=7, bias=True)
+  (log_std_linear): Linear(in_features=512, out_features=7, bias=True)
+)
+Starting position
+[0.35 0.   0.  ]
+end
+[0.025 0.045 0.   ]
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02  0.055 0.04 ]
+Episode:  0 | Episode Reward:  1.0912349596147242
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02918563 0.05595771 0.03692919]
+Episode:  1 | Episode Reward:  1.5304970673904323
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02951336 0.06293799 0.03894541]
+target
+Episode:  2 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03190545 0.0421382  0.        ]
+Episode:  3 | Episode Reward:  0.19136952447772132
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02893593 0.03945843 0.        ]
+Episode:  4 | Episode Reward:  0.21642880055475627
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01435722 0.06427041 0.03904223]
+Episode:  5 | Episode Reward:  1.2546556003162652
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02160368 0.06432465 0.04913629]
+Episode:  6 | Episode Reward:  1.8583073694755239
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02991048 0.04701052 0.04412324]
+Episode:  7 | Episode Reward:  -0.3243453262539857
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02860848 0.05160283 0.03170482]
+floor_foam_block
+target
+thumb_proximal
+Episode:  8 | Episode Reward:  -0.21492591074932865
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02501064 0.03925378 0.        ]
+Episode:  9 | Episode Reward:  -0.8255414105446159
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01844766 0.05838558 0.03362255]
+Episode:  10 | Episode Reward:  -0.5627326278588267
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02228858 0.04803589 0.        ]
+Episode:  11 | Episode Reward:  -0.959703831080814
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02629922 0.05241941 0.03290427]
+thumb_proximal
+Exception
+Exception
+Episode:  12 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01875831 0.06442218 0.04875035]
