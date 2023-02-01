@@ -36,7 +36,7 @@ env = Mujoco_prototype(dir_,arm_, visualize)
 wandb.init(config = {"algorithm": "JacoRL2"}, project="JacoRL2", entity="pippo98")
 
 
-replay_buffer_size = 50000000
+replay_buffer_size = 50
 replay_buffer = ReplayBuffer(replay_buffer_size)
 
 action_dim = 7
@@ -48,10 +48,10 @@ max_steps = 5
 
 
 frame_idx   = 0
-batch_size  = 500
+batch_size  = 10
 explore_steps = 0  # for random action sampling in the beginning of training
-initial_update_itr = 2000
-update_itr = 1
+initial_update_itr = 20
+update_itr = 3
 AUTO_ENTROPY=True
 DETERMINISTIC=False
 hidden_dim = 512

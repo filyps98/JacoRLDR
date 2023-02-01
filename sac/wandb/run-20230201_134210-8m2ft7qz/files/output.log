@@ -1,0 +1,233 @@
+
+cuda:0
+Soft Q Network (1,2):  SoftQNetwork(
+  (batch_norm): BatchNorm2d(3, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (conv1): Conv2d(3, 64, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling1): MaxPool2d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (conv2): Conv2d(64, 128, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (conv_gen1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+  (conv3): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2))
+  (conv_gen2): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+  (linear1): Linear(in_features=256, out_features=224, bias=True)
+  (linear_1): Linear(in_features=6, out_features=64, bias=True)
+  (linear_2): Linear(in_features=64, out_features=64, bias=True)
+  (linear_3): Linear(in_features=64, out_features=32, bias=True)
+  (linear_state_combined): Linear(in_features=256, out_features=512, bias=True)
+  (linear_combined_1): Linear(in_features=550, out_features=256, bias=True)
+  (linear_combined_2): Linear(in_features=256, out_features=128, bias=True)
+  (linear_action_1): Linear(in_features=7, out_features=64, bias=True)
+  (linear_action_2): Linear(in_features=64, out_features=38, bias=True)
+  (linear_final): Linear(in_features=128, out_features=1, bias=True)
+)
+Policy Network:  PolicyNetwork(
+  (batch_norm): BatchNorm2d(3, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (conv1): Conv2d(3, 64, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling1): MaxPool2d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (conv2): Conv2d(64, 128, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (conv_gen1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+  (conv3): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2))
+  (conv_gen2): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+  (linear1): Linear(in_features=256, out_features=480, bias=True)
+  (linear_1): Linear(in_features=6, out_features=64, bias=True)
+  (linear_2): Linear(in_features=64, out_features=64, bias=True)
+  (linear_3): Linear(in_features=64, out_features=32, bias=True)
+  (linear_combined_1): Linear(in_features=512, out_features=1024, bias=True)
+  (linear_combined_2): Linear(in_features=1024, out_features=512, bias=True)
+  (mean_linear): Linear(in_features=512, out_features=7, bias=True)
+  (log_std_linear): Linear(in_features=512, out_features=7, bias=True)
+)
+Starting position
+[0.35 0.   0.  ]
+end
+[0.025 0.045 0.   ]
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02  0.055 0.04 ]
+floor_foam_block
+Episode:  0 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01614836 0.04657443 0.04094137]
+floor_foam_block
+Episode:  1 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02440076 0.04507399 0.04707052]
+Episode:  2 | Episode Reward:  1.6971258261809044
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01735543 0.04803223 0.03681669]
+thumb_proximal
+Episode:  3 | Episode Reward:  1.0986524373752475
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02056353 0.05357209 0.04336419]
+floor_foam_block
+Episode:  4 | Episode Reward:  0.5741402130407047
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02247241 0.04729288 0.04441578]
+floor_foam_block
+Episode:  5 | Episode Reward:  8.027488196115003
+Starting position
+[0.35 0.   0.  ]
+end
+[0.0226729  0.05916024 0.04933963]
+target
+Episode:  6 | Episode Reward:  1.7793903303318979
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01582278 0.0403326  0.        ]
+Episode:  7 | Episode Reward:  0.22141641796979672
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01839823 0.05405486 0.        ]
+thumb_proximal
+Episode:  8 | Episode Reward:  -0.8684989748344878
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02040732 0.04558307 0.        ]
+thumb_proximal
+Episode:  9 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03433215 0.04712462 0.        ]
+Episode:  10 | Episode Reward:  -1
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02085965 0.04794161 0.04091503]
+Episode:  11 | Episode Reward:  0.9941983215355377
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01961568 0.04373452 0.        ]
+Episode:  12 | Episode Reward:  0.1974195382353537
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02201686 0.0433854  0.        ]
+Episode:  13 | Episode Reward:  -0.9163937434178608
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03123363 0.04835189 0.        ]
+target
+Episode:  14 | Episode Reward:  0.18148917961905622
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01435196 0.05209607 0.03688119]
+Episode:  15 | Episode Reward:  4.291506400491721
+Starting position
+[0.35 0.   0.  ]
+end
+[0.0300316  0.04462963 0.        ]
+floor_foam_block
+target
+thumb_proximal
+Episode:  16 | Episode Reward:  -0.8258951963819297
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01233909 0.04777537 0.04785125]
+Episode:  17 | Episode Reward:  4.868545331940028
+Starting position
+[0.35 0.   0.  ]
+end
+[0.0288096  0.06050403 0.03774846]
+thumb_proximal
+Episode:  18 | Episode Reward:  -0.24846025202629685
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01834975 0.05739554 0.04969516]
+floor_foam_block
+thumb_proximal
+Episode:  19 | Episode Reward:  0.2332624442744029
+Starting position
+[0.35 0.   0.  ]
+end
+[0.0277222  0.04114902 0.        ]
+floor_foam_block
+Episode:  20 | Episode Reward:  0.18917395152100844
+Starting position
+[0.35 0.   0.  ]
+end
+[0.0288841  0.05843138 0.04119595]
+Episode:  21 | Episode Reward:  2.2087099794735803
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02880063 0.03978537 0.        ]
+target
+Episode:  22 | Episode Reward:  0.1861811349092374
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02636307 0.05792556 0.03270028]
+Episode:  23 | Episode Reward:  0.945002563493961
+Starting position
+[0.35 0.   0.  ]
+end
+[0.0154673  0.04180965 0.        ]
+target
+Episode:  24 | Episode Reward:  0.21711048566775842
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01253845 0.0631976  0.03110353]
+thumb_proximal
+Episode:  25 | Episode Reward:  -0.3832646968163941
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02641687 0.04854535 0.        ]
+Episode:  26 | Episode Reward:  0.18734901786344443
+Starting position
+[0.35 0.   0.  ]
+end
+[0.01901796 0.04826368 0.        ]
+Episode:  27 | Episode Reward:  0.1962479234062015
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02012632 0.05734139 0.0350965 ]
+Episode:  28 | Episode Reward:  2.115396166901955
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03334371 0.05397325 0.        ]
+Episode:  29 | Episode Reward:  0.18918619675086784
+Starting position
+[0.35 0.   0.  ]
+end
+[0.02727859 0.05519246 0.03689799]
+floor_foam_block
+Episode:  30 | Episode Reward:  0.7425465981024602
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03097819 0.03818809 0.        ]
+thumb_proximal
+Episode:  31 | Episode Reward:  -0.8405912984316126
+Starting position
+[0.35 0.   0.  ]
+end
+[0.03193006 0.04893885 0.        ]

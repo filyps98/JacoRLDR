@@ -2,6 +2,7 @@ import random
 import torch
 import os
 import numpy as np 
+import math
 
 class ReplayBuffer:
     def __init__(self, capacity):
@@ -9,17 +10,26 @@ class ReplayBuffer:
         self.buffer = []
         self.position = 0
         self.buffer_complete = False
+        self.isthereDataset = False
         self.buffer_combined = []
         self.final_partition = 0.7
 
         if(os.path.isfile("Dataset.pt") == False):
-            self.buffer_combined = []
+            self.buffer_combined = self.buffer
         else:
             self.dataset = torch.load("Dataset.pt").copy()
-            self.buffer_combined  = random.sample(self.dataset,self.capacity)
+            
+            if(len(self.dataset) >= self.capacity):
+                self.buffer_combined  = random.sample(self.dataset,self.capacity)
+                self.isthereDataset = True
+            
+            else:
+                self.buffer_combined = self.buffer
+
 
     
     def push(self, state_image, state_hand, action, reward, next_state_image, next_state_hand, done):
+    
         if len(self.buffer) < self.capacity:
             self.buffer.append(None)
         self.buffer[self.position] = (state_image, state_hand, action, reward, next_state_image, next_state_hand, done)
@@ -39,17 +49,21 @@ class ReplayBuffer:
         
     
     def sample(self, batch_size):
-        if (self.buffer_complete != True):
-
-            ratio = self.position/self.capacity*100
+    
+    	ratio = int(math.floor((self.position+1)/self.capacity))*100
+    	
+        if(ratio%10 == 0 and self.isthereDataset):
+    	
+            if (self.buffer_complete != True):
         
-            if(ratio%10 == 0):
                 batch_dataset = random.sample(self.dataset,self.capacity - self.position)
                 self.buffer_combined = self.buffer + batch_dataset
             
-        else: 
-            batch_partition = int(self.capacity)*self.final_partition
-            self.buffer_combined = random.sample(self.buffer, batch_partition) + random.sample(self.dataset, self.capacity - batch_partition)
+            else: 
+            
+                batch_partition = math.floor(int((self.capacity)*self.final_partition))
+                self.buffer_combined = random.sample(self.buffer, batch_partition) + random.sample(self.dataset, self.capacity - batch_partition)
+	
 
         batch = random.sample(self.buffer_combined, batch_size)
         state_image, state_hand, action, reward, next_state_image, next_state_hand, done = map(np.stack, zip(*batch)) # stack for each element
