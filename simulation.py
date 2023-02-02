@@ -141,6 +141,7 @@ class Mujoco_prototype():
 
                     #Evaluate new target position
                     target = self.get_limit_target_pos(target_geom_ID, xyz_pos)
+                
 
                     #re-get the feedback
                     feedback = self.interface.get_feedback()
@@ -252,22 +253,17 @@ class Mujoco_prototype():
     #works in a way I can grasp in a proper way considering the size of the finger
     def get_limit_target_pos(self,target_geom_ID,xyz_pos):
 
-        
-        finger_size = 0.08
         half_size_target = self.interface.model.geom_size[target_geom_ID]
         height_target = 0
 
-        if(target_geom_ID == 3):
-            xyz_pos[2] = xyz_pos[2] - half_size_target[2] 
+        if(target_geom_ID == 2):
             height_target = 2*half_size_target[2]
 
-        elif (target_geom_ID == 4):
-            xyz_pos[2] = xyz_pos[2] - half_size_target[1] 
+        elif (target_geom_ID == 3):
             height_target = 2*half_size_target[1]
 
-        if height_target >= finger_size:
-            xyz_pos[2] = xyz_pos[2] + height_target - finger_size
-
+        xyz_pos[2] = xyz_pos[2] + height_target 
+        
         return xyz_pos
 
 

@@ -107,7 +107,7 @@ for eps in range(10):
     scripted_action = np.resize(scripted_action,(9))
     
 
-    _, _, _, _ = env.step_sim(scripted_action, -1,  geom_body_ID, target_pos)
+    _, _, _, _ = env.step_sim(scripted_action, -1,  geom_body_ID, target_pos.copy())
 
 
     action = np.zeros(9)
@@ -120,7 +120,7 @@ for eps in range(10):
         #except the fore grippers that have a greater action space
         action[6:] = ratio_residual_force*action_RL[6]*np.ones(3) + ratio_residual_force
 
-        next_state_image, next_state_hand, reward, done = env.step_sim(action, step, geom_body_ID, target_pos) 
+        next_state_image, next_state_hand, reward, done = env.step_sim(action, step, geom_body_ID, target_pos.copy()) 
 
 
         episode_reward += reward

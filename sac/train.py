@@ -29,26 +29,26 @@ import argparse
 dir_ = os.path.dirname(os.getcwd())
 
 arm_ = "jaco2.xml"
-visualize = True
+visualize = False
 env = Mujoco_prototype(dir_,arm_, visualize)
 
 
 wandb.init(config = {"algorithm": "JacoRL2"}, project="JacoRL2", entity="pippo98")
 
 
-replay_buffer_size = 5000000
+replay_buffer_size = 50
 replay_buffer = ReplayBuffer(replay_buffer_size)
 
 action_dim = 7
 action_range = 1
 
 # hyper-parameters for RL training
-max_episodes  = 500000
+max_episodes  = 2e5
 max_steps = 5
 
 
 frame_idx   = 0
-batch_size  = 500
+batch_size  = 550
 explore_steps = 0  # for random action sampling in the beginning of training
 initial_update_itr = 20
 update_itr = 3
@@ -114,7 +114,7 @@ for eps in range(max_episodes):
     scripted_action = np.resize(scripted_action,(9))
     
 
-    _, _, _, _ = env.step_sim(scripted_action, -1,  geom_body_ID, target_pos)
+    _, _, _, _ = env.step_sim(scripted_action, -1,  geom_body_ID, target_pos.copy())
 
 
     action = np.zeros(9)
@@ -139,7 +139,7 @@ for eps in range(max_episodes):
         action[6:] = ratio_residual_force*action_RL[6]*np.ones(3) + ratio_residual_force
 
 
-        next_state_image, next_state_hand, reward, done = env.step_sim(action, step, geom_body_ID, target_pos)       
+        next_state_image, next_state_hand, reward, done = env.step_sim(action, step, geom_body_ID, target_pos.copy())       
         
             
         replay_buffer.push(state_image, state_hand, action_RL, reward, next_state_image, next_state_hand, done)

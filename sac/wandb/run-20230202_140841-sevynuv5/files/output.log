@@ -1,0 +1,285 @@
+
+cuda:0
+Soft Q Network (1,2):  SoftQNetwork(
+  (batch_norm): BatchNorm2d(3, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (conv1): Conv2d(3, 64, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling1): MaxPool2d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (conv2): Conv2d(64, 128, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (conv_gen1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+  (conv3): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2))
+  (conv_gen2): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+  (linear1): Linear(in_features=256, out_features=224, bias=True)
+  (linear_1): Linear(in_features=6, out_features=64, bias=True)
+  (linear_2): Linear(in_features=64, out_features=64, bias=True)
+  (linear_3): Linear(in_features=64, out_features=32, bias=True)
+  (linear_state_combined): Linear(in_features=256, out_features=512, bias=True)
+  (linear_combined_1): Linear(in_features=550, out_features=256, bias=True)
+  (linear_combined_2): Linear(in_features=256, out_features=128, bias=True)
+  (linear_action_1): Linear(in_features=7, out_features=64, bias=True)
+  (linear_action_2): Linear(in_features=64, out_features=38, bias=True)
+  (linear_final): Linear(in_features=128, out_features=1, bias=True)
+)
+Policy Network:  PolicyNetwork(
+  (batch_norm): BatchNorm2d(3, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (conv1): Conv2d(3, 64, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling1): MaxPool2d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (conv2): Conv2d(64, 128, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (conv_gen1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+  (conv3): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2))
+  (conv_gen2): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+  (linear1): Linear(in_features=256, out_features=480, bias=True)
+  (linear_1): Linear(in_features=6, out_features=64, bias=True)
+  (linear_2): Linear(in_features=64, out_features=64, bias=True)
+  (linear_3): Linear(in_features=64, out_features=32, bias=True)
+  (linear_combined_1): Linear(in_features=512, out_features=1024, bias=True)
+  (linear_combined_2): Linear(in_features=1024, out_features=512, bias=True)
+  (mean_linear): Linear(in_features=512, out_features=7, bias=True)
+  (log_std_linear): Linear(in_features=512, out_features=7, bias=True)
+)
+Target position:
+[0.30999235 0.03509845 0.        ]
+Target type:
+3
+Target half size:
+[0.02761411 0.04107991 0.        ]
+Target Point:
+[0.30999235 0.03509845 0.        ]
+Episode:  0 | Episode Reward:  -1
+Target position:
+[0.38202652 0.03834728 0.        ]
+Target type:
+2
+Target half size:
+[0.0283351  0.0569392  0.03539995]
+Target Point:
+[0.38202652 0.03834728 0.        ]
+Target position:
+[0.38202652 0.03834728 0.        ]
+Target type:
+2
+Target half size:
+[0.0283351  0.0569392  0.03539995]
+Target Point:
+[0.38202652 0.03834728 0.        ]
+Target position:
+[0.38202652 0.03834728 0.        ]
+Target type:
+2
+Target half size:
+[0.0283351  0.0569392  0.03539995]
+Target Point:
+[0.38202652 0.03834728 0.        ]
+Target position:
+[0.38202652 0.03834728 0.        ]
+Target type:
+2
+Target half size:
+[0.0283351  0.0569392  0.03539995]
+Target Point:
+[0.38202652 0.03834728 0.        ]
+Target position:
+[0.38202652 0.03834728 0.        ]
+Target type:
+2
+Target half size:
+[0.0283351  0.0569392  0.03539995]
+Target Point:
+[0.38202652 0.03834728 0.        ]
+Target position:
+[0.38202652 0.03834728 0.        ]
+Target type:
+2
+Target half size:
+[0.0283351  0.0569392  0.03539995]
+Target Point:
+[0.38202652 0.03834728 0.        ]
+Episode:  1 | Episode Reward:  1.6391884817646527
+Target position:
+[0.33959615 0.02872989 0.        ]
+Target type:
+2
+Target half size:
+[0.02169395 0.06393423 0.04370952]
+Target Point:
+[0.33959615 0.02872989 0.        ]
+Target position:
+[0.33959615 0.02872989 0.        ]
+Target type:
+2
+Target half size:
+[0.02169395 0.06393423 0.04370952]
+Target Point:
+[0.33959615 0.02872989 0.        ]
+Target position:
+[0.33959615 0.02872989 0.        ]
+Target type:
+2
+Target half size:
+[0.02169395 0.06393423 0.04370952]
+Target Point:
+[0.33959615 0.02872989 0.        ]
+Target position:
+[0.33959615 0.02872989 0.        ]
+Target type:
+2
+Target half size:
+[0.02169395 0.06393423 0.04370952]
+Target Point:
+[0.33959615 0.02872989 0.        ]
+Target position:
+[0.33959615 0.02872989 0.        ]
+Target type:
+2
+Target half size:
+[0.02169395 0.06393423 0.04370952]
+Target Point:
+[0.33959615 0.02872989 0.        ]
+Target position:
+[0.33959615 0.02872989 0.        ]
+Target type:
+2
+Target half size:
+[0.02169395 0.06393423 0.04370952]
+Target Point:
+[0.33959615 0.02872989 0.        ]
+Episode:  2 | Episode Reward:  0.8707576013041199
+Target position:
+[ 0.33683624 -0.03398452  0.        ]
+Target type:
+3
+Target half size:
+[0.03392042 0.05153786 0.        ]
+Target Point:
+[ 0.33683624 -0.03398452  0.        ]
+Target position:
+[ 0.33683624 -0.03398452  0.        ]
+Target type:
+3
+Target half size:
+[0.03392042 0.05153786 0.        ]
+Target Point:
+[ 0.33683624 -0.03398452  0.        ]
+Target position:
+[ 0.33683624 -0.03398452  0.        ]
+Target type:
+3
+Target half size:
+[0.03392042 0.05153786 0.        ]
+Target Point:
+[ 0.33683624 -0.03398452  0.        ]
+Target position:
+[ 0.33683624 -0.03398452  0.        ]
+Target type:
+3
+Target half size:
+[0.03392042 0.05153786 0.        ]
+Target Point:
+[ 0.33683624 -0.03398452  0.        ]
+Target position:
+[ 0.33683624 -0.03398452  0.        ]
+Target type:
+3
+Target half size:
+[0.03392042 0.05153786 0.        ]
+Target Point:
+[ 0.33683624 -0.03398452  0.        ]
+Target position:
+[ 0.33683624 -0.03398452  0.        ]
+Target type:
+3
+Target half size:
+[0.03392042 0.05153786 0.        ]
+Target Point:
+[ 0.33683624 -0.03398452  0.        ]
+Episode:  3 | Episode Reward:  0.7954636613276151
+Target position:
+[ 0.34117072 -0.02907526  0.        ]
+Target type:
+3
+Target half size:
+[0.02781536 0.03992653 0.        ]
+Target Point:
+[ 0.34117072 -0.02907526  0.        ]
+Target position:
+[ 0.34117072 -0.02907526  0.        ]
+Target type:
+3
+Target half size:
+[0.02781536 0.03992653 0.        ]
+Target Point:
+[ 0.34117072 -0.02907526  0.        ]
+Target position:
+[ 0.34117072 -0.02907526  0.        ]
+Target type:
+3
+Target half size:
+[0.02781536 0.03992653 0.        ]
+Target Point:
+[ 0.34117072 -0.02907526  0.        ]
+Episode:  4 | Episode Reward:  -0.37991353807005235
+Target position:
+[0.34214314 0.0210537  0.        ]
+Target type:
+2
+Target half size:
+[0.01158644 0.05147922 0.03646323]
+Target Point:
+[0.34214314 0.0210537  0.        ]
+Target position:
+[0.34214314 0.0210537  0.        ]
+Target type:
+2
+Target half size:
+[0.01158644 0.05147922 0.03646323]
+Target Point:
+[0.34214314 0.0210537  0.        ]
+Target position:
+[0.34214314 0.0210537  0.        ]
+Target type:
+2
+Target half size:
+[0.01158644 0.05147922 0.03646323]
+Target Point:
+[0.34214314 0.0210537  0.        ]
+Target position:
+[0.34214314 0.0210537  0.        ]
+Target type:
+2
+Target half size:
+[0.01158644 0.05147922 0.03646323]
+Target Point:
+[0.34214314 0.0210537  0.        ]
+Episode:  5 | Episode Reward:  -0.15730963796308484
+Target position:
+[ 0.35613619 -0.04525852  0.        ]
+Target type:
+2
+Target half size:
+[0.0153913  0.04544744 0.03054434]
+Target Point:
+[ 0.35613619 -0.04525852  0.        ]
+Episode:  6 | Episode Reward:  -1
+Target position:
+[ 0.32241303 -0.00795047  0.        ]
+Target type:
+3
+Target half size:
+[0.02308553 0.05372521 0.        ]
+Target Point:
+[ 0.32241303 -0.00795047  0.        ]
+Episode:  7 | Episode Reward:  -1
+Target position:
+[ 0.39920868 -0.03394737  0.        ]
+Target type:
+3
+Target half size:
+[0.02401281 0.05179637 0.        ]
+Target Point:
+[ 0.39920868 -0.03394737  0.        ]
+Episode:  8 | Episode Reward:  -1

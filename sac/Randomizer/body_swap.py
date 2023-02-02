@@ -10,7 +10,10 @@ def body_swap(cube, cylinder):
         size = cube.modify_size([0.01, 0.01, 0.01])
 
         cylinder.isolate_object()
-        geom_id = 4
+        geom_id = 2
+
+        return geom_id, target_xyz, target_orientation, size
+
 
         
 
@@ -22,4 +25,4 @@ def body_swap(cube, cylinder):
         cube.isolate_object()
         geom_id = 3
 
-    return geom_id, target_xyz, target_orientation, size
+        return geom_id, target_xyz.copy(), target_orientation, size
