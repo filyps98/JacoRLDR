@@ -29,7 +29,7 @@ import argparse
 dir_ = os.path.dirname(os.getcwd())
 
 arm_ = "jaco2.xml"
-visualize = False
+visualize = True
 env = Mujoco_prototype(dir_,arm_, visualize)
 
 
@@ -43,12 +43,12 @@ action_dim = 7
 action_range = 1
 
 # hyper-parameters for RL training
-max_episodes  = 2e5
+max_episodes  = 500000
 max_steps = 5
 
 
 frame_idx   = 0
-batch_size  = 550
+batch_size  = 20
 explore_steps = 0  # for random action sampling in the beginning of training
 initial_update_itr = 20
 update_itr = 3

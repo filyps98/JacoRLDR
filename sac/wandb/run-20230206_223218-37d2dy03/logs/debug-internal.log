@@ -1,0 +1,8 @@
+2023-02-06 22:32:18,091 INFO    StreamThr :4105 [internal.py:wandb_internal():90] W&B internal server running at pid: 4105, started at: 2023-02-06 22:32:18.090866
+2023-02-06 22:32:18,093 DEBUG   HandlerThread:4105 [handler.py:handle_request():144] handle_request: status
+2023-02-06 22:32:18,099 INFO    WriterThread:4105 [datastore.py:open_for_write():85] open: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230206_223218-37d2dy03/run-37d2dy03.wandb
+2023-02-06 22:32:18,099 DEBUG   SenderThread:4105 [sender.py:send():334] send: header
+2023-02-06 22:32:18,115 DEBUG   SenderThread:4105 [sender.py:send():334] send: run
+2023-02-06 22:32:23,119 DEBUG   HandlerThread:4105 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-06 22:32:28,121 DEBUG   HandlerThread:4105 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-06 22:32:34,102 INFO    MainThread:4105 [internal.py:handle_exit():77] Internal process exited

@@ -140,7 +140,7 @@ class Mujoco_prototype():
                     next_state_image, next_state_hand = self.get_state()
 
                     #Evaluate new target position
-                    target = self.get_limit_target_pos(target_geom_ID, xyz_pos)
+                    target, max_dimension = self.get_limit_target_pos(target_geom_ID, xyz_pos)
                 
 
                     #re-get the feedback
@@ -150,8 +150,13 @@ class Mujoco_prototype():
                   
                     #Adding distance
                     final_distance = 1/(np.linalg.norm(ee_xyz - target[:3]))
-                    reward_from_distance = fun.expit(0.55*final_distance - 4)
-
+                    print(final_distance)
+                    #since the objects change dimention, we change the reward depending on their dimensions 
+                    #arg/(1/maxx_dimension) = arg*max_dimension
+                    s = (-np.log(1/0.8 - 1) + 4)*(max_dimension +0.02)
+                
+                    reward_from_distance = fun.expit(s*final_distance - 4)
+    
                     reward_from_force = 0 
                     reward_from_height = 0
                     
@@ -254,17 +259,17 @@ class Mujoco_prototype():
     def get_limit_target_pos(self,target_geom_ID,xyz_pos):
 
         half_size_target = self.interface.model.geom_size[target_geom_ID]
-        height_target = 0
-
+       
         if(target_geom_ID == 2):
-            height_target = 2*half_size_target[2]
+            xyz_pos[2] = xyz_pos[2] + half_size_target[2]
 
-        elif (target_geom_ID == 3):
-            height_target = 2*half_size_target[1]
-
-        xyz_pos[2] = xyz_pos[2] + height_target 
+        elif(target_geom_ID == 3):
+            xyz_pos[2] = xyz_pos[2] + half_size_target[1]
         
-        return xyz_pos
+        index_max_dimension = np.argmax(half_size_target)
+        max_dimension = half_size_target[index_max_dimension]
+        
+        return xyz_pos, max_dimension
 
 
     def get_target_orient(self):

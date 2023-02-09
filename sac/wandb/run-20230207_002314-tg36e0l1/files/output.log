@@ -1,0 +1,232 @@
+
+cuda:0
+Soft Q Network (1,2):  SoftQNetwork(
+  (batch_norm): BatchNorm2d(3, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (conv1): Conv2d(3, 64, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling1): MaxPool2d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (conv2): Conv2d(64, 128, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (conv_gen1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+  (conv3): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2))
+  (conv_gen2): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+  (linear1): Linear(in_features=256, out_features=224, bias=True)
+  (linear_1): Linear(in_features=6, out_features=64, bias=True)
+  (linear_2): Linear(in_features=64, out_features=64, bias=True)
+  (linear_3): Linear(in_features=64, out_features=32, bias=True)
+  (linear_state_combined): Linear(in_features=256, out_features=512, bias=True)
+  (linear_combined_1): Linear(in_features=550, out_features=256, bias=True)
+  (linear_combined_2): Linear(in_features=256, out_features=128, bias=True)
+  (linear_action_1): Linear(in_features=7, out_features=64, bias=True)
+  (linear_action_2): Linear(in_features=64, out_features=38, bias=True)
+  (linear_final): Linear(in_features=128, out_features=1, bias=True)
+)
+Policy Network:  PolicyNetwork(
+  (batch_norm): BatchNorm2d(3, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (conv1): Conv2d(3, 64, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling1): MaxPool2d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (conv2): Conv2d(64, 128, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (conv_gen1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+  (conv3): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2))
+  (conv_gen2): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+  (linear1): Linear(in_features=256, out_features=480, bias=True)
+  (linear_1): Linear(in_features=6, out_features=64, bias=True)
+  (linear_2): Linear(in_features=64, out_features=64, bias=True)
+  (linear_3): Linear(in_features=64, out_features=32, bias=True)
+  (linear_combined_1): Linear(in_features=512, out_features=1024, bias=True)
+  (linear_combined_2): Linear(in_features=1024, out_features=512, bias=True)
+  (mean_linear): Linear(in_features=512, out_features=7, bias=True)
+  (log_std_linear): Linear(in_features=512, out_features=7, bias=True)
+)
+dimensions
+0.05497873425360885
+7.623157420712366
+Parameter
+0.19597234051475065
+reward distance
+0.07543360513372432
+dimensions
+0.05497873425360885
+6.3933443304257676
+Parameter
+0.19597234051475065
+reward distance
+0.06025169648158987
+dimensions
+0.05497873425360885
+4.745100067168266
+Parameter
+0.19597234051475065
+reward distance
+0.04435794303868111
+dimensions
+0.05497873425360885
+3.518339755260097
+Parameter
+0.19597234051475065
+reward distance
+0.03521263633893862
+dimensions
+0.05497873425360885
+2.8121679047201282
+Parameter
+0.19597234051475065
+reward distance
+0.030801893383966515
+dimensions
+0.05497873425360885
+3.487022900044409
+Parameter
+0.19597234051475065
+reward distance
+0.035004731476403726
+Episode:  0 | Episode Reward:  0.20562890071957984
+dimensions
+0.05208045313111652
+8.907404675010472
+Parameter
+0.18839708680183267
+reward distance
+0.08932774714392334
+Episode:  1 | Episode Reward:  -1
+dimensions
+0.03839434502902677
+7.192431705268503
+Parameter
+0.15262562888107795
+reward distance
+0.05204242056072499
+dimensions
+0.03839434502902677
+10.392816585268424
+Parameter
+0.15262562888107795
+reward distance
+0.08212717898510123
+dimensions
+0.03839434502902677
+7.442166901038093
+Parameter
+0.15262562888107795
+reward distance
+0.05395526411807241
+dimensions
+0.03839434502902677
+5.271967432308595
+Parameter
+0.15262562888107795
+reward distance
+0.039340607708660075
+dimensions
+0.03839434502902677
+4.676560327978992
+Parameter
+0.15262562888107795
+reward distance
+0.03604636957164603
+Episode:  2 | Episode Reward:  -0.7885305796165203
+dimensions
+0.044553629939435756
+7.161313644112575
+Parameter
+0.16872418658288307
+reward distance
+0.05777362618021983
+dimensions
+0.044553629939435756
+10.335664289367399
+Parameter
+0.16872418658288307
+reward distance
+0.09482257589285847
+dimensions
+0.044553629939435756
+10.782843212114532
+Parameter
+0.16872418658288307
+reward distance
+0.1014994854412501
+Episode:  3 | Episode Reward:  -0.8036779386658914
+dimensions
+0.03751502655999138
+6.767595157814517
+Parameter
+0.15032734924018873
+reward distance
+0.04821608457371587
+dimensions
+0.03751502655999138
+8.892822329510857
+Parameter
+0.15032734924018873
+reward distance
+0.06518217724282738
+dimensions
+0.03751502655999138
+10.71983539686579
+Parameter
+0.15032734924018873
+reward distance
+0.08405264508423382
+dimensions
+0.03751502655999138
+14.313227161356833
+Parameter
+0.15032734924018873
+reward distance
+0.13606903441119175
+Episode:  4 | Episode Reward:  -0.714696143261747
+dimensions
+0.03991222353168023
+6.432904849314837
+Parameter
+0.15659291648259818
+reward distance
+0.04775890699660092
+dimensions
+0.03991222353168023
+4.077552592975997
+Parameter
+0.15659291648259818
+reward distance
+0.033521107399593894
+dimensions
+0.03991222353168023
+4.018617161412511
+Parameter
+0.15659291648259818
+reward distance
+0.03322339934411118
+dimensions
+0.03991222353168023
+4.788329896182209
+Parameter
+0.15659291648259818
+reward distance
+0.03732036750875875
+dimensions
+0.03991222353168023
+4.266180735539847
+Parameter
+0.15659291648259818
+reward distance
+0.0344913558802175
+dimensions
+0.03991222353168023
+4.118013175303911
+Parameter
+0.15659291648259818
+reward distance
+0.03372698020819545
+Episode:  5 | Episode Reward:  0.17228321034087676
+dimensions
+0.04685246850124824
+7.878156344892723
+Parameter
+0.1747326738947674
+reward distance
+0.06764572686915525
