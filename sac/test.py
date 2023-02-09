@@ -29,7 +29,7 @@ env = Mujoco_prototype(dir_,arm_, visualize)
 wandb.init(config = {"algorithm": "JacoRL_test_time"}, project="JacoRL_test_time", entity="pippo98")
 
 
-replay_buffer_size = 5000000
+replay_buffer_size = 2e5
 replay_buffer = ReplayBuffer(replay_buffer_size)
 
 action_dim = 7
@@ -40,7 +40,7 @@ max_episodes  = 500000
 max_steps = 5
 
 frame_idx   = 0
-batch_size  = 500
+batch_size  = 550
 explore_steps = 0  # for random action sampling in the beginning of training
 update_itr = 1
 AUTO_ENTROPY=True

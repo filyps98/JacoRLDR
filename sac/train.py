@@ -29,26 +29,26 @@ import argparse
 dir_ = os.path.dirname(os.getcwd())
 
 arm_ = "jaco2.xml"
-visualize = True
+visualize = False
 env = Mujoco_prototype(dir_,arm_, visualize)
 
 
 wandb.init(config = {"algorithm": "JacoRL2"}, project="JacoRL2", entity="pippo98")
 
 
-replay_buffer_size = 50
+replay_buffer_size = 2e5
 replay_buffer = ReplayBuffer(replay_buffer_size)
 
 action_dim = 7
 action_range = 1
 
 # hyper-parameters for RL training
-max_episodes  = 500000
+max_episodes  = 5000000
 max_steps = 5
 
 
 frame_idx   = 0
-batch_size  = 20
+batch_size  = 550
 explore_steps = 0  # for random action sampling in the beginning of training
 initial_update_itr = 20
 update_itr = 3
@@ -102,7 +102,7 @@ for eps in range(max_episodes):
 
     #I don't want to be too close by the target
     #target_estimated_pos = (target_pos + np.array([0 , 0 , 0.1])).tolist()
-    target_estimated_pos = (target_pos + 0.05*np.random.rand(3)+np.array([0 , 0 , 0.1])).tolist()
+    target_estimated_pos = (target_pos + 0.05*np.random.rand(3)+np.array([0 , 0 , 0.15])).tolist()
     target_estimated_orientation = list(target_orient)
     initial_gripper_force = [5,5,5]
 
