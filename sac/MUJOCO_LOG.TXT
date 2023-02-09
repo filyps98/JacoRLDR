@@ -13,3 +13,9 @@ ERROR: Could not allocate offscreen framebuffer
 Tue Feb  7 00:32:28 2023
 ERROR: Could not allocate offscreen framebuffer
 
+Thu Feb  9 20:37:01 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Thu Feb  9 20:45:31 2023
+ERROR: Could not allocate offscreen framebuffer
+

@@ -89,6 +89,7 @@
             <joint name='boxy_ori_cylinder' type='hinge' axis='0 1 0' limited='false' damping = "0.1"/>
             <joint name='boxx_ori_cylinder' type='hinge' axis='1 0 0' limited='false' damping = "0.1"/>
         </body>
+        
 
         <body name="path_planner_orientation" pos="0 0 -0.15" mocap="true">
             <geom type="box" size=".02 .04 .06" rgba="0 1 1 .5" contype="32" conaffinity="32"/>

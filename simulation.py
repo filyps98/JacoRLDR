@@ -150,10 +150,10 @@ class Mujoco_prototype():
                   
                     #Adding distance
                     final_distance = 1/(np.linalg.norm(ee_xyz - target[:3]))
-                    print(final_distance)
+                    
                     #since the objects change dimention, we change the reward depending on their dimensions 
                     #arg/(1/maxx_dimension) = arg*max_dimension
-                    s = (-np.log(1/0.8 - 1) + 4)*(max_dimension +0.02)
+                    s = (-np.log(1/0.8 - 1) + 4)*(max_dimension +0.035)
                 
                     reward_from_distance = fun.expit(s*final_distance - 4)
     
