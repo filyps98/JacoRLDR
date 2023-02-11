@@ -103,7 +103,8 @@ for eps in range(max_episodes):
     #I don't want to be too close by the target
     #target_estimated_pos = (target_pos + np.array([0 , 0 , 0.1])).tolist()
     target_estimated_pos = (target_pos + 0.05*np.random.rand(3)+np.array([0 , 0 , 0.2])).tolist()
-    target_estimated_orientation = list(target_orient)
+    #target_estimated_orientation = list(target_orient)
+    target_estimated_orientation = [0, 0, 0]
     initial_gripper_force = [5,5,5]
 
     #I initialize and resize the first action
