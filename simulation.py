@@ -66,7 +66,7 @@ class Mujoco_prototype():
 
 
 
-    def step_sim(self,action, number_step, target_geom_ID, xyz_pos):
+    def step_sim(self,action, number_step, target_geom_ID):
 
         #variable to store the destination
         self.pos_final = np.hstack([action])
@@ -140,7 +140,7 @@ class Mujoco_prototype():
                     next_state_image, next_state_hand = self.get_state()
 
                     #Evaluate new target position
-                    target, max_dimension = self.get_limit_target_pos(target_geom_ID, xyz_pos)
+                    target, z_height, max_dimension = self.get_limit_target_pos(target_geom_ID)
                 
 
                     #re-get the feedback
@@ -159,7 +159,6 @@ class Mujoco_prototype():
     
                     reward_from_force = 0 
                     reward_from_height = 0
-                    
 
                     if reward_from_distance > 0.8:
 
@@ -172,12 +171,13 @@ class Mujoco_prototype():
                         #Initialize Resulting Height
                         resulting_height = 0
 
-                        if target[2] < 0.2:
-                            resulting_height = target[2]
+                        if (target[2] - z_height) < 0.2:
+                            resulting_height = target[2] - z_height
                         else:
                             resulting_height = 0.2
 
                         reward_from_height = 10*resulting_height
+                        
 
                     reward = reward_from_distance + reward_from_force + reward_from_height
 
@@ -256,20 +256,23 @@ class Mujoco_prototype():
         return image
     
     #works in a way I can grasp in a proper way considering the size of the finger
-    def get_limit_target_pos(self,target_geom_ID,xyz_pos):
+    def get_limit_target_pos(self,target_geom_ID):
 
         half_size_target = self.interface.model.geom_size[target_geom_ID]
+        
        
         if(target_geom_ID == 2):
-            xyz_pos[2] = xyz_pos[2] + half_size_target[2]
+            xyz_pos = self.interface.get_xyz("target")
+            height = half_size_target[2]
 
         elif(target_geom_ID == 3):
-            xyz_pos[2] = xyz_pos[2] + half_size_target[1]
+            xyz_pos = self.interface.get_xyz("target_cylinder")
+            height = half_size_target[1]
         
         index_max_dimension = np.argmax(half_size_target)
         max_dimension = half_size_target[index_max_dimension]
         
-        return xyz_pos, max_dimension
+        return xyz_pos, height, max_dimension
 
 
     def get_target_orient(self):

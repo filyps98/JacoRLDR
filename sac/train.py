@@ -102,7 +102,7 @@ for eps in range(max_episodes):
 
     #I don't want to be too close by the target
     #target_estimated_pos = (target_pos + np.array([0 , 0 , 0.1])).tolist()
-    target_estimated_pos = (target_pos + 0.05*np.random.rand(3)+np.array([0 , 0 , 0.15])).tolist()
+    target_estimated_pos = (target_pos + 0.05*np.random.rand(3)+np.array([0 , 0 , 0.2])).tolist()
     target_estimated_orientation = list(target_orient)
     initial_gripper_force = [5,5,5]
 
@@ -114,7 +114,7 @@ for eps in range(max_episodes):
     scripted_action = np.resize(scripted_action,(9))
     
 
-    _, _, _, _ = env.step_sim(scripted_action, -1,  geom_body_ID, target_pos.copy())
+    _, _, _, _ = env.step_sim(scripted_action, -1,  geom_body_ID)
 
 
     action = np.zeros(9)
@@ -139,7 +139,7 @@ for eps in range(max_episodes):
         action[6:] = ratio_residual_force*action_RL[6]*np.ones(3) + ratio_residual_force
 
 
-        next_state_image, next_state_hand, reward, done = env.step_sim(action, step, geom_body_ID, target_pos.copy())       
+        next_state_image, next_state_hand, reward, done = env.step_sim(action, step, geom_body_ID)       
         
             
         replay_buffer.push(state_image, state_hand, action_RL, reward, next_state_image, next_state_hand, done)
