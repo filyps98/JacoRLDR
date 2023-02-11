@@ -133,9 +133,9 @@ class SAC_Trainer():
         torch.save(self.policy_net.state_dict(), path+'_policy')
 
     def load_model(self, path):
-        self.soft_q_net1.load_state_dict(torch.load(path+'_q1.zip', map_location=torch.device('cpu')))
-        self.soft_q_net2.load_state_dict(torch.load(path+'_q2.zip', map_location=torch.device('cpu')))
-        self.policy_net.load_state_dict(torch.load(path+'_policy.zip', map_location=torch.device('cpu')))
+        self.soft_q_net1.load_state_dict(torch.load(path+'_q1', map_location=torch.device('cpu')))
+        self.soft_q_net2.load_state_dict(torch.load(path+'_q2', map_location=torch.device('cpu')))
+        self.policy_net.load_state_dict(torch.load(path+'_policy', map_location=torch.device('cpu')))
 
         self.soft_q_net1.eval()
         self.soft_q_net2.eval()
