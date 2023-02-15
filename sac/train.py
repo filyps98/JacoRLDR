@@ -44,14 +44,14 @@ action_range = 1
 
 # hyper-parameters for RL training
 max_episodes  = 5000000
-max_steps = 5
+max_steps = 3
 
 
 frame_idx   = 0
 batch_size  = 550
 explore_steps = 0  # for random action sampling in the beginning of training
 initial_update_itr = 20
-update_itr = 3
+update_itr = 5
 AUTO_ENTROPY=True
 DETERMINISTIC=False
 hidden_dim = 512
@@ -63,8 +63,8 @@ sac_trainer=SAC_Trainer(replay_buffer, action_dim, action_range=action_range )
 average_rewards = 0
 
 #Action range for each action
-ratio_xy = 0.1
-ratio_orient = 0.3
+ratio_xy = 0.05
+ratio_orient = 0.785
 ratio_z = 0.15
 
 ratio_ = np.array([ratio_xy, ratio_xy, ratio_z, ratio_orient, ratio_orient, ratio_orient ])
@@ -83,7 +83,7 @@ light = randomizer.light()
 # pre-training loop
 if(len(replay_buffer) > 0):
     for i in range(initial_update_itr):
-        _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.05*action_dim)
+        _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.1*action_dim)
 
 for eps in range(max_episodes):
     
@@ -102,7 +102,7 @@ for eps in range(max_episodes):
 
     #I don't want to be too close by the target
     #target_estimated_pos = (target_pos + np.array([0 , 0 , 0.1])).tolist()
-    target_estimated_pos = (target_pos + 0.05*np.random.rand(3)+np.array([0 , 0 , 0.2])).tolist()
+    target_estimated_pos = (target_pos + np.array([0.03 , 0.03, 0]*(np.random.rand(3)-0.5)+np.array([0 , 0 , 0.2]))).tolist()
     #target_estimated_orientation = list(target_orient)
     target_estimated_orientation = [0, 0, 0]
     initial_gripper_force = [5,5,5]
@@ -156,7 +156,7 @@ for eps in range(max_episodes):
         
         if len(replay_buffer) > batch_size:
             for i in range(update_itr):
-                _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.05*action_dim)
+                _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.1*action_dim)
 
 
         if done:

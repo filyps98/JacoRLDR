@@ -31,7 +31,7 @@ class Mujoco_prototype():
         self.robot_config = arm(arm_model, folder = dir_name )
 
         # create our Mujoco interface
-        self.interface = Mujoco(self.robot_config, dt=0.001,visualize = vision, create_offscreen_rendercontext = True)
+        self.interface = Mujoco(self.robot_config, dt=0.0001,visualize = vision, create_offscreen_rendercontext = True)
         self.interface.connect()
 
         self.start()
@@ -95,7 +95,7 @@ class Mujoco_prototype():
         
             pre_grip = np.copy(self.pos_final[6:])
 
-            for i in range(800):
+            for i in range(8000):
                 
                 #generate next step of the path planner
                 pos, _ = position_planner.next()
@@ -153,7 +153,7 @@ class Mujoco_prototype():
                     
                     #since the objects change dimention, we change the reward depending on their dimensions 
                     #arg/(1/maxx_dimension) = arg*max_dimension
-                    s = (-np.log(1/0.8 - 1) + 4)*(max_dimension +0.035)
+                    s = (-np.log(1/0.8 - 1) + 4)*(max_dimension +0.015)
                 
                     reward_from_distance = fun.expit(s*final_distance - 4)
     
