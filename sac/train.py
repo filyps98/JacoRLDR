@@ -20,7 +20,6 @@ import time
 from replay import ReplayBuffer
 from normalised_action import NormalizedActions
 from sac_trainer import SAC_Trainer
-from demonstration import scripted_policy
 from Randomizer import body_swap as bs
 from Randomizer.mujoco_randomizer import Randomizer
 
