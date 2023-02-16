@@ -29,14 +29,14 @@ import argparse
 dir_ = os.path.dirname(os.getcwd())
 
 arm_ = "jaco2.xml"
-visualize = False
+visualize = True
 env = Mujoco_prototype(dir_,arm_, visualize)
 
 
 wandb.init(config = {"algorithm": "JacoRL2"}, project="JacoRL2", entity="pippo98")
 
 
-replay_buffer_size = 2e5
+replay_buffer_size = 50
 replay_buffer = ReplayBuffer(replay_buffer_size)
 
 action_dim = 7
@@ -48,7 +48,7 @@ max_steps = 3
 
 
 frame_idx   = 0
-batch_size  = 550
+batch_size  = 20
 explore_steps = 0  # for random action sampling in the beginning of training
 initial_update_itr = 20
 update_itr = 5
@@ -63,7 +63,7 @@ sac_trainer=SAC_Trainer(replay_buffer, action_dim, action_range=action_range )
 average_rewards = 0
 
 #Action range for each action
-ratio_xy = 0.05
+ratio_xy = 0.1
 ratio_orient = 0.785
 ratio_z = 0.15
 
@@ -83,7 +83,7 @@ light = randomizer.light()
 # pre-training loop
 if(len(replay_buffer) > 0):
     for i in range(initial_update_itr):
-        _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.1*action_dim)
+        _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.2*action_dim)
 
 for eps in range(max_episodes):
     
@@ -102,7 +102,7 @@ for eps in range(max_episodes):
 
     #I don't want to be too close by the target
     #target_estimated_pos = (target_pos + np.array([0 , 0 , 0.1])).tolist()
-    target_estimated_pos = (target_pos + np.array([0.03 , 0.03, 0]*(np.random.rand(3)-0.5)+np.array([0 , 0 , 0.2]))).tolist()
+    target_estimated_pos = (target_pos + np.array([0.1 , 0.1, 0]*(np.random.rand(3)-0.5)+np.array([0 , 0 , 0.3]))).tolist()
     #target_estimated_orientation = list(target_orient)
     target_estimated_orientation = [0, 0, 0]
     initial_gripper_force = [5,5,5]

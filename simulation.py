@@ -31,7 +31,7 @@ class Mujoco_prototype():
         self.robot_config = arm(arm_model, folder = dir_name )
 
         # create our Mujoco interface
-        self.interface = Mujoco(self.robot_config, dt=0.0001,visualize = vision, create_offscreen_rendercontext = True)
+        self.interface = Mujoco(self.robot_config, dt=0.0005,visualize = vision, create_offscreen_rendercontext = True)
         self.interface.connect()
 
         self.start()
@@ -95,7 +95,7 @@ class Mujoco_prototype():
         
             pre_grip = np.copy(self.pos_final[6:])
 
-            for i in range(8000):
+            for i in range(5000):
                 
                 #generate next step of the path planner
                 pos, _ = position_planner.next()
@@ -147,16 +147,16 @@ class Mujoco_prototype():
                     feedback = self.interface.get_feedback()
                     ee_xyz = self.robot_config.Tx("EE", q=feedback["q"])
 
-                  
+                    
                     #Adding distance
                     final_distance = 1/(np.linalg.norm(ee_xyz - target[:3]))
                     
                     #since the objects change dimention, we change the reward depending on their dimensions 
                     #arg/(1/maxx_dimension) = arg*max_dimension
-                    s = (-np.log(1/0.8 - 1) + 4)*(max_dimension +0.015)
+                    s = (-np.log(1/0.8 - 1) + 4)*(max_dimension +0.03)
                 
                     reward_from_distance = fun.expit(s*final_distance - 4)
-    
+
                     reward_from_force = 0 
                     reward_from_height = 0
 
@@ -169,14 +169,18 @@ class Mujoco_prototype():
 
                         #Adding Resulting Height
                         #Initialize Resulting Height
-                        resulting_height = 0
+                        resulting_height = target[2] - z_height
 
-                        if (target[2] - z_height) < 0.2:
-                            resulting_height = target[2] - z_height
+                        if resulting_height > 0:
+                            if resulting_height < 0.2:
+                                resulting_height = target[2] - z_height
+                            else:
+                                resulting_height = 0.2
+
+                            reward_from_height = 10*resulting_height
+
                         else:
-                            resulting_height = 0.2
-
-                        reward_from_height = 10*resulting_height
+                            reward_from_height = 0
                         
 
                     reward = reward_from_distance + reward_from_force + reward_from_height
