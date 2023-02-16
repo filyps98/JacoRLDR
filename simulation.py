@@ -95,7 +95,7 @@ class Mujoco_prototype():
         
             pre_grip = np.copy(self.pos_final[6:])
 
-            for i in range(5000):
+            for i in range(3000):
                 
                 #generate next step of the path planner
                 pos, _ = position_planner.next()
