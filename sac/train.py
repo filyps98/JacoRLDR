@@ -28,7 +28,7 @@ import argparse
 dir_ = os.path.dirname(os.getcwd())
 
 arm_ = "jaco2.xml"
-visualize = True
+visualize = False
 env = Mujoco_prototype(dir_,arm_, visualize)
 
 
@@ -63,7 +63,7 @@ average_rewards = 0
 
 #Action range for each action
 ratio_xy = 0.1
-ratio_orient = 0.785
+ratio_orient = 0.3
 ratio_z = 0.15
 
 ratio_ = np.array([ratio_xy, ratio_xy, ratio_z, ratio_orient, ratio_orient, ratio_orient ])
@@ -83,7 +83,7 @@ light = randomizer.light()
 if(len(replay_buffer) > 0):
     print("I am inside")
     for i in range(initial_update_itr):
-        _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.2*action_dim)
+        _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.1*action_dim)
 
 for eps in range(max_episodes):
     
@@ -102,7 +102,7 @@ for eps in range(max_episodes):
 
     #I don't want to be too close by the target
     #target_estimated_pos = (target_pos + np.array([0 , 0 , 0.1])).tolist()
-    target_estimated_pos = (target_pos + np.array([0.1 , 0.1, 0]*(np.random.rand(3)-0.5)+np.array([0 , 0 , 0.3]))).tolist()
+    target_estimated_pos = (target_pos + np.array([0.05 , 0.05, 0]*(np.random.rand(3)-0.5)+np.array([0 , 0 , 0.15]))).tolist()
     #target_estimated_orientation = list(target_orient)
     target_estimated_orientation = [0, 0, 0]
     initial_gripper_force = [5,5,5]
@@ -156,7 +156,7 @@ for eps in range(max_episodes):
         
         if len(replay_buffer) > batch_size:
             for i in range(update_itr):
-                _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.2*action_dim)
+                _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.1*action_dim)
 
 
         if done:
