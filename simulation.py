@@ -181,6 +181,9 @@ class Mujoco_prototype():
 
                         else:
                             reward_from_height = 0
+                            
+                        print("\n height reward")
+                        print(reward_from_height)
                         
 
                     reward = reward_from_distance + reward_from_force + reward_from_height
@@ -255,7 +258,7 @@ class Mujoco_prototype():
         data = self.interface.offscreen.read_pixels(84,84,depth = False)
         image = np.array(data[:,:,:])
         #image = np.array(100*data[1])
-        image = np.resize(image,(3,84,84))
+        image = np.resize(image,(3,224,224))
 
         return image
     

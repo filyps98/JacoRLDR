@@ -7,26 +7,23 @@ from torch.distributions import Normal
 
 #to modify
 class PolicyNetwork(nn.Module):
-    def __init__(self, num_actions, _device, action_range=1., init_w=3e-3, log_std_min=-20, log_std_max=2):
+    def __init__(self, num_actions, _device, pre_model, action_range=1., init_w=3e-3, log_std_min=-20, log_std_max=2):
         super(PolicyNetwork, self).__init__()
 
         self.device = _device
+        self.feature_extractor = pre_model
         
         self.log_std_min = log_std_min
         self.log_std_max = log_std_max
 
-        #CNN part
-        self.batch_norm= nn.BatchNorm2d(3)
-        self.conv1 = nn.Conv2d(in_channels=3, out_channels=64, kernel_size = 2, stride = 1)
-        self.batchnorm1 = nn.BatchNorm2d(64)
-        self.pooling1 = nn.MaxPool2d(3)
-        self.conv2 = nn.Conv2d(in_channels=64, out_channels=128, kernel_size = 2, stride = 1)
-        self.batchnorm2 = nn.BatchNorm2d(128)
-        self.pooling2 = nn.MaxPool2d(2)
-        self.conv_gen1 = nn.Conv2d(in_channels=128, out_channels=128, kernel_size = 1, stride = 1)
-        self.conv3 = nn.Conv2d(in_channels=128, out_channels=256, kernel_size = 3, stride = 2)
-        self.conv_gen2 = nn.Conv2d(in_channels=256, out_channels=256, kernel_size = 1, stride = 1)
-        self.linear1 = nn.Linear(256,480)
+        #CNN partx = F.relu(self.conv_gen2(x))
+        self.batch_norm= nn.BatchNorm2d(256)
+        self.conv_gen1 = nn.Conv2d(in_channels=256, out_channels=256, kernel_size = 1, stride = 1)
+        self.conv_gen2 = nn.Conv2d(in_channels=256, out_channels=512, kernel_size = 3, stride = 2)
+        self.conv_gen3 = nn.Conv2d(in_channels=512, out_channels=512, kernel_size = 1, stride = 1)
+        self.conv_gen4 = nn.Conv2d(in_channels=512, out_channels=1024, kernel_size = 3, stride = 2)
+        self.pooling1 = nn.MaxPool2d(kernel_size= 2, stride = 2)
+        self.linear1 = nn.Linear(4096,480)
 
         #Linear Part
         self.linear_1 = nn.Linear(6,64)
@@ -51,18 +48,13 @@ class PolicyNetwork(nn.Module):
     def forward_CNN(self, state):
 
         x = self.batch_norm(state)
-        x = F.relu(self.conv1(x))
-        x = self.pooling1(x)
-        x = self.batchnorm1(x)
-        x = F.relu(self.conv2(x))
-        x = self.batchnorm2(x)
         x = F.relu(self.conv_gen1(x))
-        x = self.pooling1(x)
-        x = self.batchnorm2(x)
-        
-        x = F.relu(self.conv3(x))
         x = F.relu(self.conv_gen2(x))
-        x = self.pooling2(x)
+        x = self.pooling1(x)
+        x = F.relu(self.conv_gen3(x))
+        x = F.relu(self.conv_gen3(x))
+        x = self.pooling1(x)
+        x = F.relu(self.conv_gen4(x))
         x = x.view(x.size(0), -1)
         x = F.relu(self.linear1(x))
 
@@ -130,8 +122,12 @@ class PolicyNetwork(nn.Module):
     def get_action(self, state_image, state_hand, deterministic):
 
         state_image = torch.FloatTensor(state_image).unsqueeze(0).to(self.device)
+
+        feature_state = self.feature_extractor(state_image)
         state_hand = torch.FloatTensor(state_hand).unsqueeze(0).to(self.device)
-        mean, log_std = self.forward(state_image, state_hand)
+
+
+        mean, log_std = self.forward(feature_state, state_hand)
         std = log_std.exp()
         
         normal = Normal(0, 1)

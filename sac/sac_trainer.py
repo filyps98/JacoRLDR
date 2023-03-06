@@ -2,6 +2,7 @@ import wandb
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import torchvision.models as models
 import numpy as np
 from soft_network import SoftQNetwork
 from policy_network import PolicyNetwork
@@ -17,6 +18,9 @@ class SAC_Trainer():
             self.device = torch.device("cpu")
         print(self.device)
         
+        self.vgg16 = models.vgg16(pretrained=True)
+        print(self.vgg16)
+        self.feature_extractor = nn.Sequential(*list(self.vgg16.features.children())[:12])
 
         self.replay_buffer = replay_buffer
 
@@ -24,7 +28,7 @@ class SAC_Trainer():
         self.soft_q_net2 = SoftQNetwork().to(self.device)
         self.target_soft_q_net1 = SoftQNetwork().to(self.device)
         self.target_soft_q_net2 = SoftQNetwork().to(self.device)
-        self.policy_net = PolicyNetwork(action_dim, self.device, action_range).to(self.device)
+        self.policy_net = PolicyNetwork(action_dim, self.device, self.feature_extractor, action_range).to(self.device)
         self.log_alpha = torch.zeros(1, dtype=torch.float32, requires_grad=True, device=self.device)
         print('Soft Q Network (1,2): ', self.soft_q_net1)
         print('Policy Network: ', self.policy_net)
@@ -59,11 +63,13 @@ class SAC_Trainer():
         reward     = torch.FloatTensor(reward).unsqueeze(1).to(self.device)  # reward is single value, unsqueeze() to add one dim to be [reward] at the sample dim;
         done       = torch.FloatTensor(np.float32(done)).unsqueeze(1).to(self.device)
 
+        feature_state =  self.feature_extractor(state_image)
+        feature_next_state = self.feature_extractor(next_state_image)
 
-        predicted_q_value1 = self.soft_q_net1(state_image, state_hand, action)
-        predicted_q_value2 = self.soft_q_net2(state_image,state_hand, action)
-        new_action, log_prob, z, mean, log_std = self.policy_net.evaluate(state_image, state_hand)
-        new_next_action, next_log_prob, _, _, _ = self.policy_net.evaluate(next_state_image, next_state_hand)
+        predicted_q_value1 = self.soft_q_net1(feature_state, state_hand, action)
+        predicted_q_value2 = self.soft_q_net2(feature_state,state_hand, action)
+        new_action, log_prob, z, mean, log_std = self.policy_net.evaluate(feature_state, state_hand)
+        new_next_action, next_log_prob, _, _, _ = self.policy_net.evaluate(feature_next_state, next_state_hand)
         reward = reward_scale * (reward - reward.mean(dim=0)) / (reward.std(dim=0) + 1e-6) # normalize with batch mean and std; plus a small number to prevent numerical problem
 
         
@@ -85,7 +91,7 @@ class SAC_Trainer():
 
 
     # Training Q Function
-        target_q_min = torch.min(self.target_soft_q_net1(next_state_image, next_state_hand, new_next_action),self.target_soft_q_net2(next_state_image, next_state_hand, new_next_action)) - self.alpha * next_log_prob
+        target_q_min = torch.min(self.target_soft_q_net1(feature_next_state, next_state_hand, new_next_action),self.target_soft_q_net2(feature_next_state, next_state_hand, new_next_action)) - self.alpha * next_log_prob
         target_q_value = reward + (1 - done) * gamma * target_q_min # if done==1, only reward
         q_value_loss1 = self.soft_q_criterion1(predicted_q_value1, target_q_value.detach())  # detach: no gradients for the variable
         q_value_loss2 = self.soft_q_criterion2(predicted_q_value2, target_q_value.detach())
@@ -102,7 +108,7 @@ class SAC_Trainer():
         self.soft_q_optimizer2.step()  
 
     # Training Policy Function
-        predicted_new_q_value = torch.min(self.soft_q_net1(state_image, state_hand, new_action),self.soft_q_net2(state_image, state_hand, new_action))
+        predicted_new_q_value = torch.min(self.soft_q_net1(feature_state, state_hand, new_action),self.soft_q_net2(feature_state, state_hand, new_action))
         policy_loss = (self.alpha * log_prob - predicted_new_q_value).mean()
 
 

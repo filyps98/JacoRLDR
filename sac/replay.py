@@ -1,11 +1,16 @@
 import random 
-import numpy as np 
+import numpy as np
+import os
+import torch
 
 class ReplayBuffer:
     def __init__(self, capacity):
         self.capacity = capacity
         self.buffer = []
         self.position = 0
+
+        if(os.path.isfile("Dataset.pt") == True):
+            self.buffer = torch.load("Dataset.pt").copy()
     
     def push(self, state_image, state_hand, action, reward, next_state_image, next_state_hand, done):
         if len(self.buffer) < self.capacity:

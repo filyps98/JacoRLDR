@@ -1,0 +1,227 @@
+2023-03-06 18:50:00,970 INFO    StreamThr :4120 [internal.py:wandb_internal():90] W&B internal server running at pid: 4120, started at: 2023-03-06 18:50:00.969689
+2023-03-06 18:50:00,971 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: status
+2023-03-06 18:50:00,984 INFO    WriterThread:4120 [datastore.py:open_for_write():85] open: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/run-u70u6lol.wandb
+2023-03-06 18:50:00,984 DEBUG   SenderThread:4120 [sender.py:send():334] send: header
+2023-03-06 18:50:01,012 DEBUG   SenderThread:4120 [sender.py:send():334] send: run
+2023-03-06 18:50:01,714 INFO    SenderThread:4120 [dir_watcher.py:__init__():216] watching files in: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files
+2023-03-06 18:50:01,714 INFO    SenderThread:4120 [sender.py:_start_run_threads():1068] run started: u70u6lol with start time 1678096200.973961
+2023-03-06 18:50:01,715 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: summary_record
+2023-03-06 18:50:01,715 INFO    SenderThread:4120 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-03-06 18:50:01,720 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: check_version
+2023-03-06 18:50:01,720 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: check_version
+2023-03-06 18:50:01,926 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: run_start
+2023-03-06 18:50:01,934 DEBUG   HandlerThread:4120 [system_info.py:__init__():31] System info init
+2023-03-06 18:50:01,934 DEBUG   HandlerThread:4120 [system_info.py:__init__():46] System info init done
+2023-03-06 18:50:01,934 INFO    HandlerThread:4120 [system_monitor.py:start():151] Starting system monitor
+2023-03-06 18:50:01,934 INFO    SystemMonitor:4120 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-03-06 18:50:01,934 INFO    HandlerThread:4120 [system_monitor.py:probe():172] Collecting system info
+2023-03-06 18:50:01,935 INFO    SystemMonitor:4120 [interfaces.py:start():168] Started cpu
+2023-03-06 18:50:01,935 INFO    SystemMonitor:4120 [interfaces.py:start():168] Started disk
+2023-03-06 18:50:01,935 INFO    SystemMonitor:4120 [interfaces.py:start():168] Started gpu
+2023-03-06 18:50:01,936 INFO    SystemMonitor:4120 [interfaces.py:start():168] Started memory
+2023-03-06 18:50:01,936 INFO    SystemMonitor:4120 [interfaces.py:start():168] Started network
+2023-03-06 18:50:01,942 ERROR   gpu       :4120 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-06 18:50:01,942 ERROR   gpu       :4120 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-06 18:50:01,975 DEBUG   HandlerThread:4120 [system_info.py:probe():195] Probing system
+2023-03-06 18:50:01,982 DEBUG   HandlerThread:4120 [system_info.py:_probe_git():180] Probing git
+2023-03-06 18:50:02,003 DEBUG   HandlerThread:4120 [system_info.py:_probe_git():188] Probing git done
+2023-03-06 18:50:02,003 DEBUG   HandlerThread:4120 [system_info.py:probe():241] Probing system done
+2023-03-06 18:50:02,003 DEBUG   HandlerThread:4120 [system_monitor.py:probe():181] {'os': 'Linux-5.15.0-67-generic-x86_64-with-debian-bullseye-sid', 'python': '3.7.16', 'heartbeatAt': '2023-03-06T09:50:01.976040', 'startedAt': '2023-03-06T09:50:00.957907', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': 'train.py', 'codePath': 'sac/train.py', 'git': {'remote': 'git@github.com:filyps98/JacoRLDR.git', 'commit': '2ad113384a845345b3060f70ef981b95554a4187'}, 'email': 'pippo.ronco@gmail.com', 'root': '/home/filippo/Desktop/Project/Experiments/JacoRLDR', 'host': 'filippo-X510UQ', 'username': 'filippo', 'executable': '/home/filippo/miniconda3/envs/robot/bin/python', 'cpu_count': 2, 'cpu_count_logical': 4, 'cpu_freq': {'current': 3021.694, 'min': 400.0, 'max': 3500.0}, 'cpu_freq_per_core': [{'current': 2900.0, 'min': 400.0, 'max': 3500.0}, {'current': 3500.026, 'min': 400.0, 'max': 3500.0}, {'current': 2900.0, 'min': 400.0, 'max': 3500.0}, {'current': 2900.0, 'min': 400.0, 'max': 3500.0}], 'disk': {'total': 96.18362426757812, 'used': 78.73260879516602}, 'gpu': 'NVIDIA GeForce 940MX', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce 940MX', 'memory_total': 2147483648}], 'memory': {'total': 7.649135589599609}}
+2023-03-06 18:50:02,003 INFO    HandlerThread:4120 [system_monitor.py:probe():182] Finished collecting system info
+2023-03-06 18:50:02,003 INFO    HandlerThread:4120 [system_monitor.py:probe():185] Publishing system info
+2023-03-06 18:50:02,004 DEBUG   HandlerThread:4120 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2023-03-06 18:50:02,004 DEBUG   HandlerThread:4120 [system_info.py:_save_pip():67] Saving pip packages done
+2023-03-06 18:50:02,004 DEBUG   HandlerThread:4120 [system_info.py:_save_conda():75] Saving list of conda packages installed into the current environment
+2023-03-06 18:50:02,717 INFO    Thread-13 :4120 [dir_watcher.py:_on_file_created():275] file/dir created: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/requirements.txt
+2023-03-06 18:50:02,717 INFO    Thread-13 :4120 [dir_watcher.py:_on_file_created():275] file/dir created: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/conda-environment.yaml
+2023-03-06 18:50:02,718 INFO    Thread-13 :4120 [dir_watcher.py:_on_file_created():275] file/dir created: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/wandb-summary.json
+2023-03-06 18:50:03,943 ERROR   gpu       :4120 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-06 18:50:03,943 ERROR   gpu       :4120 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-06 18:50:05,945 ERROR   gpu       :4120 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-06 18:50:05,946 ERROR   gpu       :4120 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-06 18:50:06,408 DEBUG   HandlerThread:4120 [system_info.py:_save_conda():86] Saving conda packages done
+2023-03-06 18:50:06,409 INFO    HandlerThread:4120 [system_monitor.py:probe():187] Finished publishing system info
+2023-03-06 18:50:06,413 DEBUG   SenderThread:4120 [sender.py:send():334] send: files
+2023-03-06 18:50:06,413 INFO    SenderThread:4120 [sender.py:_save_file():1319] saving file wandb-metadata.json with policy now
+2023-03-06 18:50:06,414 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: status_report
+2023-03-06 18:50:06,456 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-06 18:50:06,456 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: stop_status
+2023-03-06 18:50:06,716 INFO    Thread-13 :4120 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/conda-environment.yaml
+2023-03-06 18:50:06,716 INFO    Thread-13 :4120 [dir_watcher.py:_on_file_created():275] file/dir created: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/wandb-metadata.json
+2023-03-06 18:50:06,726 DEBUG   SenderThread:4120 [sender.py:send():334] send: telemetry
+2023-03-06 18:50:07,200 INFO    Thread-16 :4120 [upload_job.py:push():143] Uploaded file /tmp/tmpak3bkh82wandb/tpm442xy-wandb-metadata.json
+2023-03-06 18:50:07,716 INFO    Thread-13 :4120 [dir_watcher.py:_on_file_created():275] file/dir created: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/output.log
+2023-03-06 18:50:07,947 ERROR   gpu       :4120 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-06 18:50:07,947 ERROR   gpu       :4120 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-06 18:50:09,717 INFO    Thread-13 :4120 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/output.log
+2023-03-06 18:50:09,948 ERROR   gpu       :4120 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-06 18:50:09,948 ERROR   gpu       :4120 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-06 18:50:11,485 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: status_report
+2023-03-06 18:50:11,718 INFO    Thread-13 :4120 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/output.log
+2023-03-06 18:50:11,949 ERROR   gpu       :4120 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-06 18:50:11,949 ERROR   gpu       :4120 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-06 18:50:13,719 INFO    Thread-13 :4120 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/output.log
+2023-03-06 18:50:13,950 ERROR   gpu       :4120 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-06 18:50:13,950 ERROR   gpu       :4120 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-06 18:50:14,355 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: partial_history
+2023-03-06 18:50:14,357 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: partial_history
+2023-03-06 18:50:14,357 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: partial_history
+2023-03-06 18:50:14,358 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: partial_history
+2023-03-06 18:50:14,358 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: partial_history
+2023-03-06 18:50:14,359 DEBUG   SenderThread:4120 [sender.py:send():334] send: history
+2023-03-06 18:50:14,359 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: summary_record
+2023-03-06 18:50:14,359 INFO    SenderThread:4120 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-03-06 18:50:14,360 DEBUG   SenderThread:4120 [sender.py:send():334] send: history
+2023-03-06 18:50:14,360 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: summary_record
+2023-03-06 18:50:14,360 INFO    SenderThread:4120 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-03-06 18:50:14,360 DEBUG   SenderThread:4120 [sender.py:send():334] send: history
+2023-03-06 18:50:14,360 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: summary_record
+2023-03-06 18:50:14,360 INFO    SenderThread:4120 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-03-06 18:50:14,360 DEBUG   SenderThread:4120 [sender.py:send():334] send: history
+2023-03-06 18:50:14,361 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: summary_record
+2023-03-06 18:50:14,361 INFO    SenderThread:4120 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-03-06 18:50:14,361 DEBUG   SenderThread:4120 [sender.py:send():334] send: history
+2023-03-06 18:50:14,361 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: summary_record
+2023-03-06 18:50:14,361 INFO    SenderThread:4120 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-03-06 18:50:14,720 INFO    Thread-13 :4120 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/wandb-summary.json
+2023-03-06 18:50:15,952 ERROR   gpu       :4120 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-06 18:50:15,952 ERROR   gpu       :4120 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-06 18:50:17,365 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: status_report
+2023-03-06 18:50:17,953 ERROR   gpu       :4120 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-06 18:50:17,953 ERROR   gpu       :4120 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-06 18:50:19,954 ERROR   gpu       :4120 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-06 18:50:19,954 ERROR   gpu       :4120 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-06 18:50:20,177 DEBUG   SenderThread:4120 [sender.py:send():334] send: exit
+2023-03-06 18:50:20,177 INFO    SenderThread:4120 [sender.py:send_exit():557] handling exit code: 1
+2023-03-06 18:50:20,178 INFO    SenderThread:4120 [sender.py:send_exit():559] handling runtime: 18
+2023-03-06 18:50:20,184 INFO    SenderThread:4120 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-03-06 18:50:20,185 INFO    SenderThread:4120 [sender.py:send_exit():565] send defer
+2023-03-06 18:50:20,186 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: defer
+2023-03-06 18:50:20,186 INFO    HandlerThread:4120 [handler.py:handle_request_defer():170] handle defer: 0
+2023-03-06 18:50:20,188 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: defer
+2023-03-06 18:50:20,188 INFO    SenderThread:4120 [sender.py:send_request_defer():581] handle sender defer: 0
+2023-03-06 18:50:20,188 INFO    SenderThread:4120 [sender.py:transition_state():585] send defer: 1
+2023-03-06 18:50:20,189 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: defer
+2023-03-06 18:50:20,189 INFO    HandlerThread:4120 [handler.py:handle_request_defer():170] handle defer: 1
+2023-03-06 18:50:20,190 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: defer
+2023-03-06 18:50:20,190 INFO    SenderThread:4120 [sender.py:send_request_defer():581] handle sender defer: 1
+2023-03-06 18:50:20,190 INFO    SenderThread:4120 [sender.py:transition_state():585] send defer: 2
+2023-03-06 18:50:20,190 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: defer
+2023-03-06 18:50:20,191 INFO    HandlerThread:4120 [handler.py:handle_request_defer():170] handle defer: 2
+2023-03-06 18:50:20,191 INFO    HandlerThread:4120 [system_monitor.py:finish():161] Stopping system monitor
+2023-03-06 18:50:20,192 DEBUG   SystemMonitor:4120 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2023-03-06 18:50:20,193 DEBUG   SystemMonitor:4120 [system_monitor.py:_start():137] Finished system metrics aggregation loop
+2023-03-06 18:50:20,194 DEBUG   SystemMonitor:4120 [system_monitor.py:_start():141] Publishing last batch of metrics
+2023-03-06 18:50:20,196 INFO    HandlerThread:4120 [interfaces.py:finish():175] Joined cpu
+2023-03-06 18:50:20,197 INFO    HandlerThread:4120 [interfaces.py:finish():175] Joined disk
+2023-03-06 18:50:20,251 ERROR   gpu       :4120 [interfaces.py:aggregate():146] Failed to serialize metric: division by zero
+2023-03-06 18:50:20,251 INFO    HandlerThread:4120 [interfaces.py:finish():175] Joined gpu
+2023-03-06 18:50:20,251 INFO    HandlerThread:4120 [interfaces.py:finish():175] Joined memory
+2023-03-06 18:50:20,251 INFO    HandlerThread:4120 [interfaces.py:finish():175] Joined network
+2023-03-06 18:50:20,252 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: defer
+2023-03-06 18:50:20,252 INFO    SenderThread:4120 [sender.py:send_request_defer():581] handle sender defer: 2
+2023-03-06 18:50:20,252 INFO    SenderThread:4120 [sender.py:transition_state():585] send defer: 3
+2023-03-06 18:50:20,252 DEBUG   SenderThread:4120 [sender.py:send():334] send: stats
+2023-03-06 18:50:20,252 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: defer
+2023-03-06 18:50:20,252 INFO    HandlerThread:4120 [handler.py:handle_request_defer():170] handle defer: 3
+2023-03-06 18:50:20,252 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: defer
+2023-03-06 18:50:20,252 INFO    SenderThread:4120 [sender.py:send_request_defer():581] handle sender defer: 3
+2023-03-06 18:50:20,252 INFO    SenderThread:4120 [sender.py:transition_state():585] send defer: 4
+2023-03-06 18:50:20,252 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: defer
+2023-03-06 18:50:20,252 INFO    HandlerThread:4120 [handler.py:handle_request_defer():170] handle defer: 4
+2023-03-06 18:50:20,253 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: defer
+2023-03-06 18:50:20,253 INFO    SenderThread:4120 [sender.py:send_request_defer():581] handle sender defer: 4
+2023-03-06 18:50:20,253 INFO    SenderThread:4120 [sender.py:transition_state():585] send defer: 5
+2023-03-06 18:50:20,253 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: defer
+2023-03-06 18:50:20,253 INFO    HandlerThread:4120 [handler.py:handle_request_defer():170] handle defer: 5
+2023-03-06 18:50:20,253 DEBUG   SenderThread:4120 [sender.py:send():334] send: summary
+2023-03-06 18:50:20,253 INFO    SenderThread:4120 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-03-06 18:50:20,253 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: defer
+2023-03-06 18:50:20,253 INFO    SenderThread:4120 [sender.py:send_request_defer():581] handle sender defer: 5
+2023-03-06 18:50:20,254 INFO    SenderThread:4120 [sender.py:transition_state():585] send defer: 6
+2023-03-06 18:50:20,254 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: defer
+2023-03-06 18:50:20,254 INFO    HandlerThread:4120 [handler.py:handle_request_defer():170] handle defer: 6
+2023-03-06 18:50:20,254 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: defer
+2023-03-06 18:50:20,254 INFO    SenderThread:4120 [sender.py:send_request_defer():581] handle sender defer: 6
+2023-03-06 18:50:20,259 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: status_report
+2023-03-06 18:50:20,585 INFO    SenderThread:4120 [sender.py:transition_state():585] send defer: 7
+2023-03-06 18:50:20,585 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: defer
+2023-03-06 18:50:20,585 INFO    HandlerThread:4120 [handler.py:handle_request_defer():170] handle defer: 7
+2023-03-06 18:50:20,586 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: defer
+2023-03-06 18:50:20,586 INFO    SenderThread:4120 [sender.py:send_request_defer():581] handle sender defer: 7
+2023-03-06 18:50:20,732 INFO    Thread-13 :4120 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/config.yaml
+2023-03-06 18:50:20,733 INFO    Thread-13 :4120 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/wandb-summary.json
+2023-03-06 18:50:21,177 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: poll_exit
+2023-03-06 18:50:21,733 INFO    Thread-13 :4120 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/output.log
+2023-03-06 18:50:22,765 INFO    SenderThread:4120 [sender.py:transition_state():585] send defer: 8
+2023-03-06 18:50:22,765 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: poll_exit
+2023-03-06 18:50:22,766 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: defer
+2023-03-06 18:50:22,767 INFO    HandlerThread:4120 [handler.py:handle_request_defer():170] handle defer: 8
+2023-03-06 18:50:22,768 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: defer
+2023-03-06 18:50:22,768 INFO    SenderThread:4120 [sender.py:send_request_defer():581] handle sender defer: 8
+2023-03-06 18:50:22,801 INFO    SenderThread:4120 [sender.py:transition_state():585] send defer: 9
+2023-03-06 18:50:22,803 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: defer
+2023-03-06 18:50:22,803 DEBUG   SenderThread:4120 [sender.py:send():334] send: artifact
+2023-03-06 18:50:22,803 INFO    HandlerThread:4120 [handler.py:handle_request_defer():170] handle defer: 9
+2023-03-06 18:50:23,734 INFO    Thread-13 :4120 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/output.log
+2023-03-06 18:50:24,518 INFO    SenderThread:4120 [sender.py:send_artifact():1415] sent artifact job-git_github.com_filyps98_JacoRLDR.git_sac_train.py - {'id': 'QXJ0aWZhY3Q6Mzg5NTM1Njcz', 'digest': '50d40a1637c34bf661977a5a1a0e5344', 'state': 'COMMITTED', 'aliases': [{'artifactCollectionName': 'job-git_github.com_filyps98_JacoRLDR.git_sac_train.py', 'alias': 'v12'}], 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjUxNDk0MDQ1', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6Mzg5NTM1Njcz', 'versionIndex': 12}}, 'version': 'v12'}
+2023-03-06 18:50:24,519 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: defer
+2023-03-06 18:50:24,519 INFO    SenderThread:4120 [sender.py:send_request_defer():581] handle sender defer: 9
+2023-03-06 18:50:24,520 INFO    SenderThread:4120 [dir_watcher.py:finish():362] shutting down directory watcher
+2023-03-06 18:50:24,736 INFO    SenderThread:4120 [dir_watcher.py:finish():392] scan: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files
+2023-03-06 18:50:24,741 INFO    SenderThread:4120 [dir_watcher.py:finish():406] scan save: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/config.yaml config.yaml
+2023-03-06 18:50:24,741 INFO    SenderThread:4120 [dir_watcher.py:finish():406] scan save: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/wandb-metadata.json wandb-metadata.json
+2023-03-06 18:50:24,742 INFO    SenderThread:4120 [dir_watcher.py:finish():406] scan save: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/conda-environment.yaml conda-environment.yaml
+2023-03-06 18:50:24,749 INFO    SenderThread:4120 [dir_watcher.py:finish():406] scan save: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/output.log output.log
+2023-03-06 18:50:24,770 INFO    SenderThread:4120 [dir_watcher.py:finish():406] scan save: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/wandb-summary.json wandb-summary.json
+2023-03-06 18:50:24,783 INFO    SenderThread:4120 [dir_watcher.py:finish():406] scan save: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/requirements.txt requirements.txt
+2023-03-06 18:50:24,799 INFO    SenderThread:4120 [sender.py:transition_state():585] send defer: 10
+2023-03-06 18:50:24,801 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: defer
+2023-03-06 18:50:24,801 INFO    HandlerThread:4120 [handler.py:handle_request_defer():170] handle defer: 10
+2023-03-06 18:50:24,820 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: defer
+2023-03-06 18:50:24,820 INFO    SenderThread:4120 [sender.py:send_request_defer():581] handle sender defer: 10
+2023-03-06 18:50:24,820 INFO    SenderThread:4120 [file_pusher.py:finish():160] shutting down file pusher
+2023-03-06 18:50:25,844 INFO    Thread-17 :4120 [upload_job.py:push():143] Uploaded file /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/config.yaml
+2023-03-06 18:50:25,854 INFO    Thread-20 :4120 [upload_job.py:push():143] Uploaded file /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/wandb-summary.json
+2023-03-06 18:50:25,854 INFO    Thread-18 :4120 [upload_job.py:push():143] Uploaded file /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/conda-environment.yaml
+2023-03-06 18:50:25,857 INFO    Thread-21 :4120 [upload_job.py:push():143] Uploaded file /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/requirements.txt
+2023-03-06 18:50:25,860 INFO    Thread-19 :4120 [upload_job.py:push():143] Uploaded file /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/files/output.log
+2023-03-06 18:50:26,061 INFO    Thread-12 :4120 [sender.py:transition_state():585] send defer: 11
+2023-03-06 18:50:26,062 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: defer
+2023-03-06 18:50:26,062 INFO    HandlerThread:4120 [handler.py:handle_request_defer():170] handle defer: 11
+2023-03-06 18:50:26,063 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: defer
+2023-03-06 18:50:26,063 INFO    SenderThread:4120 [sender.py:send_request_defer():581] handle sender defer: 11
+2023-03-06 18:50:26,063 INFO    SenderThread:4120 [file_pusher.py:join():165] waiting for file pusher
+2023-03-06 18:50:26,064 INFO    SenderThread:4120 [sender.py:transition_state():585] send defer: 12
+2023-03-06 18:50:26,064 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: defer
+2023-03-06 18:50:26,065 INFO    HandlerThread:4120 [handler.py:handle_request_defer():170] handle defer: 12
+2023-03-06 18:50:26,065 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: defer
+2023-03-06 18:50:26,066 INFO    SenderThread:4120 [sender.py:send_request_defer():581] handle sender defer: 12
+2023-03-06 18:50:26,181 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-06 18:50:26,296 INFO    SenderThread:4120 [sender.py:transition_state():585] send defer: 13
+2023-03-06 18:50:26,297 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: defer
+2023-03-06 18:50:26,297 INFO    HandlerThread:4120 [handler.py:handle_request_defer():170] handle defer: 13
+2023-03-06 18:50:26,298 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: defer
+2023-03-06 18:50:26,298 INFO    SenderThread:4120 [sender.py:send_request_defer():581] handle sender defer: 13
+2023-03-06 18:50:26,299 INFO    SenderThread:4120 [sender.py:transition_state():585] send defer: 14
+2023-03-06 18:50:26,300 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: defer
+2023-03-06 18:50:26,300 INFO    HandlerThread:4120 [handler.py:handle_request_defer():170] handle defer: 14
+2023-03-06 18:50:26,301 DEBUG   SenderThread:4120 [sender.py:send():334] send: final
+2023-03-06 18:50:26,302 DEBUG   SenderThread:4120 [sender.py:send():334] send: footer
+2023-03-06 18:50:26,302 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: defer
+2023-03-06 18:50:26,302 INFO    SenderThread:4120 [sender.py:send_request_defer():581] handle sender defer: 14
+2023-03-06 18:50:26,304 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: poll_exit
+2023-03-06 18:50:26,305 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: server_info
+2023-03-06 18:50:26,307 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: poll_exit
+2023-03-06 18:50:26,308 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: get_summary
+2023-03-06 18:50:26,309 DEBUG   SenderThread:4120 [sender.py:send_request():361] send_request: server_info
+2023-03-06 18:50:26,322 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: sampled_history
+2023-03-06 18:50:26,672 INFO    MainThread:4120 [wandb_run.py:_footer_history_summary_info():3427] rendering history
+2023-03-06 18:50:26,673 INFO    MainThread:4120 [wandb_run.py:_footer_history_summary_info():3459] rendering summary
+2023-03-06 18:50:26,674 INFO    MainThread:4120 [wandb_run.py:_footer_sync_info():3383] logging synced files
+2023-03-06 18:50:26,675 DEBUG   HandlerThread:4120 [handler.py:handle_request():144] handle_request: shutdown
+2023-03-06 18:50:26,675 INFO    HandlerThread:4120 [handler.py:finish():841] shutting down handler
+2023-03-06 18:50:27,308 INFO    WriterThread:4120 [datastore.py:close():299] close: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230306_185000-u70u6lol/run-u70u6lol.wandb
+2023-03-06 18:50:27,671 INFO    SenderThread:4120 [sender.py:finish():1491] shutting down sender
+2023-03-06 18:50:27,672 INFO    SenderThread:4120 [file_pusher.py:finish():160] shutting down file pusher
+2023-03-06 18:50:27,672 INFO    SenderThread:4120 [file_pusher.py:join():165] waiting for file pusher
