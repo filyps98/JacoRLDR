@@ -40,9 +40,9 @@ max_episodes  = 500000
 max_steps = 5
 
 frame_idx   = 0
-batch_size  = 550
+batch_size  = 100
 explore_steps = 0  # for random action sampling in the beginning of training
-update_itr = 1
+update_itr = 5
 AUTO_ENTROPY=True
 DETERMINISTIC=False
 hidden_dim = 512
@@ -94,7 +94,7 @@ for eps in range(10):
 
     #I don't want to be too close by the target
     #target_estimated_pos = (target_pos + np.array([0 , 0 , 0.1])).tolist()
-    target_estimated_pos = (target_pos + 0.05*np.random.rand(3)+np.array([0 , 0 , 0.2])).tolist()
+    target_estimated_pos = (target_pos + np.array([0.05 , 0.05, 0]*(np.random.rand(3)-0.5)+np.array([0 , 0 , 0.15]))).tolist()
     #target_estimated_orientation = list(target_orient)
     target_estimated_orientation = [0, 0, 0]
     initial_gripper_force = [5,5,5]

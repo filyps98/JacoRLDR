@@ -98,12 +98,12 @@ class SAC_Trainer():
 
 
         self.soft_q_optimizer1.zero_grad()
-        q_value_loss1.backward()
+        q_value_loss1.backward(retain_graph = True)
         torch.nn.utils.clip_grad_norm_(self.soft_q_net1.parameters(), 5)
         self.soft_q_optimizer1.step()
 
         self.soft_q_optimizer2.zero_grad()
-        q_value_loss2.backward()
+        q_value_loss2.backward(retain_graph = True)
         torch.nn.utils.clip_grad_norm_(self.soft_q_net2.parameters(), 5)
         self.soft_q_optimizer2.step()  
 

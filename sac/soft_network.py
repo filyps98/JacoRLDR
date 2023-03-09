@@ -44,19 +44,14 @@ class SoftQNetwork(nn.Module):
     def forward_CNN(self,state):
 
         x = self.batch_norm(state)
-        #x = F.relu(self.conv1(x))
-        #x = self.pooling1(x)
-        #x = self.batchnorm1(x)
-        #x = F.relu(self.conv2(x))
-        #x = self.batchnorm2(x)
-        #x = F.relu(self.conv_gen1(x))
-        #x = self.pooling1(x)
-        #x = self.batchnorm2(x)
+        x = F.relu(self.conv_gen1(x))
+        x = F.relu(self.conv_gen2(x))
+        x = self.pooling1(x)
+        x = F.relu(self.conv_gen3(x))
+        x = F.relu(self.conv_gen3(x))
+        x = self.pooling1(x)
+        x = F.relu(self.conv_gen4(x))
         
-        #x = F.relu(self.conv3(x))
-        x = F.relu(self.conv_gen2(x))
-        x = F.relu(self.conv_gen2(x))
-        x = self.pooling2(x)
         x = x.view(x.size(0), -1)
         x = F.relu(self.linear1(x))
 
