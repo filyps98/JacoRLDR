@@ -15,7 +15,6 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import scipy.special as fun
 import wandb
-
 from abr_control.controllers import OSC, Damping, path_planners
 from abr_control.arms.mujoco_config import MujocoConfig as arm
 from abr_control.interfaces.mujoco import Mujoco
@@ -64,12 +63,12 @@ class Mujoco_prototype():
         self.start_xyz = self.robot_config.Tx("EE", feedback["q"])
         self.start_orientation = self.robot_config.quaternion("EE", feedback["q"])
 
-
-
-    def step_sim(self,action, number_step, target_geom_ID):
+    def step_sim(self, action, number_step, target_geom_ID):
 
         #variable to store the destination
         self.pos_final = np.hstack([action])
+
+        resulting_height = 0
 
         #transform matrix to compute the translation from global coordinates to local right position of the hand
         A = np.array([[1, 0, 0],[0, -1, 0],[0, 0, -1]])
@@ -95,7 +94,7 @@ class Mujoco_prototype():
         
             pre_grip = np.copy(self.pos_final[6:])
 
-            for i in range(5000):
+            for i in range(8000):
                 
                 #generate next step of the path planner
                 pos, _ = position_planner.next()
@@ -124,6 +123,9 @@ class Mujoco_prototype():
 
                 # send forces into Mujoco, step the sim forward
                 self.interface.send_forces(u)
+
+                target, z_height, max_dimension = self.get_limit_target_pos(target_geom_ID)
+                resulting_height = resulting_height + (target[2] - z_height)
                         
                 # calculate end-effector position
                 ee_xyz = self.robot_config.Tx("EE", q=feedback["q"])
@@ -131,11 +133,12 @@ class Mujoco_prototype():
                 #takes at the end of the movement
                 error_pos_int = np.linalg.norm(ee_xyz - position_final)
 
+                
 
                 #when it reaches a new position save the image
                 #even if you don't input anythin at the strt it takes a picture
                 #if error_pos_int < error_limit:
-                if (error_pos_int < 0.06 and i > 250):
+                if (error_pos_int < 0.04 and i > 3000):
 
                     next_state_image, next_state_hand = self.get_state()
 
@@ -156,47 +159,24 @@ class Mujoco_prototype():
                     s = (-np.log(1/0.8 - 1) + 4)*(max_dimension + 0.03)
                 
                     reward_from_distance = fun.expit(s*final_distance - 4)
+                    
+                    if(resulting_height > 0):
+                        reward_from_height = resulting_height
+                    
+                    else: 
+                        reward_from_height = 0
 
-                    reward_from_force = 0 
-                    reward_from_height = 0
+                    reward = reward_from_distance + 50*reward_from_height
 
-                    if reward_from_distance > 0.8:
-
-                        gripper_sum = np.sum(self.pos_step[6:])
-                        reward_gripper = 1 - gripper_sum/24
-
-                        reward_from_force = reward_gripper
-
-                        #Adding Resulting Height
-                        #Initialize Resulting Height
-                        resulting_height = target[2] - z_height
-
-                        if resulting_height > 0:
-                            if resulting_height < 0.2:
-                                resulting_height = target[2] - z_height
-                            else:
-                                resulting_height = 0.2
-
-                            reward_from_height = 100*resulting_height
-
-                        else:
-                            reward_from_height = 0
-                            
-                        print("\n height reward")
-                        print(reward_from_height)
-                        
-
-                    reward = reward_from_distance + reward_from_force + reward_from_height
-
-                    if number_step >= 0:
+                    #if number_step >= 0:
 
 
-                        wandb.log({f'Force Reward_{number_step}':reward_from_force})
-                        wandb.log({f'Height Reward_{number_step}':reward_from_height})
-                        wandb.log({f'Distance Reward_{number_step}':reward_from_distance})
-                        wandb.log({f'Force Gripper_{number_step}':np.sum(self.pos_step[6:])})
+                        #wandb.log({f'Force Reward_{number_step}':reward_from_force})
+                        #wandb.log({f'Height Reward_{number_step}':reward_from_height})
+                        #wandb.log({f'Distance Reward_{number_step}':reward_from_distance})
+                        #wandb.log({f'Force Gripper_{number_step}':np.sum(self.pos_step[6:])})
 
-                        wandb.log({f'Step Reward_{number_step}':reward})
+                        #wandb.log({f'Step Reward_{number_step}':reward})
 
                     return next_state_image, next_state_hand, reward, False
 
@@ -209,7 +189,6 @@ class Mujoco_prototype():
             next_state_image, next_state_hand = self.get_state()
             return next_state_image, next_state_hand, -1, True
             
-
 
     def get_target(self, ee_position,ee_orientation, target_position, target_orientation):
         # pregenerate our path and orientation planners
@@ -253,9 +232,9 @@ class Mujoco_prototype():
     def get_image(self):
 
         self.interface.offscreen._set_mujoco_buffers()
-        self.interface.offscreen.render(84,84,0)
+        self.interface.offscreen.render(224,224,0)
 
-        data = self.interface.offscreen.read_pixels(84,84,depth = False)
+        data = self.interface.offscreen.read_pixels(224,224,depth = False)
         image = np.array(data[:,:,:])
         #image = np.array(100*data[1])
         image = np.resize(image,(3,224,224))

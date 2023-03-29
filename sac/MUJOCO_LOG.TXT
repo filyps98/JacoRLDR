@@ -31,3 +31,69 @@ ERROR: Could not allocate offscreen framebuffer
 Tue Feb 28 23:42:32 2023
 ERROR: Could not allocate offscreen framebuffer
 
+Mon Mar 20 13:05:17 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Tue Mar 21 18:44:40 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Tue Mar 21 22:31:54 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Tue Mar 21 22:33:23 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Wed Mar 29 14:57:57 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Wed Mar 29 15:12:26 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Wed Mar 29 15:18:58 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Wed Mar 29 15:19:49 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Wed Mar 29 15:24:04 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Wed Mar 29 15:25:31 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Wed Mar 29 15:31:14 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Wed Mar 29 16:11:58 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Wed Mar 29 18:57:00 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Wed Mar 29 19:01:36 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Wed Mar 29 19:07:29 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Wed Mar 29 21:13:30 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Wed Mar 29 21:37:24 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Wed Mar 29 21:49:23 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Thu Mar 30 00:59:02 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Thu Mar 30 01:06:00 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Thu Mar 30 01:36:04 2023
+ERROR: Could not allocate offscreen framebuffer
+
+Thu Mar 30 01:44:53 2023
+ERROR: Could not allocate offscreen framebuffer
+

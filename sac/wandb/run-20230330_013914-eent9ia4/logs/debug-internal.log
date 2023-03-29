@@ -1,0 +1,102 @@
+2023-03-30 01:39:14,567 INFO    StreamThr :4365 [internal.py:wandb_internal():90] W&B internal server running at pid: 4365, started at: 2023-03-30 01:39:14.567185
+2023-03-30 01:39:14,569 DEBUG   HandlerThread:4365 [handler.py:handle_request():144] handle_request: status
+2023-03-30 01:39:14,578 INFO    WriterThread:4365 [datastore.py:open_for_write():85] open: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230330_013914-eent9ia4/run-eent9ia4.wandb
+2023-03-30 01:39:14,579 DEBUG   SenderThread:4365 [sender.py:send():334] send: header
+2023-03-30 01:39:14,596 DEBUG   SenderThread:4365 [sender.py:send():334] send: run
+2023-03-30 01:39:15,351 INFO    SenderThread:4365 [dir_watcher.py:__init__():216] watching files in: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230330_013914-eent9ia4/files
+2023-03-30 01:39:15,352 INFO    SenderThread:4365 [sender.py:_start_run_threads():1068] run started: eent9ia4 with start time 1680107954.570604
+2023-03-30 01:39:15,352 DEBUG   SenderThread:4365 [sender.py:send_request():361] send_request: summary_record
+2023-03-30 01:39:15,353 INFO    SenderThread:4365 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-03-30 01:39:15,362 DEBUG   HandlerThread:4365 [handler.py:handle_request():144] handle_request: check_version
+2023-03-30 01:39:15,363 DEBUG   SenderThread:4365 [sender.py:send_request():361] send_request: check_version
+2023-03-30 01:39:15,578 DEBUG   HandlerThread:4365 [handler.py:handle_request():144] handle_request: run_start
+2023-03-30 01:39:15,605 DEBUG   HandlerThread:4365 [system_info.py:__init__():31] System info init
+2023-03-30 01:39:15,606 DEBUG   HandlerThread:4365 [system_info.py:__init__():46] System info init done
+2023-03-30 01:39:15,606 INFO    HandlerThread:4365 [system_monitor.py:start():151] Starting system monitor
+2023-03-30 01:39:15,606 INFO    SystemMonitor:4365 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-03-30 01:39:15,606 INFO    HandlerThread:4365 [system_monitor.py:probe():172] Collecting system info
+2023-03-30 01:39:15,607 INFO    SystemMonitor:4365 [interfaces.py:start():168] Started cpu
+2023-03-30 01:39:15,608 INFO    SystemMonitor:4365 [interfaces.py:start():168] Started disk
+2023-03-30 01:39:15,610 INFO    SystemMonitor:4365 [interfaces.py:start():168] Started gpu
+2023-03-30 01:39:15,611 INFO    SystemMonitor:4365 [interfaces.py:start():168] Started memory
+2023-03-30 01:39:15,611 INFO    SystemMonitor:4365 [interfaces.py:start():168] Started network
+2023-03-30 01:39:15,617 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:15,617 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:15,636 DEBUG   HandlerThread:4365 [system_info.py:probe():195] Probing system
+2023-03-30 01:39:15,648 DEBUG   HandlerThread:4365 [system_info.py:_probe_git():180] Probing git
+2023-03-30 01:39:15,677 DEBUG   HandlerThread:4365 [system_info.py:_probe_git():188] Probing git done
+2023-03-30 01:39:15,677 DEBUG   HandlerThread:4365 [system_info.py:probe():241] Probing system done
+2023-03-30 01:39:15,678 DEBUG   HandlerThread:4365 [system_monitor.py:probe():181] {'os': 'Linux-5.15.0-69-generic-x86_64-with-debian-bullseye-sid', 'python': '3.7.16', 'heartbeatAt': '2023-03-29T16:39:15.636548', 'startedAt': '2023-03-29T16:39:14.554567', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': 'train.py', 'codePath': 'sac/train.py', 'git': {'remote': 'git@github.com:filyps98/JacoRLDR.git', 'commit': '73b1735e92394e3fae86964675c012c3235c9768'}, 'email': 'pippo.ronco@gmail.com', 'root': '/home/filippo/Desktop/Project/Experiments/JacoRLDR', 'host': 'filippo-X510UQ', 'username': 'filippo', 'executable': '/home/filippo/miniconda3/envs/robot/bin/python', 'cpu_count': 2, 'cpu_count_logical': 4, 'cpu_freq': {'current': 2600.0327500000003, 'min': 400.0, 'max': 3500.0}, 'cpu_freq_per_core': [{'current': 2900.0, 'min': 400.0, 'max': 3500.0}, {'current': 1700.131, 'min': 400.0, 'max': 3500.0}, {'current': 2900.0, 'min': 400.0, 'max': 3500.0}, {'current': 2900.0, 'min': 400.0, 'max': 3500.0}], 'disk': {'total': 96.18362426757812, 'used': 78.87384033203125}, 'gpu': 'NVIDIA GeForce 940MX', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce 940MX', 'memory_total': 2147483648}], 'memory': {'total': 7.6491241455078125}}
+2023-03-30 01:39:15,678 INFO    HandlerThread:4365 [system_monitor.py:probe():182] Finished collecting system info
+2023-03-30 01:39:15,678 INFO    HandlerThread:4365 [system_monitor.py:probe():185] Publishing system info
+2023-03-30 01:39:15,678 DEBUG   HandlerThread:4365 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2023-03-30 01:39:15,678 DEBUG   HandlerThread:4365 [system_info.py:_save_pip():67] Saving pip packages done
+2023-03-30 01:39:15,679 DEBUG   HandlerThread:4365 [system_info.py:_save_conda():75] Saving list of conda packages installed into the current environment
+2023-03-30 01:39:16,353 INFO    Thread-13 :4365 [dir_watcher.py:_on_file_created():275] file/dir created: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230330_013914-eent9ia4/files/requirements.txt
+2023-03-30 01:39:16,354 INFO    Thread-13 :4365 [dir_watcher.py:_on_file_created():275] file/dir created: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230330_013914-eent9ia4/files/conda-environment.yaml
+2023-03-30 01:39:16,354 INFO    Thread-13 :4365 [dir_watcher.py:_on_file_created():275] file/dir created: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230330_013914-eent9ia4/files/wandb-summary.json
+2023-03-30 01:39:17,618 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:17,618 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:18,254 DEBUG   HandlerThread:4365 [system_info.py:_save_conda():86] Saving conda packages done
+2023-03-30 01:39:18,255 INFO    HandlerThread:4365 [system_monitor.py:probe():187] Finished publishing system info
+2023-03-30 01:39:18,257 DEBUG   SenderThread:4365 [sender.py:send():334] send: files
+2023-03-30 01:39:18,258 INFO    SenderThread:4365 [sender.py:_save_file():1319] saving file wandb-metadata.json with policy now
+2023-03-30 01:39:18,306 DEBUG   HandlerThread:4365 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-30 01:39:18,308 DEBUG   SenderThread:4365 [sender.py:send_request():361] send_request: stop_status
+2023-03-30 01:39:18,353 INFO    Thread-13 :4365 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230330_013914-eent9ia4/files/conda-environment.yaml
+2023-03-30 01:39:18,353 INFO    Thread-13 :4365 [dir_watcher.py:_on_file_created():275] file/dir created: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230330_013914-eent9ia4/files/wandb-metadata.json
+2023-03-30 01:39:18,576 DEBUG   SenderThread:4365 [sender.py:send():334] send: telemetry
+2023-03-30 01:39:19,088 INFO    Thread-16 :4365 [upload_job.py:push():143] Uploaded file /tmp/tmpwhmomkbzwandb/5fezr0py-wandb-metadata.json
+2023-03-30 01:39:19,353 INFO    Thread-13 :4365 [dir_watcher.py:_on_file_created():275] file/dir created: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230330_013914-eent9ia4/files/output.log
+2023-03-30 01:39:19,572 DEBUG   HandlerThread:4365 [handler.py:handle_request():144] handle_request: status_report
+2023-03-30 01:39:19,619 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:19,619 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:21,354 INFO    Thread-13 :4365 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230330_013914-eent9ia4/files/output.log
+2023-03-30 01:39:21,632 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:21,632 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:23,355 INFO    Thread-13 :4365 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230330_013914-eent9ia4/files/output.log
+2023-03-30 01:39:23,633 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:23,633 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:25,224 DEBUG   HandlerThread:4365 [handler.py:handle_request():144] handle_request: status_report
+2023-03-30 01:39:25,634 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:25,634 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:27,635 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:27,636 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:29,637 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:29,638 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:30,225 DEBUG   HandlerThread:4365 [handler.py:handle_request():144] handle_request: status_report
+2023-03-30 01:39:31,639 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:31,640 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:33,262 DEBUG   HandlerThread:4365 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-30 01:39:33,643 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:33,643 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:35,226 DEBUG   HandlerThread:4365 [handler.py:handle_request():144] handle_request: status_report
+2023-03-30 01:39:35,644 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:35,644 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:37,645 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:37,646 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:39,648 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:39,649 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:40,229 DEBUG   HandlerThread:4365 [handler.py:handle_request():144] handle_request: status_report
+2023-03-30 01:39:41,651 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:41,651 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:43,653 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:43,654 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:45,234 DEBUG   HandlerThread:4365 [handler.py:handle_request():144] handle_request: status_report
+2023-03-30 01:39:45,703 ERROR   gpu       :4365 [interfaces.py:aggregate():146] Failed to serialize metric: division by zero
+2023-03-30 01:39:45,704 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:45,704 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:46,370 INFO    Thread-13 :4365 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230330_013914-eent9ia4/files/config.yaml
+2023-03-30 01:39:47,706 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:47,707 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:49,709 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:49,709 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:50,618 DEBUG   HandlerThread:4365 [handler.py:handle_request():144] handle_request: status_report
+2023-03-30 01:39:51,711 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:51,712 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:53,714 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:53,714 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:55,620 DEBUG   HandlerThread:4365 [handler.py:handle_request():144] handle_request: status_report
+2023-03-30 01:39:55,716 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:55,717 ERROR   gpu       :4365 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-30 01:39:57,629 INFO    MainThread:4365 [internal.py:handle_exit():77] Internal process exited

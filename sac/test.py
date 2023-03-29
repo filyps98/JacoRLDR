@@ -14,7 +14,6 @@ import time
 from replay import ReplayBuffer
 from normalised_action import NormalizedActions
 from sac_trainer import SAC_Trainer
-from demonstration import scripted_policy
 from Randomizer import body_swap as bs
 from Randomizer.mujoco_randomizer import Randomizer
 
@@ -55,7 +54,7 @@ average_rewards = 0
 
 #Action range for each action
 ratio_xy = 0.1
-ratio_orient = 0.3
+ratio_orient = 0.55
 ratio_z = 0.15
 
 ratio_ = np.array([ratio_xy, ratio_xy, ratio_z, ratio_orient, ratio_orient, ratio_orient ])

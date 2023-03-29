@@ -1,0 +1,65 @@
+{
+    "os": "Linux-5.15.0-69-generic-x86_64-with-debian-bullseye-sid",
+    "python": "3.7.16",
+    "heartbeatAt": "2023-03-29T16:39:15.636548",
+    "startedAt": "2023-03-29T16:39:14.554567",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "train.py",
+    "codePath": "sac/train.py",
+    "git": {
+        "remote": "git@github.com:filyps98/JacoRLDR.git",
+        "commit": "73b1735e92394e3fae86964675c012c3235c9768"
+    },
+    "email": "pippo.ronco@gmail.com",
+    "root": "/home/filippo/Desktop/Project/Experiments/JacoRLDR",
+    "host": "filippo-X510UQ",
+    "username": "filippo",
+    "executable": "/home/filippo/miniconda3/envs/robot/bin/python",
+    "cpu_count": 2,
+    "cpu_count_logical": 4,
+    "cpu_freq": {
+        "current": 2600.0327500000003,
+        "min": 400.0,
+        "max": 3500.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2900.0,
+            "min": 400.0,
+            "max": 3500.0
+        },
+        {
+            "current": 1700.131,
+            "min": 400.0,
+            "max": 3500.0
+        },
+        {
+            "current": 2900.0,
+            "min": 400.0,
+            "max": 3500.0
+        },
+        {
+            "current": 2900.0,
+            "min": 400.0,
+            "max": 3500.0
+        }
+    ],
+    "disk": {
+        "total": 96.18362426757812,
+        "used": 78.87384033203125
+    },
+    "gpu": "NVIDIA GeForce 940MX",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce 940MX",
+            "memory_total": 2147483648
+        }
+    ],
+    "memory": {
+        "total": 7.6491241455078125
+    }
+}

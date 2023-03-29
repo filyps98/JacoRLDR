@@ -64,7 +64,7 @@ average_rewards = 0
 
 #Action range for each action
 ratio_xy = 0.1
-ratio_orient = 0.3
+ratio_orient = 0.55
 ratio_z = 0.15
 
 ratio_ = np.array([ratio_xy, ratio_xy, ratio_z, ratio_orient, ratio_orient, ratio_orient ])
@@ -86,16 +86,20 @@ if(len(replay_buffer) > 0):
     for i in range(initial_update_itr):
         _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.1*action_dim)
 
+
+geom_body_ID, target_pos, target_orient, size = bs.body_swap(body_cube, body_cylinder)
+
 for eps in range(max_episodes):
+
     
     #randomize the position and orientation every step 
     env.restart()
 
     #randomize position
-    geom_body_ID, target_pos, target_orient, size = bs.body_swap(body_cube, body_cylinder)
-
-    light._rand_textures()
-    light._rand_lights()
+    if(eps%5 == 0):
+        geom_body_ID, target_pos, target_orient, size = bs.body_swap(body_cube, body_cylinder)
+        light._rand_textures()
+        light._rand_lights()
 
     state_image, state_hand = env.get_state()
     episode_reward = 0
@@ -103,7 +107,7 @@ for eps in range(max_episodes):
 
     #I don't want to be too close by the target
     #target_estimated_pos = (target_pos + np.array([0 , 0 , 0.1])).tolist()
-    target_estimated_pos = (target_pos + np.array([0.05 , 0.05, 0]*(np.random.rand(3)-0.5)+np.array([0 , 0 , 0.15]))).tolist()
+    #target_estimated_pos = target_pos + (np.array([0.05 , 0.05, 0]*(np.random.rand(3)-0.5)+np.array([0 , 0 , 0.3]))).tolist()
     #target_estimated_orientation = list(target_orient)
     target_estimated_orientation = [0, 0, 0]
     initial_gripper_force = [5,5,5]
@@ -111,7 +115,7 @@ for eps in range(max_episodes):
     #I initialize and resize the first action
 
     #estimate how much to shift
-    shifted_xyz = target_estimated_pos - env.get_hand_pos() 
+    shifted_xyz = [0,0,0.15]
     scripted_action = np.array([shifted_xyz, target_estimated_orientation, initial_gripper_force])
     scripted_action = np.resize(scripted_action,(9))
     
@@ -153,11 +157,11 @@ for eps in range(max_episodes):
         #updating episode reward
         episode_reward += reward
         frame_idx += 1
-        
+
         
         if len(replay_buffer) > batch_size:
             for i in range(update_itr):
-                _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.05*action_dim)
+                _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.1*action_dim)
 
 
         if done:
@@ -170,7 +174,6 @@ for eps in range(max_episodes):
         average_rewards = 0
         np.save('rewards', rewards)
         sac_trainer.save_model(model_path)
-
         
 
     print('Episode: ', eps, '| Episode Reward: ', episode_reward)

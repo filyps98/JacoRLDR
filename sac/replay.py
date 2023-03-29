@@ -11,6 +11,7 @@ class ReplayBuffer:
 
         if(os.path.isfile("Dataset.pt") == True):
             self.buffer = torch.load("Dataset.pt").copy()
+            print("There is buffer")
     
     def push(self, state_image, state_hand, action, reward, next_state_image, next_state_hand, done):
         if len(self.buffer) < self.capacity:
