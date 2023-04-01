@@ -89,11 +89,9 @@ for eps in range(10):
     state_image, state_hand = env.get_state()
     episode_reward = 0
 
-    
-
-    #I don't want to be too close by the target
+     #I don't want to be too close by the target
     #target_estimated_pos = (target_pos + np.array([0 , 0 , 0.1])).tolist()
-    target_estimated_pos = (target_pos + np.array([0.05 , 0.05, 0]*(np.random.rand(3)-0.5)+np.array([0 , 0 , 0.15]))).tolist()
+    #target_estimated_pos = target_pos + (np.array([0.05 , 0.05, 0]*(np.random.rand(3)-0.5)+np.array([0 , 0 , 0.3]))).tolist()
     #target_estimated_orientation = list(target_orient)
     target_estimated_orientation = [0, 0, 0]
     initial_gripper_force = [5,5,5]
@@ -101,12 +99,12 @@ for eps in range(10):
     #I initialize and resize the first action
 
     #estimate how much to shift
-    shifted_xyz = target_estimated_pos - env.get_hand_pos() 
+    shifted_xyz = [0,0,0.15]
     scripted_action = np.array([shifted_xyz, target_estimated_orientation, initial_gripper_force])
     scripted_action = np.resize(scripted_action,(9))
     
 
-    _, _, _, _ = env.step_sim(scripted_action, -1,  geom_body_ID)
+    _, _, _, _ = env.step_sim(scripted_action, -1, max_steps, geom_body_ID)
 
 
     action = np.zeros(9)

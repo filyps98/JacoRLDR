@@ -51,7 +51,7 @@ class SAC_Trainer():
         self.alpha_optimizer = optim.Adam([self.log_alpha], lr=alpha_lr)
 
     
-    def update(self, batch_size, reward_scale=10., auto_entropy=True, target_entropy=-2, gamma=0.99,soft_tau=1e-2):
+    def update(self, batch_size, reward_scale=10., auto_entropy=True, target_entropy=-2, gamma=0.99,soft_tau=1e-2, train_policy = True):
         state_image, state_hand, action, reward, next_state_image, next_state_hand, done = self.replay_buffer.sample(batch_size)
         # print('sample:', state, action,  reward, done)
 
@@ -68,30 +68,39 @@ class SAC_Trainer():
 
         predicted_q_value1 = self.soft_q_net1(feature_state, state_hand, action)
         predicted_q_value2 = self.soft_q_net2(feature_state,state_hand, action)
-        new_action, log_prob, z, mean, log_std = self.policy_net.evaluate(feature_state, state_hand)
-        new_next_action, next_log_prob, _, _, _ = self.policy_net.evaluate(feature_next_state, next_state_hand)
+
+        if train_policy:
+            new_action, log_prob, z, mean, log_std = self.policy_net.evaluate(feature_state, state_hand)
+            new_next_action, next_log_prob, _, _, _ = self.policy_net.evaluate(feature_next_state, next_state_hand)
+
         reward = reward_scale * (reward - reward.mean(dim=0)) / (reward.std(dim=0) + 1e-6) # normalize with batch mean and std; plus a small number to prevent numerical problem
 
         
     # Updating alpha wrt entropy
         # alpha = 0.0  # trade-off between exploration (max entropy) and exploitation (max Q) 
-        if auto_entropy is True:
-            alpha_loss = -(self.log_alpha * (log_prob + target_entropy).detach()).mean()
-            # print('alpha loss: ',alpha_loss)
-            self.alpha_optimizer.zero_grad()
-            alpha_loss.backward()
-            self.alpha_optimizer.step()
-            self.alpha = self.log_alpha.exp()
-        else:
-            self.alpha = 1.
-            alpha_loss = 0
+        if train_policy:
+            if auto_entropy is True:
+                alpha_loss = -(self.log_alpha * (log_prob + target_entropy).detach()).mean()
+                # print('alpha loss: ',alpha_loss)
+                self.alpha_optimizer.zero_grad()
+                alpha_loss.backward()
+                self.alpha_optimizer.step()
+                self.alpha = self.log_alpha.exp()
+            else:
+                self.alpha = 1.
+                alpha_loss = 0
 
-        wandb.log({"alpha":self.alpha})
-        wandb.log({"alpha_loss":alpha_loss})
+            wandb.log({"alpha":self.alpha})
+            wandb.log({"alpha_loss":alpha_loss})
 
 
     # Training Q Function
-        target_q_min = torch.min(self.target_soft_q_net1(feature_next_state, next_state_hand, new_next_action),self.target_soft_q_net2(feature_next_state, next_state_hand, new_next_action)) - self.alpha * next_log_prob
+        if train_policy:
+            target_q_min = torch.min(self.target_soft_q_net1(feature_next_state, next_state_hand, new_next_action),self.target_soft_q_net2(feature_next_state, next_state_hand, new_next_action)) - self.alpha * next_log_prob
+        else:
+            #since if I don't train the policy I use the label "done"
+            target_q_min = 0
+
         target_q_value = reward + (1 - done) * gamma * target_q_min # if done==1, only reward
         q_value_loss1 = self.soft_q_criterion1(predicted_q_value1, target_q_value.detach())  # detach: no gradients for the variable
         q_value_loss2 = self.soft_q_criterion2(predicted_q_value2, target_q_value.detach())
@@ -102,38 +111,46 @@ class SAC_Trainer():
         torch.nn.utils.clip_grad_norm_(self.soft_q_net1.parameters(), 5)
         self.soft_q_optimizer1.step()
 
+        wandb.log({"loss_q_value_1":q_value_loss1})
+
         self.soft_q_optimizer2.zero_grad()
         q_value_loss2.backward(retain_graph = True)
         torch.nn.utils.clip_grad_norm_(self.soft_q_net2.parameters(), 5)
         self.soft_q_optimizer2.step()  
 
+        wandb.log({"loss_q_value_2":q_value_loss2})
+
     # Training Policy Function
-        predicted_new_q_value = torch.min(self.soft_q_net1(feature_state, state_hand, new_action),self.soft_q_net2(feature_state, state_hand, new_action))
-        policy_loss = (self.alpha * log_prob - predicted_new_q_value).mean()
-
-
-        self.policy_optimizer.zero_grad()
-        policy_loss.backward()
-
-        torch.nn.utils.clip_grad_norm_(self.policy_net.parameters(), 5)
-        self.policy_optimizer.step()
         
-        # print('q loss: ', q_value_loss1, q_value_loss2)
-        wandb.log({"loss":policy_loss})
+        
+        
+        if train_policy:
+            predicted_new_q_value = torch.min(self.soft_q_net1(feature_state, state_hand, new_action),self.soft_q_net2(feature_state, state_hand, new_action))
+            policy_loss = (self.alpha * log_prob - predicted_new_q_value).mean()
+
+            self.policy_optimizer.zero_grad()
+            policy_loss.backward()
+
+            torch.nn.utils.clip_grad_norm_(self.policy_net.parameters(), 5)
+            self.policy_optimizer.step()
+            
+            # print('q loss: ', q_value_loss1, q_value_loss2)
+            wandb.log({"loss":policy_loss})
 
 
-    # Soft update the target value net
-        for target_param, param in zip(self.target_soft_q_net1.parameters(), self.soft_q_net1.parameters()):
-            target_param.data.copy_(  # copy data value into target parameters
-                target_param.data * (1.0 - soft_tau) + param.data * soft_tau
-            )
-        for target_param, param in zip(self.target_soft_q_net2.parameters(), self.soft_q_net2.parameters()):
-            target_param.data.copy_(  # copy data value into target parameters
-                target_param.data * (1.0 - soft_tau) + param.data * soft_tau
-            )
-        return predicted_new_q_value.mean()
+            # Soft update the target value net
+            for target_param, param in zip(self.target_soft_q_net1.parameters(), self.soft_q_net1.parameters()):
+                target_param.data.copy_(  # copy data value into target parameters
+                    target_param.data * (1.0 - soft_tau) + param.data * soft_tau
+                )
+            for target_param, param in zip(self.target_soft_q_net2.parameters(), self.soft_q_net2.parameters()):
+                target_param.data.copy_(  # copy data value into target parameters
+                    target_param.data * (1.0 - soft_tau) + param.data * soft_tau
+                )
+            return predicted_new_q_value.mean()
 
     def save_model(self, path):
+
         torch.save(self.soft_q_net1.state_dict(), path+'_q1')
         torch.save(self.soft_q_net2.state_dict(), path+'_q2')
         torch.save(self.policy_net.state_dict(), path+'_policy')
@@ -146,3 +163,11 @@ class SAC_Trainer():
         self.soft_q_net1.eval()
         self.soft_q_net2.eval()
         self.policy_net.eval()
+
+    def save_pre_trained_model(self, path):
+        torch.save(self.soft_q_net1.state_dict(), path+'_pre_q1')
+        torch.save(self.soft_q_net2.state_dict(), path+'_pre_q2')
+    
+    def load_pre_trained_model(self, path):
+        self.soft_q_net1.load_state_dict(torch.load(path+'_pre_q1', map_location=torch.device('cpu')))
+        self.soft_q_net2.load_state_dict(torch.load(path+'_pre_q2', map_location=torch.device('cpu')))

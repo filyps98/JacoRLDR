@@ -63,12 +63,11 @@ class Mujoco_prototype():
         self.start_xyz = self.robot_config.Tx("EE", feedback["q"])
         self.start_orientation = self.robot_config.quaternion("EE", feedback["q"])
 
-    def step_sim(self, action, number_step, target_geom_ID):
+    def step_sim(self, action, number_step, max_steps, target_geom_ID):
 
         #variable to store the destination
         self.pos_final = np.hstack([action])
 
-        resulting_height = 0
 
         #transform matrix to compute the translation from global coordinates to local right position of the hand
         A = np.array([[1, 0, 0],[0, -1, 0],[0, 0, -1]])
@@ -92,9 +91,8 @@ class Mujoco_prototype():
 
         try:
         
-            pre_grip = np.copy(self.pos_final[6:])
 
-            for i in range(8000):
+            for i in range(5000):
                 
                 #generate next step of the path planner
                 pos, _ = position_planner.next()
@@ -113,19 +111,13 @@ class Mujoco_prototype():
                 )
 
                 # add gripper forces
-                if i <= 200:
-                    grip = i*(self.pos_step[6:] - pre_grip)/200 + pre_grip
-                
-                else: grip = self.pos_step[6:]
+                grip = self.pos_step[6:]
 
                 # add gripper forces
                 u = np.hstack((u, grip))
 
                 # send forces into Mujoco, step the sim forward
                 self.interface.send_forces(u)
-
-                target, z_height, max_dimension = self.get_limit_target_pos(target_geom_ID)
-                resulting_height = resulting_height + (target[2] - z_height)
                         
                 # calculate end-effector position
                 ee_xyz = self.robot_config.Tx("EE", q=feedback["q"])
@@ -133,17 +125,17 @@ class Mujoco_prototype():
                 #takes at the end of the movement
                 error_pos_int = np.linalg.norm(ee_xyz - position_final)
 
-                
-
+    
                 #when it reaches a new position save the image
                 #even if you don't input anythin at the strt it takes a picture
                 #if error_pos_int < error_limit:
-                if (error_pos_int < 0.04 and i > 3000):
+                if (error_pos_int < 0.04 and i > 1500):
 
                     next_state_image, next_state_hand = self.get_state()
 
                     #Evaluate new target position
                     target, z_height, max_dimension = self.get_limit_target_pos(target_geom_ID)
+                    resulting_height = (target[2] - z_height)
                 
 
                     #re-get the feedback
@@ -161,12 +153,13 @@ class Mujoco_prototype():
                     reward_from_distance = fun.expit(s*final_distance - 4)
                     
                     if(resulting_height > 0):
-                        reward_from_height = resulting_height
+                        reward_from_height = 50*resulting_height
                     
                     else: 
                         reward_from_height = 0
+                    
 
-                    reward = reward_from_distance + 50*reward_from_height
+                    reward = reward_from_distance + reward_from_height
 
                     #if number_step >= 0:
 
@@ -178,7 +171,14 @@ class Mujoco_prototype():
 
                         #wandb.log({f'Step Reward_{number_step}':reward})
 
-                    return next_state_image, next_state_hand, reward, False
+                    done = False
+                    if number_step + 1 == max_steps:
+                        done = True
+                    
+                    if number_step != -1:
+                        print(done)
+
+                    return next_state_image, next_state_hand, reward, done
 
             next_state_image, next_state_hand = self.get_state()
             return next_state_image, next_state_hand, -1, True

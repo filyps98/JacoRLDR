@@ -16,7 +16,7 @@ from simulation import Mujoco_prototype
 import numpy as np
 import wandb
 import time
-
+import math
 
 from replay import ReplayBuffer
 from normalised_action import NormalizedActions
@@ -36,7 +36,7 @@ env = Mujoco_prototype(dir_,arm_, visualize)
 wandb.init(config = {"algorithm": "JacoRL2"}, project="JacoRL2", entity="pippo98")
 
 
-replay_buffer_size = 2e5
+replay_buffer_size = 20
 replay_buffer = ReplayBuffer(replay_buffer_size)
 
 action_dim = 7
@@ -48,9 +48,9 @@ max_steps = 5
 
 
 frame_idx   = 0
-batch_size  = 100
+batch_size  = 2
 explore_steps = 0  # for random action sampling in the beginning of training
-initial_update_itr = 20
+initial_update_itr = 5
 update_itr = 5
 AUTO_ENTROPY=True
 DETERMINISTIC=False
@@ -79,15 +79,20 @@ body_cube = randomizer.body(2)
 body_cylinder = randomizer.body(3)
 light = randomizer.light()
 
+sac_trainer.load_pre_trained_model(model_path)
 
-# pre-training loop
-if(len(replay_buffer) > 0):
-    print("I am inside")
-    for i in range(initial_update_itr):
-        _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.1*action_dim)
+while(replay_buffer.load_next_dataset()):
+    # pre-training loop
+    print("enter in other dataset")
 
+    for i in range(1, math.ceil(replay_buffer_size/batch_size)):
+        for i in range(initial_update_itr):
+            _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.1*action_dim, train_policy = False)
+
+sac_trainer.save_pre_trained_model(model_path)
 
 geom_body_ID, target_pos, target_orient, size = bs.body_swap(body_cube, body_cylinder)
+
 
 for eps in range(max_episodes):
 
@@ -120,12 +125,10 @@ for eps in range(max_episodes):
     scripted_action = np.resize(scripted_action,(9))
     
 
-    _, _, _, _ = env.step_sim(scripted_action, -1,  geom_body_ID)
-
+    _, _, _, _ = env.step_sim(scripted_action, -1, max_steps,  geom_body_ID)
 
     action = np.zeros(9)
 
-    
 
     for step in range(max_steps):
 
@@ -145,7 +148,7 @@ for eps in range(max_episodes):
         action[6:] = ratio_residual_force*action_RL[6]*np.ones(3) + ratio_residual_force
 
 
-        next_state_image, next_state_hand, reward, done = env.step_sim(action, step, geom_body_ID)       
+        next_state_image, next_state_hand, reward, done = env.step_sim(action, step , max_steps, geom_body_ID)       
         
             
         replay_buffer.push(state_image, state_hand, action_RL, reward, next_state_image, next_state_hand, done)
@@ -161,8 +164,7 @@ for eps in range(max_episodes):
         
         if len(replay_buffer) > batch_size:
             for i in range(update_itr):
-                _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.1*action_dim)
-
+                _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.1*action_dim, train_policy = True)
 
         if done:
             break
