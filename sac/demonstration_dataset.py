@@ -4,18 +4,8 @@ import torch
 import os
 import numpy as np 
 import math
+import datetime
 
-
-def what_is_next_dataset_index():
-
-    directory = "dataset"
-    count = 0
-
-    for filename in os.listdir(directory):
-        if os.path.isfile(os.path.join(directory, filename)):
-            count += 1
-    
-    return count
 
 class ReplayBuffer:
     def __init__(self, capacity):
@@ -30,13 +20,12 @@ class ReplayBuffer:
         
         self.buffer[self.position] = (state_image, state_hand, action, reward, next_state_image, next_state_hand, done)
         
+        # as a ring buffer
         self.position = int((self.position + 1) % self.capacity)
         if (int((self.position) % self.capacity) == 0):
-            print("Enter")
+            print("Upload new Dataset")
             #the buffer is full
-            #Create dataset if it doesn't exist
-            index = what_is_next_dataset_index() + 1
-            torch.save(self.buffer,"dataset/Dataset_"+ str(index))
+            torch.save(self.buffer,"dataset/Dataset_"+ str(datetime.datetime.now()))
             
-          # as a ring buffer
+          
         

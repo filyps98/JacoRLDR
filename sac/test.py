@@ -28,7 +28,7 @@ env = Mujoco_prototype(dir_,arm_, visualize)
 wandb.init(config = {"algorithm": "JacoRL_test_time"}, project="JacoRL_test_time", entity="pippo98")
 
 
-replay_buffer_size = 2e5
+replay_buffer_size = 5e4
 replay_buffer = ReplayBuffer(replay_buffer_size)
 
 action_dim = 7
@@ -74,7 +74,6 @@ sac_trainer.load_model(model_path)
 
 # training loop
     
-
 for eps in range(10):
     
     #randomize the position and orientation every step 

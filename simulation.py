@@ -171,14 +171,8 @@ class Mujoco_prototype():
 
                         #wandb.log({f'Step Reward_{number_step}':reward})
 
-                    done = False
-                    if number_step + 1 == max_steps:
-                        done = True
-                    
-                    if number_step != -1:
-                        print(done)
 
-                    return next_state_image, next_state_hand, reward, done
+                    return next_state_image, next_state_hand, reward, False
 
             next_state_image, next_state_hand = self.get_state()
             return next_state_image, next_state_hand, -1, True

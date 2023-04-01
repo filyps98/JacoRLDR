@@ -36,7 +36,7 @@ env = Mujoco_prototype(dir_,arm_, visualize)
 wandb.init(config = {"algorithm": "JacoRL2"}, project="JacoRL2", entity="pippo98")
 
 
-replay_buffer_size = 20
+replay_buffer_size = 5e4
 replay_buffer = ReplayBuffer(replay_buffer_size)
 
 action_dim = 7
@@ -48,7 +48,7 @@ max_steps = 5
 
 
 frame_idx   = 0
-batch_size  = 2
+batch_size  = 100
 explore_steps = 0  # for random action sampling in the beginning of training
 initial_update_itr = 5
 update_itr = 5
@@ -79,11 +79,19 @@ body_cube = randomizer.body(2)
 body_cylinder = randomizer.body(3)
 light = randomizer.light()
 
-sac_trainer.load_pre_trained_model(model_path)
+path_summary = model_path+"\_trained_dataset.txt"
+path_dataset = "dataset"
 
-while(replay_buffer.load_next_dataset()):
+if (os.path.exists(model_path+"\_pre_q1") and os.path.exists(model_path+"\_pre_q2")):
+    sac_trainer.load_pre_trained_model(model_path)
+
+else:
+    with open(path_summary, "w") as file:
+        file.write("Following all the dataset that the pre-policy model was trained on:")
+
+replay_buffer.select_datasets(path_summary)
+while(replay_buffer.load_next_dataset(path_summary)):
     # pre-training loop
-    print("enter in other dataset")
 
     for i in range(1, math.ceil(replay_buffer_size/batch_size)):
         for i in range(initial_update_itr):

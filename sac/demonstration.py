@@ -38,7 +38,7 @@ action_range = 1
 max_episodes  = 5000000
 max_steps = 5
 
-replay_buffer_size = 20
+replay_buffer_size = 5e4
 replay_buffer = ReplayBuffer(replay_buffer_size)
 
 rewards     = []
