@@ -84,12 +84,13 @@ path_dataset = "dataset"
 
 if (os.path.exists(model_path+"\_pre_q1") and os.path.exists(model_path+"\_pre_q2")):
     sac_trainer.load_pre_trained_model(model_path)
+    replay_buffer.select_datasets(path_summary)
 
 else:
     with open(path_summary, "w") as file:
         file.write("Following all the dataset that the pre-policy model was trained on:")
 
-replay_buffer.select_datasets(path_summary)
+
 while(replay_buffer.load_next_dataset(path_summary)):
     # pre-training loop
 
@@ -109,7 +110,7 @@ for eps in range(max_episodes):
     env.restart()
 
     #randomize position
-    if(eps%5 == 0):
+    if(eps%20 == 0):
         geom_body_ID, target_pos, target_orient, size = bs.body_swap(body_cube, body_cylinder)
         light._rand_textures()
         light._rand_lights()
@@ -120,7 +121,7 @@ for eps in range(max_episodes):
 
     #I don't want to be too close by the target
     #target_estimated_pos = (target_pos + np.array([0 , 0 , 0.1])).tolist()
-    #target_estimated_pos = target_pos + (np.array([0.05 , 0.05, 0]*(np.random.rand(3)-0.5)+np.array([0 , 0 , 0.3]))).tolist()
+    #target_estimated_pos = target_pos + (np.array([0.1 , 0.1, 0]*(np.random.rand(3)-0.5)+np.array([0 , 0 , 0.3]))).tolist()
     #target_estimated_orientation = list(target_orient)
     target_estimated_orientation = [0, 0, 0]
     initial_gripper_force = [5,5,5]
@@ -129,6 +130,7 @@ for eps in range(max_episodes):
 
     #estimate how much to shift
     shifted_xyz = [0,0,0.15]
+    #shifted_xyz = target_estimated_pos - env.get_hand_pos() 
     scripted_action = np.array([shifted_xyz, target_estimated_orientation, initial_gripper_force])
     scripted_action = np.resize(scripted_action,(9))
     
@@ -179,7 +181,7 @@ for eps in range(max_episodes):
 
     average_rewards = average_rewards + episode_reward
 
-    if eps % 5 == 0 and eps>0: # plot and model saving interval
+    if eps % 20 == 0 and eps>0: # plot and model saving interval
         wandb.log({"episode reward every_5":average_rewards/5})
         average_rewards = 0
         np.save('rewards', rewards)

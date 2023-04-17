@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import scipy.special as fun
 import wandb
+import torchvision.transforms as transforms
 from abr_control.controllers import OSC, Damping, path_planners
 from abr_control.arms.mujoco_config import MujocoConfig as arm
 from abr_control.interfaces.mujoco import Mujoco
@@ -161,15 +162,15 @@ class Mujoco_prototype():
 
                     reward = reward_from_distance + reward_from_height
 
-                    #if number_step >= 0:
+                    if number_step >= 0:
 
 
                         #wandb.log({f'Force Reward_{number_step}':reward_from_force})
-                        #wandb.log({f'Height Reward_{number_step}':reward_from_height})
-                        #wandb.log({f'Distance Reward_{number_step}':reward_from_distance})
+                        wandb.log({f'Height Reward_{number_step}':reward_from_height})
+                        wandb.log({f'Distance Reward_{number_step}':reward_from_distance})
                         #wandb.log({f'Force Gripper_{number_step}':np.sum(self.pos_step[6:])})
 
-                        #wandb.log({f'Step Reward_{number_step}':reward})
+                        wandb.log({f'Step Reward_{number_step}':reward})
 
 
                     return next_state_image, next_state_hand, reward, False
@@ -231,7 +232,17 @@ class Mujoco_prototype():
         data = self.interface.offscreen.read_pixels(224,224,depth = False)
         image = np.array(data[:,:,:])
         #image = np.array(100*data[1])
-        image = np.resize(image,(3,224,224))
+        transform = transforms.Compose([
+            transforms.ToTensor(),
+            transforms.Normalize(
+    
+                mean = [0.485,0.456, 0.406],
+                std  = [0.229, 0.224, 0.225]
+            )
+
+        ])
+    
+        image = transform(image)
 
         return image
     
