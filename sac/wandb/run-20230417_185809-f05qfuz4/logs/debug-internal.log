@@ -1,0 +1,151 @@
+2023-04-17 18:58:09,622 INFO    StreamThr :4472 [internal.py:wandb_internal():90] W&B internal server running at pid: 4472, started at: 2023-04-17 18:58:09.622191
+2023-04-17 18:58:09,623 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: status
+2023-04-17 18:58:09,626 INFO    WriterThread:4472 [datastore.py:open_for_write():85] open: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230417_185809-f05qfuz4/run-f05qfuz4.wandb
+2023-04-17 18:58:09,626 DEBUG   SenderThread:4472 [sender.py:send():334] send: header
+2023-04-17 18:58:09,643 DEBUG   SenderThread:4472 [sender.py:send():334] send: run
+2023-04-17 18:58:10,549 INFO    SenderThread:4472 [dir_watcher.py:__init__():216] watching files in: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230417_185809-f05qfuz4/files
+2023-04-17 18:58:10,549 INFO    SenderThread:4472 [sender.py:_start_run_threads():1068] run started: f05qfuz4 with start time 1681725489.621054
+2023-04-17 18:58:10,550 DEBUG   SenderThread:4472 [sender.py:send_request():361] send_request: summary_record
+2023-04-17 18:58:10,550 INFO    SenderThread:4472 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-04-17 18:58:10,561 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: check_version
+2023-04-17 18:58:10,562 DEBUG   SenderThread:4472 [sender.py:send_request():361] send_request: check_version
+2023-04-17 18:58:10,625 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: run_start
+2023-04-17 18:58:10,640 DEBUG   HandlerThread:4472 [system_info.py:__init__():31] System info init
+2023-04-17 18:58:10,640 DEBUG   HandlerThread:4472 [system_info.py:__init__():46] System info init done
+2023-04-17 18:58:10,640 INFO    HandlerThread:4472 [system_monitor.py:start():151] Starting system monitor
+2023-04-17 18:58:10,640 INFO    SystemMonitor:4472 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-04-17 18:58:10,640 INFO    HandlerThread:4472 [system_monitor.py:probe():172] Collecting system info
+2023-04-17 18:58:10,641 INFO    SystemMonitor:4472 [interfaces.py:start():168] Started cpu
+2023-04-17 18:58:10,642 INFO    SystemMonitor:4472 [interfaces.py:start():168] Started disk
+2023-04-17 18:58:10,642 INFO    SystemMonitor:4472 [interfaces.py:start():168] Started gpu
+2023-04-17 18:58:10,643 INFO    SystemMonitor:4472 [interfaces.py:start():168] Started memory
+2023-04-17 18:58:10,644 INFO    SystemMonitor:4472 [interfaces.py:start():168] Started network
+2023-04-17 18:58:10,649 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:10,649 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:10,665 DEBUG   HandlerThread:4472 [system_info.py:probe():195] Probing system
+2023-04-17 18:58:10,674 DEBUG   HandlerThread:4472 [system_info.py:_probe_git():180] Probing git
+2023-04-17 18:58:10,694 DEBUG   HandlerThread:4472 [system_info.py:_probe_git():188] Probing git done
+2023-04-17 18:58:10,695 DEBUG   HandlerThread:4472 [system_info.py:probe():241] Probing system done
+2023-04-17 18:58:10,695 DEBUG   HandlerThread:4472 [system_monitor.py:probe():181] {'os': 'Linux-5.15.0-69-generic-x86_64-with-debian-bullseye-sid', 'python': '3.7.16', 'heartbeatAt': '2023-04-17T09:58:10.665972', 'startedAt': '2023-04-17T09:58:09.610317', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': 'train.py', 'codePath': 'sac/train.py', 'git': {'remote': 'git@github.com:filyps98/JacoRLDR.git', 'commit': '1776d16a45302ba369322988a2300b13606c4237'}, 'email': 'pippo.ronco@gmail.com', 'root': '/home/filippo/Desktop/Project/Experiments/JacoRLDR', 'host': 'filippo-X510UQ', 'username': 'filippo', 'executable': '/home/filippo/miniconda3/envs/robot/bin/python', 'cpu_count': 2, 'cpu_count_logical': 4, 'cpu_freq': {'current': 2775.03525, 'min': 400.0, 'max': 3500.0}, 'cpu_freq_per_core': [{'current': 2400.141, 'min': 400.0, 'max': 3500.0}, {'current': 2900.0, 'min': 400.0, 'max': 3500.0}, {'current': 2900.0, 'min': 400.0, 'max': 3500.0}, {'current': 2900.0, 'min': 400.0, 'max': 3500.0}], 'disk': {'total': 96.18362426757812, 'used': 80.44607162475586}, 'gpu': 'NVIDIA GeForce 940MX', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce 940MX', 'memory_total': 2147483648}], 'memory': {'total': 7.6491241455078125}}
+2023-04-17 18:58:10,695 INFO    HandlerThread:4472 [system_monitor.py:probe():182] Finished collecting system info
+2023-04-17 18:58:10,695 INFO    HandlerThread:4472 [system_monitor.py:probe():185] Publishing system info
+2023-04-17 18:58:10,695 DEBUG   HandlerThread:4472 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2023-04-17 18:58:10,695 DEBUG   HandlerThread:4472 [system_info.py:_save_pip():67] Saving pip packages done
+2023-04-17 18:58:10,696 DEBUG   HandlerThread:4472 [system_info.py:_save_conda():75] Saving list of conda packages installed into the current environment
+2023-04-17 18:58:11,551 INFO    Thread-13 :4472 [dir_watcher.py:_on_file_created():275] file/dir created: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230417_185809-f05qfuz4/files/conda-environment.yaml
+2023-04-17 18:58:11,551 INFO    Thread-13 :4472 [dir_watcher.py:_on_file_created():275] file/dir created: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230417_185809-f05qfuz4/files/wandb-summary.json
+2023-04-17 18:58:11,551 INFO    Thread-13 :4472 [dir_watcher.py:_on_file_created():275] file/dir created: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230417_185809-f05qfuz4/files/requirements.txt
+2023-04-17 18:58:12,650 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:12,650 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:13,550 INFO    Thread-13 :4472 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230417_185809-f05qfuz4/files/conda-environment.yaml
+2023-04-17 18:58:13,563 DEBUG   HandlerThread:4472 [system_info.py:_save_conda():86] Saving conda packages done
+2023-04-17 18:58:13,563 INFO    HandlerThread:4472 [system_monitor.py:probe():187] Finished publishing system info
+2023-04-17 18:58:13,566 DEBUG   SenderThread:4472 [sender.py:send():334] send: files
+2023-04-17 18:58:13,567 INFO    SenderThread:4472 [sender.py:_save_file():1319] saving file wandb-metadata.json with policy now
+2023-04-17 18:58:13,603 DEBUG   SenderThread:4472 [sender.py:send():334] send: telemetry
+2023-04-17 18:58:13,606 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: stop_status
+2023-04-17 18:58:13,606 DEBUG   SenderThread:4472 [sender.py:send_request():361] send_request: stop_status
+2023-04-17 18:58:14,270 INFO    Thread-16 :4472 [upload_job.py:push():143] Uploaded file /tmp/tmplpqoqiuqwandb/vay3glhx-wandb-metadata.json
+2023-04-17 18:58:14,550 INFO    Thread-13 :4472 [dir_watcher.py:_on_file_created():275] file/dir created: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230417_185809-f05qfuz4/files/output.log
+2023-04-17 18:58:14,550 INFO    Thread-13 :4472 [dir_watcher.py:_on_file_created():275] file/dir created: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230417_185809-f05qfuz4/files/wandb-metadata.json
+2023-04-17 18:58:14,652 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:14,653 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:14,894 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: status_report
+2023-04-17 18:58:16,551 INFO    Thread-13 :4472 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230417_185809-f05qfuz4/files/output.log
+2023-04-17 18:58:16,653 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:16,654 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:18,552 INFO    Thread-13 :4472 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230417_185809-f05qfuz4/files/output.log
+2023-04-17 18:58:18,654 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:18,658 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:20,295 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: status_report
+2023-04-17 18:58:20,659 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:20,659 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:20,999 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-17 18:58:21,000 DEBUG   SenderThread:4472 [sender.py:send():334] send: history
+2023-04-17 18:58:21,001 DEBUG   SenderThread:4472 [sender.py:send_request():361] send_request: summary_record
+2023-04-17 18:58:21,001 INFO    SenderThread:4472 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-04-17 18:58:21,003 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-17 18:58:21,003 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-17 18:58:21,003 DEBUG   SenderThread:4472 [sender.py:send():334] send: history
+2023-04-17 18:58:21,004 DEBUG   SenderThread:4472 [sender.py:send_request():361] send_request: summary_record
+2023-04-17 18:58:21,004 INFO    SenderThread:4472 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-04-17 18:58:21,005 DEBUG   SenderThread:4472 [sender.py:send():334] send: history
+2023-04-17 18:58:21,005 DEBUG   SenderThread:4472 [sender.py:send_request():361] send_request: summary_record
+2023-04-17 18:58:21,006 INFO    SenderThread:4472 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-04-17 18:58:21,553 INFO    Thread-13 :4472 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230417_185809-f05qfuz4/files/wandb-summary.json
+2023-04-17 18:58:22,660 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:22,660 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:24,661 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:24,661 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:24,911 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-17 18:58:24,912 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-17 18:58:24,913 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-17 18:58:24,914 DEBUG   SenderThread:4472 [sender.py:send():334] send: history
+2023-04-17 18:58:24,914 DEBUG   SenderThread:4472 [sender.py:send_request():361] send_request: summary_record
+2023-04-17 18:58:24,915 INFO    SenderThread:4472 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-04-17 18:58:24,915 DEBUG   SenderThread:4472 [sender.py:send():334] send: history
+2023-04-17 18:58:24,915 DEBUG   SenderThread:4472 [sender.py:send_request():361] send_request: summary_record
+2023-04-17 18:58:24,918 INFO    SenderThread:4472 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-04-17 18:58:24,919 DEBUG   SenderThread:4472 [sender.py:send():334] send: history
+2023-04-17 18:58:24,919 DEBUG   SenderThread:4472 [sender.py:send_request():361] send_request: summary_record
+2023-04-17 18:58:24,919 INFO    SenderThread:4472 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-04-17 18:58:25,555 INFO    Thread-13 :4472 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230417_185809-f05qfuz4/files/wandb-summary.json
+2023-04-17 18:58:25,919 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: status_report
+2023-04-17 18:58:26,275 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-17 18:58:26,276 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-17 18:58:26,277 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-17 18:58:26,278 DEBUG   SenderThread:4472 [sender.py:send():334] send: history
+2023-04-17 18:58:26,278 DEBUG   SenderThread:4472 [sender.py:send_request():361] send_request: summary_record
+2023-04-17 18:58:26,278 INFO    SenderThread:4472 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-04-17 18:58:26,279 DEBUG   SenderThread:4472 [sender.py:send():334] send: history
+2023-04-17 18:58:26,279 DEBUG   SenderThread:4472 [sender.py:send_request():361] send_request: summary_record
+2023-04-17 18:58:26,282 INFO    SenderThread:4472 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-04-17 18:58:26,282 DEBUG   SenderThread:4472 [sender.py:send():334] send: history
+2023-04-17 18:58:26,282 DEBUG   SenderThread:4472 [sender.py:send_request():361] send_request: summary_record
+2023-04-17 18:58:26,282 INFO    SenderThread:4472 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-04-17 18:58:26,555 INFO    Thread-13 :4472 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230417_185809-f05qfuz4/files/wandb-summary.json
+2023-04-17 18:58:26,662 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:26,662 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:28,571 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-17 18:58:28,571 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-17 18:58:28,663 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:28,663 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:30,664 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:30,664 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:31,695 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: status_report
+2023-04-17 18:58:32,557 INFO    Thread-13 :4472 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230417_185809-f05qfuz4/files/output.log
+2023-04-17 18:58:32,665 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:32,665 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:33,572 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-17 18:58:33,696 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-17 18:58:33,697 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-17 18:58:33,697 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-17 18:58:33,699 DEBUG   SenderThread:4472 [sender.py:send():334] send: history
+2023-04-17 18:58:33,699 DEBUG   SenderThread:4472 [sender.py:send_request():361] send_request: summary_record
+2023-04-17 18:58:33,699 INFO    SenderThread:4472 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-04-17 18:58:33,700 DEBUG   SenderThread:4472 [sender.py:send():334] send: history
+2023-04-17 18:58:33,700 DEBUG   SenderThread:4472 [sender.py:send_request():361] send_request: summary_record
+2023-04-17 18:58:33,703 INFO    SenderThread:4472 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-04-17 18:58:33,703 DEBUG   SenderThread:4472 [sender.py:send():334] send: history
+2023-04-17 18:58:33,703 DEBUG   SenderThread:4472 [sender.py:send_request():361] send_request: summary_record
+2023-04-17 18:58:33,703 INFO    SenderThread:4472 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-04-17 18:58:34,558 INFO    Thread-13 :4472 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230417_185809-f05qfuz4/files/wandb-summary.json
+2023-04-17 18:58:34,666 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:34,666 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:35,592 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-17 18:58:35,592 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-17 18:58:35,593 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-17 18:58:35,594 DEBUG   SenderThread:4472 [sender.py:send():334] send: history
+2023-04-17 18:58:35,594 DEBUG   SenderThread:4472 [sender.py:send_request():361] send_request: summary_record
+2023-04-17 18:58:35,595 INFO    SenderThread:4472 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-04-17 18:58:35,595 DEBUG   SenderThread:4472 [sender.py:send():334] send: history
+2023-04-17 18:58:35,595 DEBUG   SenderThread:4472 [sender.py:send_request():361] send_request: summary_record
+2023-04-17 18:58:35,598 INFO    SenderThread:4472 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-04-17 18:58:35,598 DEBUG   SenderThread:4472 [sender.py:send():334] send: history
+2023-04-17 18:58:35,599 DEBUG   SenderThread:4472 [sender.py:send_request():361] send_request: summary_record
+2023-04-17 18:58:35,599 INFO    SenderThread:4472 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-04-17 18:58:36,559 INFO    Thread-13 :4472 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/filippo/Desktop/Project/Experiments/JacoRLDR/sac/wandb/run-20230417_185809-f05qfuz4/files/wandb-summary.json
+2023-04-17 18:58:36,667 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:36,667 ERROR   gpu       :4472 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-04-17 18:58:37,600 DEBUG   HandlerThread:4472 [handler.py:handle_request():144] handle_request: status_report
+2023-04-17 18:58:38,636 INFO    MainThread:4472 [internal.py:handle_exit():77] Internal process exited

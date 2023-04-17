@@ -26,7 +26,6 @@ class PolicyNetwork(nn.Module):
         self.pooling1 = nn.MaxPool2d(kernel_size= 2, stride = 2)
         self.linear1 = nn.Linear(4096,480)
 
-        self.linear_bn = nn.BatchNorm1d()
 
         #Linear Part
         self.linear_1 = nn.Linear(6,64)
@@ -34,6 +33,7 @@ class PolicyNetwork(nn.Module):
         self.linear_3 = nn.Linear(64,32)
 
         #Linear Combined
+
         self.linear_combined_1 = nn.Linear(512,1024)
         self.linear_combined_2 = nn.Linear (1024,1024)
         self.linear_combined_3 = nn.Linear(1024,512)
@@ -74,9 +74,7 @@ class PolicyNetwork(nn.Module):
     def forward_Linear(self, state):
 
         x = F.relu(self.linear_1(state))
-        x = self.linear_bn(x)
         x = F.relu(self.linear_2(x))
-        x = self.linear_bn(x)
         x = F.relu(self.linear_3(x))
 
         return x
@@ -91,11 +89,8 @@ class PolicyNetwork(nn.Module):
         
         
         x = self.linear_combined_1(x)
-        x = self.linear_bn(x)
         x = self.linear_combined_2(x)
-        x = self.linear_bn(x)
         x = self.linear_combined_2(x)
-        x = self.linear_bn(x)
         x = self.linear_combined_3(x)
 
         mean    = (self.mean_linear(x))
