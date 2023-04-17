@@ -10,14 +10,17 @@ class SoftQNetwork(nn.Module):
         super(SoftQNetwork, self).__init__()
         
         #CNN part
-        self.batch_norm= nn.BatchNorm2d(256)
-        self.batch_norm= nn.BatchNorm2d(256)
+        self.batch_norm_1= nn.BatchNorm2d(256)
+        self.batch_norm_2= nn.BatchNorm2d(512)
         self.conv_gen1 = nn.Conv2d(in_channels=256, out_channels=256, kernel_size = 1, stride = 1)
         self.conv_gen2 = nn.Conv2d(in_channels=256, out_channels=512, kernel_size = 3, stride = 2)
         self.conv_gen3 = nn.Conv2d(in_channels=512, out_channels=512, kernel_size = 1, stride = 1)
         self.conv_gen4 = nn.Conv2d(in_channels=512, out_channels=1024, kernel_size = 3, stride = 2)
         self.pooling1 = nn.MaxPool2d(kernel_size= 2, stride = 2)
         self.linear1 = nn.Linear(4096,480)
+
+        
+        self.linear_bn = nn.BatchNorm1d()
 
         #Linear Part
         self.linear_1 = nn.Linear(6,64)
@@ -29,7 +32,8 @@ class SoftQNetwork(nn.Module):
 
         #Linear combined action and state
         self.linear_combined_1= nn.Linear(550,256)
-        self.linear_combined_2= nn.Linear(256,128)
+        self.linear_combined_2= nn.Linear(256,256)
+        self.linear_combined_3= nn.Linear(256,128)
 
         #Linear action
         self.linear_action_1 = nn.Linear(7,64)
@@ -43,13 +47,19 @@ class SoftQNetwork(nn.Module):
 
     def forward_CNN(self,state):
 
-        x = self.batch_norm(state)
+        x = self.batch_norm_1(state)
         x = F.relu(self.conv_gen1(x))
+        x = self.batch_norm_1(x)
+        x = F.relu(self.conv_gen1(x))
+        x = self.batch_norm_1(x)
         x = F.relu(self.conv_gen2(x))
         x = self.pooling1(x)
+        x = self.batch_norm_2(x)
         x = F.relu(self.conv_gen3(x))
+        x = self.batch_norm_2(x)
         x = F.relu(self.conv_gen3(x))
         x = self.pooling1(x)
+        x = self.batch_norm_2(x)
         x = F.relu(self.conv_gen4(x))
         
         x = x.view(x.size(0), -1)
@@ -61,7 +71,9 @@ class SoftQNetwork(nn.Module):
     def forward_linear(self, state):
         
         x = F.relu(self.linear_1(state))
+        x = self.linear_bn(x)
         x = F.relu(self.linear_2(x))
+        x = self.linear_bn(x)
         x = F.relu(self.linear_3(x))
 
         return x
@@ -69,6 +81,7 @@ class SoftQNetwork(nn.Module):
     def action_linear(self,action):
 
         x = F.relu(self.linear_action_1(action))
+        x = self.linear_bn(x)
         x = F.relu(self.linear_action_2(x))
 
         return x
@@ -89,7 +102,13 @@ class SoftQNetwork(nn.Module):
         z = torch.cat((x,y),1)
       
         z = F.relu(self.linear_combined_1(z))
+        z = self.linear_bn(z)
         z = F.relu(self.linear_combined_2(z))
+        z = self.linear_bn(z)
+        z = F.relu(self.linear_combined_2(z))
+        z = self.linear_bn(z)
+        z = F.relu(self.linear_combined_3(z))
+        z = self.linear_bn(z)
         z = F.relu(self.linear_final(z))
         
         return z
