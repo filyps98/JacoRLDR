@@ -31,7 +31,7 @@ class Mujoco_prototype():
         self.robot_config = arm(arm_model, folder = dir_name )
 
         # create our Mujoco interface
-        self.interface = Mujoco(self.robot_config, dt=0.0005,visualize = vision, create_offscreen_rendercontext = True)
+        self.interface = Mujoco(self.robot_config, dt=0.001,visualize = vision, create_offscreen_rendercontext = True)
         self.interface.connect()
 
         self.start()

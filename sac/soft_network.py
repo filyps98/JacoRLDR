@@ -19,9 +19,14 @@ class SoftQNetwork(nn.Module):
         self.pooling1 = nn.MaxPool2d(kernel_size= 2, stride = 2)
         self.linear1 = nn.Linear(4096,480)
 
-        
+        self.linear_bn_0_1 = nn.BatchNorm1d(num_features=6)
+        self.linear_bn_0_2 = nn.BatchNorm1d(num_features=7)
+        self.linear_bn_0_3 = nn.BatchNorm1d(num_features=550)
+
         self.linear_bn_1 = nn.BatchNorm1d(num_features=64)
         self.linear_bn_2 = nn.BatchNorm1d(num_features=256)
+
+        self.final_linear_bn = nn.BatchNorm1d(num_features=128)
 
         #Linear Part
         self.linear_1 = nn.Linear(6,64)
@@ -41,7 +46,7 @@ class SoftQNetwork(nn.Module):
         self.linear_action_2 = nn.Linear(64,64)
         self.linear_action_3 = nn.Linear(64,38)
 
-
+        
         self.linear_final = nn.Linear(128,1)
         
         self.linear_combined_2.weight.data.uniform_(-init_w, init_w)
@@ -72,7 +77,8 @@ class SoftQNetwork(nn.Module):
     #to modify
     def forward_linear(self, state):
         
-        x = F.relu(self.linear_1(state))
+        x = self.self.linear_bn_0_1(state)
+        x = F.relu(self.linear_1(x))
         x = self.linear_bn_1(x)
         x = F.relu(self.linear_2(x))
         x = self.linear_bn_1(x)
@@ -82,7 +88,8 @@ class SoftQNetwork(nn.Module):
 
     def action_linear(self,action):
 
-        x = F.relu(self.linear_action_1(action))
+        x = self.self.linear_bn_0_2(action)
+        x = F.relu(self.linear_action_1(x))
         x = self.linear_bn_1(x)
         x = F.relu(self.linear_action_2(x))
         x = self.linear_bn_1(x)
@@ -105,6 +112,7 @@ class SoftQNetwork(nn.Module):
         
         z = torch.cat((x,y),1)
       
+        z = self.self.linear_bn_0_3(z)
         z = F.relu(self.linear_combined_1(z))
         z = self.linear_bn_2(z)
         z = F.relu(self.linear_combined_2(z))
@@ -112,6 +120,7 @@ class SoftQNetwork(nn.Module):
         z = F.relu(self.linear_combined_2(z))
         z = self.linear_bn_2(z)
         z = F.relu(self.linear_combined_3(z))
+        z = self.final_linear_bn(z)
         z = F.relu(self.linear_final(z))
         
         return z

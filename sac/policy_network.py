@@ -24,8 +24,8 @@ class PolicyNetwork(nn.Module):
         self.conv_gen3 = nn.Conv2d(in_channels=512, out_channels=512, kernel_size = 1, stride = 1)
         self.conv_gen4 = nn.Conv2d(in_channels=512, out_channels=1024, kernel_size = 3, stride = 2)
         self.pooling1 = nn.MaxPool2d(kernel_size= 2, stride = 2)
-        self.linear1 = nn.Linear(4096,480)
 
+        self.linear1 = nn.Linear(4096,480)
 
         #Linear Part
         self.linear_1 = nn.Linear(6,64)
