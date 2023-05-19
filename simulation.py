@@ -132,10 +132,11 @@ class Mujoco_prototype():
                 #if error_pos_int < error_limit:
                 if (error_pos_int < 0.04 and i > 1500):
 
-                    next_state_image, next_state_hand = self.get_state()
+                    target, z_height, max_dimension = self.get_limit_target_pos(target_geom_ID)
+                    next_state_image, next_state_hand = self.get_state(target)
 
                     #Evaluate new target position
-                    target, z_height, max_dimension = self.get_limit_target_pos(target_geom_ID)
+                    
                     resulting_height = (target[2] - z_height)
                 
 
@@ -175,13 +176,15 @@ class Mujoco_prototype():
 
                     return next_state_image, next_state_hand, reward, False
 
-            next_state_image, next_state_hand = self.get_state()
+            target, z_height, max_dimension = self.get_limit_target_pos(target_geom_ID)
+            next_state_image, next_state_hand = self.get_state(target)
             return next_state_image, next_state_hand, -1, True
 
 
         except:
             print("Exception")
-            next_state_image, next_state_hand = self.get_state()
+            target, z_height, max_dimension = self.get_limit_target_pos(target_geom_ID)
+            next_state_image, next_state_hand = self.get_state(target)
             return next_state_image, next_state_hand, -1, True
             
 
@@ -206,7 +209,7 @@ class Mujoco_prototype():
 
         return position_planner, orientation_path
 
-    def get_state(self):
+    def get_state(self,target):
 
         #image
         image = self.get_image()
@@ -219,7 +222,7 @@ class Mujoco_prototype():
         
         #hand_status = np.concatenate((force, pos_hand, orient_hand), axis = None)
 
-        hand_status = np.concatenate((pos_hand, orient_hand), axis = None)
+        hand_status = np.concatenate((pos_hand, orient_hand,target), axis = None)
 
         return image, hand_status
 

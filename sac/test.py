@@ -39,7 +39,7 @@ max_episodes  = 500000
 max_steps = 5
 
 frame_idx   = 0
-batch_size  = 100
+batch_size  = 64
 explore_steps = 0  # for random action sampling in the beginning of training
 update_itr = 5
 AUTO_ENTROPY=True
@@ -90,7 +90,7 @@ for eps in range(10):
 
      #I don't want to be too close by the target
     #target_estimated_pos = (target_pos + np.array([0 , 0 , 0.1])).tolist()
-    #target_estimated_pos = target_pos + (np.array([0.1 , 0.1, 0]*(np.random.rand(3)-0.5)+np.array([0 , 0 , 0.3]))).tolist()
+    target_estimated_pos = target_pos + (np.array([0.1 , 0.1, 0]*(np.random.rand(3)-0.5)+np.array([0 , 0 , 0.25]))).tolist()
     #target_estimated_orientation = list(target_orient)
     target_estimated_orientation = [0, 0, 0]
     initial_gripper_force = [5,5,5]
@@ -98,8 +98,8 @@ for eps in range(10):
     #I initialize and resize the first action
 
     #estimate how much to shift
-    shifted_xyz = [0,0,0.15]
-    #shifted_xyz = target_estimated_pos - env.get_hand_pos() 
+    #shifted_xyz = [0,0,0.15]
+    shifted_xyz = target_estimated_pos - env.get_hand_pos() 
     scripted_action = np.array([shifted_xyz, target_estimated_orientation, initial_gripper_force])
     scripted_action = np.resize(scripted_action,(9))
     

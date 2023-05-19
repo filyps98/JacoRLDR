@@ -27,7 +27,7 @@ import argparse
 dir_ = os.path.dirname(os.getcwd())
 
 arm_ = "jaco2.xml"
-visualize = False
+visualize = True
 env = Mujoco_prototype(dir_,arm_, visualize)
 
 

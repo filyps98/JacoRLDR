@@ -53,7 +53,7 @@ class ReplayBuffer:
             print("Upload new dataset")
             #the buffer is full
             #Create dataset if it doesn't exist
-            torch.save(self.buffer,"dataset/Dataset_"+ str(datetime.datetime.now()))
+            #torch.save(self.buffer,"dataset/Dataset_"+ str(datetime.datetime.now()))
 
         
     

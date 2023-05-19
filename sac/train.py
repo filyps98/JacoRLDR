@@ -48,7 +48,7 @@ max_steps = 5
 
 
 frame_idx   = 0
-batch_size  = 100
+batch_size  = 64
 explore_steps = 0  # for random action sampling in the beginning of training
 initial_update_itr = 5
 update_itr = 5
@@ -114,14 +114,15 @@ for eps in range(max_episodes):
         geom_body_ID, target_pos, target_orient, size = bs.body_swap(body_cube, body_cylinder)
         light._rand_textures()
         light._rand_lights()
-
-    state_image, state_hand = env.get_state()
+    
+    target_state, z_height, max_dimension = env.get_limit_target_pos(geom_body_ID)
+    state_image, state_hand = env.get_state(target_state)
     episode_reward = 0
 
 
     #I don't want to be too close by the target
     #target_estimated_pos = (target_pos + np.array([0 , 0 , 0.1])).tolist()
-    #target_estimated_pos = target_pos + (np.array([0.1 , 0.1, 0]*(np.random.rand(3)-0.5)+np.array([0 , 0 , 0.3]))).tolist()
+    target_estimated_pos = target_pos + (np.array([0.1 , 0.1, 0]*(np.random.rand(3)-0.5)+np.array([0 , 0 , 0.15]))).tolist()
     #target_estimated_orientation = list(target_orient)
     target_estimated_orientation = [0, 0, 0]
     initial_gripper_force = [5,5,5]
@@ -129,8 +130,8 @@ for eps in range(max_episodes):
     #I initialize and resize the first action
 
     #estimate how much to shift
-    shifted_xyz = [0,0,0.15]
-    #shifted_xyz = target_estimated_pos - env.get_hand_pos() 
+    #shifted_xyz = [0,0,0.15]
+    shifted_xyz = target_estimated_pos - env.get_hand_pos() 
     scripted_action = np.array([shifted_xyz, target_estimated_orientation, initial_gripper_force])
     scripted_action = np.resize(scripted_action,(9))
     
@@ -174,7 +175,7 @@ for eps in range(max_episodes):
         
         if len(replay_buffer) > batch_size:
             for i in range(update_itr):
-                _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.279*action_dim, train_policy = True)
+                _=sac_trainer.update(batch_size, reward_scale=10., auto_entropy=AUTO_ENTROPY, target_entropy=-0.8*action_dim, train_policy = True)
 
         if done:
             break
@@ -182,7 +183,7 @@ for eps in range(max_episodes):
     average_rewards = average_rewards + episode_reward
 
     if eps % 20 == 0 and eps>0: # plot and model saving interval
-        wandb.log({"episode reward every_5":average_rewards/5})
+        wandb.log({"episode reward every_5":average_rewards/20})
         average_rewards = 0
         np.save('rewards', rewards)
         sac_trainer.save_model(model_path)

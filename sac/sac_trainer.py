@@ -84,12 +84,14 @@ class SAC_Trainer():
                 # print('alpha loss: ',alpha_loss)
                 self.alpha_optimizer.zero_grad()
                 alpha_loss.backward()
+                torch.nn.utils.clip_grad_norm_(self.log_alpha, 1)
                 self.alpha_optimizer.step()
                 self.alpha = self.log_alpha.exp()
             else:
                 self.alpha = 1.
                 alpha_loss = 0
 
+            wandb.log({"log probability": log_prob.detach().mean()})
             wandb.log({"alpha":self.alpha})
             wandb.log({"alpha_loss":alpha_loss})
 

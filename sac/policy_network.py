@@ -28,7 +28,7 @@ class PolicyNetwork(nn.Module):
         self.linear1 = nn.Linear(4096,480)
 
         #Linear Part
-        self.linear_1 = nn.Linear(6,64)
+        self.linear_1 = nn.Linear(9,64)
         self.linear_2 = nn.Linear(64,64)
         self.linear_3 = nn.Linear(64,32)
 
