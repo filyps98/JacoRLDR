@@ -31,7 +31,7 @@ class Mujoco_prototype():
         self.robot_config = arm(arm_model, folder = dir_name )
 
         # create our Mujoco interface
-        self.interface = Mujoco(self.robot_config, dt=0.001,visualize = vision, create_offscreen_rendercontext = True)
+        self.interface = Mujoco(self.robot_config, dt=0.0005,visualize = vision, create_offscreen_rendercontext = True)
         self.interface.connect()
 
         self.start()
@@ -66,7 +66,7 @@ class Mujoco_prototype():
 
 
 
-    def step_sim(self,action, number_step):
+    def step_sim(self,action, number_step, target_geom_ID):
 
         #variable to store the destination
         self.pos_final = np.hstack([action])
@@ -95,10 +95,10 @@ class Mujoco_prototype():
         
             pre_grip = np.copy(self.pos_final[6:])
 
-            for i in range(800):
+            for i in range(3000):
                 
                 #generate next step of the path planner
-                pos, vel = position_planner.next()
+                pos, _ = position_planner.next()
                 orient = orientation_path.next()
                 self.pos_step = np.hstack([pos, orient,self.pos_final[6:]])
             
@@ -131,11 +131,6 @@ class Mujoco_prototype():
                 #takes at the end of the movement
                 error_pos_int = np.linalg.norm(ee_xyz - position_final)
 
-        
-                #if (len([*filter(lambda x: x > 1e8, np.absolute(self.interface.sim.data.qacc))]) > 0):
-
-                    #next_state_image, next_state_hand = self.get_state()
-                    #return next_state_image, next_state_hand, -1, True
 
                 #when it reaches a new position save the image
                 #even if you don't input anythin at the strt it takes a picture
@@ -145,49 +140,48 @@ class Mujoco_prototype():
                     next_state_image, next_state_hand = self.get_state()
 
                     #Evaluate new target position
-                    target = self.get_limit_target_pos()
+                    target, z_height, max_dimension = self.get_limit_target_pos(target_geom_ID)
+                
 
                     #re-get the feedback
                     feedback = self.interface.get_feedback()
                     ee_xyz = self.robot_config.Tx("EE", q=feedback["q"])
 
-                  
+                    
                     #Adding distance
                     final_distance = 1/(np.linalg.norm(ee_xyz - target[:3]))
-                    reward_from_distance = fun.expit(0.55*final_distance - 4)
+                    
+                    #since the objects change dimention, we change the reward depending on their dimensions 
+                    #arg/(1/maxx_dimension) = arg*max_dimension
+                    s = (-np.log(1/0.8 - 1) + 4)*(max_dimension +0.03)
+                
+                    reward_from_distance = fun.expit(s*final_distance - 4)
 
                     reward_from_force = 0 
                     reward_from_height = 0
-                    
-
-                    force = self.get_gripper_forces()
 
                     if reward_from_distance > 0.8:
 
                         gripper_sum = np.sum(self.pos_step[6:])
                         reward_gripper = 1 - gripper_sum/24
 
-                        #Adding Force reward and normalizing it. I include the amplitude of the fingers
-                        #positive_force_x = math.sqrt(np.sum(force[0][:]**2))/30
-                        #positive_force_y = math.sqrt(np.sum(force[1][:]**2))/30
-                        #positive_force_z = math.sqrt(np.sum(force[2][:]**2))/30
-
-                        #reward_from_force = (positive_force_x + positive_force_y + positive_force_z)/3
-
-                        #reward_from_force = reward_from_force + reward_gripper
-
                         reward_from_force = reward_gripper
 
                         #Adding Resulting Height
                         #Initialize Resulting Height
-                        resulting_height = 0
+                        resulting_height = target[2] - z_height
 
-                        if target[2] < 0.2:
-                            resulting_height = target[2]
+                        if resulting_height > 0:
+                            if resulting_height < 0.2:
+                                resulting_height = target[2] - z_height
+                            else:
+                                resulting_height = 0.2
+
+                            reward_from_height = 10*resulting_height
+
                         else:
-                            resulting_height = 0.2
-
-                        reward_from_height = 10*resulting_height
+                            reward_from_height = 0
+                        
 
                     reward = reward_from_distance + reward_from_force + reward_from_height
 
@@ -264,50 +258,25 @@ class Mujoco_prototype():
         image = np.resize(image,(3,84,84))
 
         return image
-
-    def get_gripper_forces(self):
-
-        force_array = np.zeros([3,3])
-
-        for i in range(self.interface.sim.data.ncon):
-                contact = self.interface.sim.data.contact[i]
-
-                if ((contact.geom1 == 3) and (contact.geom2 in (24,26,28))) or ((contact.geom1 in (24,26,28)) and (contact.geom2 == 3)):
-
-
-                    # Use internal functions to read out mj_contactForce
-                    c_array = np.zeros(6, dtype=np.float64)
-                    mujoco_py.functions.mj_contactForce(self.interface.sim.model, self.interface.sim.data, i, c_array)
-                    
-                    # Convert the contact force from contact frame to world frame
-                    ref = np.reshape(contact.frame, (3,3))
-                    c_force = np.dot(np.linalg.inv(ref), c_array[0:3])
-                    #c_torque = np.dot(np.linalg.inv(ref), c_array[3:6])
-
-                    #store the contact in the right position
-                    index = (contact.geom2 - 24)/2
-                    force_array[int(index),:] = c_force
-        
-        return force_array
-
     
     #works in a way I can grasp in a proper way considering the size of the finger
-    def get_limit_target_pos(self):
+    def get_limit_target_pos(self,target_geom_ID):
 
-        targetID = 3
-        finger_size = 0.08
-        half_size_target = self.interface.model.geom_size[targetID]
+        half_size_target = self.interface.model.geom_size[target_geom_ID]
+        
+       
+        if(target_geom_ID == 2):
+            xyz_pos = self.interface.get_xyz("target")
+            height = half_size_target[2]
 
-        xyz_pos = self.interface.get_xyz("target")
-        xyz_pos[2] = xyz_pos[2] - half_size_target[2] 
-
-
-        height_target = 2*half_size_target[2]
-
-        if height_target >= finger_size:
-            xyz_pos[2] = xyz_pos[2] + height_target - finger_size
-
-        return xyz_pos
+        elif(target_geom_ID == 3):
+            xyz_pos = self.interface.get_xyz("target_cylinder")
+            height = half_size_target[1]
+        
+        index_max_dimension = np.argmax(half_size_target)
+        max_dimension = half_size_target[index_max_dimension]
+        
+        return xyz_pos, height, max_dimension
 
 
     def get_target_orient(self):

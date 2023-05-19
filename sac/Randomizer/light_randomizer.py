@@ -23,7 +23,7 @@ class Light():
         """Randomize all the textures in the scene, including the skybox"""
         bright = np.random.binomial(1, 0.5)
 
-        object_ = [self.model.geom_names[0], self.model.geom_names[1], self.model.geom_names[19]]
+        object_ = [self.model.geom_names[0], self.model.geom_names[1],self.model.geom_names[19]]
 
         for name in object_:
             self.tex_modder.rand_all(name)

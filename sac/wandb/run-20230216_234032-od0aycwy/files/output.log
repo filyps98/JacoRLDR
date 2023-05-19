@@ -1,0 +1,71 @@
+cuda:0
+Soft Q Network (1,2):  SoftQNetwork(
+  (batch_norm): BatchNorm2d(3, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (conv1): Conv2d(3, 64, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling1): MaxPool2d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (conv2): Conv2d(64, 128, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (conv_gen1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+  (conv3): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2))
+  (conv_gen2): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+  (linear1): Linear(in_features=256, out_features=224, bias=True)
+  (linear_1): Linear(in_features=6, out_features=64, bias=True)
+  (linear_2): Linear(in_features=64, out_features=64, bias=True)
+  (linear_3): Linear(in_features=64, out_features=32, bias=True)
+  (linear_state_combined): Linear(in_features=256, out_features=512, bias=True)
+  (linear_combined_1): Linear(in_features=550, out_features=256, bias=True)
+  (linear_combined_2): Linear(in_features=256, out_features=128, bias=True)
+  (linear_action_1): Linear(in_features=7, out_features=64, bias=True)
+  (linear_action_2): Linear(in_features=64, out_features=38, bias=True)
+  (linear_final): Linear(in_features=128, out_features=1, bias=True)
+)
+Policy Network:  PolicyNetwork(
+  (batch_norm): BatchNorm2d(3, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (conv1): Conv2d(3, 64, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling1): MaxPool2d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (conv2): Conv2d(64, 128, kernel_size=(2, 2), stride=(1, 1))
+  (batchnorm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (pooling2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (conv_gen1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+  (conv3): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2))
+  (conv_gen2): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+  (linear1): Linear(in_features=256, out_features=480, bias=True)
+  (linear_1): Linear(in_features=6, out_features=64, bias=True)
+  (linear_2): Linear(in_features=64, out_features=64, bias=True)
+  (linear_3): Linear(in_features=64, out_features=32, bias=True)
+  (linear_combined_1): Linear(in_features=512, out_features=1024, bias=True)
+  (linear_combined_2): Linear(in_features=1024, out_features=512, bias=True)
+  (mean_linear): Linear(in_features=512, out_features=7, bias=True)
+  (log_std_linear): Linear(in_features=512, out_features=7, bias=True)
+)
+I am inside
+Episode:  0 | Episode Reward:  -1
+Episode:  1 | Episode Reward:  0.6245674834737629
+Episode:  2 | Episode Reward:  0.5263056641174986
+Episode:  3 | Episode Reward:  0.2277368678668782
+Episode:  4 | Episode Reward:  -1
+Episode:  5 | Episode Reward:  -1
+Episode:  6 | Episode Reward:  -0.920219520541583
+Episode:  7 | Episode Reward:  -1
+Episode:  8 | Episode Reward:  -1
+Episode:  9 | Episode Reward:  -0.8947185587348373
+Episode:  10 | Episode Reward:  -1
+Episode:  11 | Episode Reward:  -0.8142273035145232
+Episode:  12 | Episode Reward:  -0.9169588443165484
+Episode:  13 | Episode Reward:  -1
+Episode:  14 | Episode Reward:  -1
+Episode:  15 | Episode Reward:  -1
+Episode:  16 | Episode Reward:  -1
+Episode:  17 | Episode Reward:  -0.8644782994951039
+Episode:  18 | Episode Reward:  -1
+Episode:  19 | Episode Reward:  -0.8707865198912188
+Episode:  20 | Episode Reward:  -1
+Episode:  21 | Episode Reward:  -1
+Episode:  22 | Episode Reward:  -0.7131084843953432
+Episode:  23 | Episode Reward:  -0.8005826022277756
+Episode:  24 | Episode Reward:  -0.8792892596217796
+Episode:  25 | Episode Reward:  -1
+Episode:  26 | Episode Reward:  -0.9048571882092248

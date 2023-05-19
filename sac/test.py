@@ -15,6 +15,7 @@ from replay import ReplayBuffer
 from normalised_action import NormalizedActions
 from sac_trainer import SAC_Trainer
 from demonstration import scripted_policy
+from Randomizer import body_swap as bs
 from Randomizer.mujoco_randomizer import Randomizer
 
 import argparse
@@ -39,7 +40,7 @@ max_episodes  = 500000
 max_steps = 5
 
 frame_idx   = 0
-batch_size  = 450
+batch_size  = 550
 explore_steps = 0  # for random action sampling in the beginning of training
 update_itr = 1
 AUTO_ENTROPY=True
@@ -65,10 +66,10 @@ randomizer = Randomizer(env.interface)
 
 #body randomizer
 #BodyID
-starting_bodyID = 2
-number_bodies = 1
-body = randomizer.body(starting_bodyID, number_bodies)
+body_cube = randomizer.body(2)
+body_cylinder = randomizer.body(3)
 light = randomizer.light()
+
 
 sac_trainer.load_model(model_path)
 
@@ -81,8 +82,7 @@ for eps in range(10):
     env.restart()
 
     #randomize position
-    target_pos = body.modify_xyz(starting_bodyID, [0.05, 0.05, 0])
-    target_orient = body.modify_euler(starting_bodyID,[0, 0, 1.57])
+    geom_body_ID, target_pos, target_orient, size = bs.body_swap(body_cube, body_cylinder)
 
     light._rand_textures()
     light._rand_lights()
@@ -94,9 +94,9 @@ for eps in range(10):
 
     #I don't want to be too close by the target
     #target_estimated_pos = (target_pos + np.array([0 , 0 , 0.1])).tolist()
-    target_estimated_pos = (target_pos + 0.05*np.random.rand(3)+np.array([0 , 0 , 0.1])).tolist()
-    target_estimated_orientation = list(target_orient)
-    #target_estimated_orientation = [0, 0, 0]
+    target_estimated_pos = (target_pos + 0.05*np.random.rand(3)+np.array([0 , 0 , 0.2])).tolist()
+    #target_estimated_orientation = list(target_orient)
+    target_estimated_orientation = [0, 0, 0]
     initial_gripper_force = [5,5,5]
 
     #I initialize and resize the first action
@@ -107,7 +107,7 @@ for eps in range(10):
     scripted_action = np.resize(scripted_action,(9))
     
 
-    _, _, _, _ = env.step_sim(scripted_action, -1)
+    _, _, _, _ = env.step_sim(scripted_action, -1,  geom_body_ID)
 
 
     action = np.zeros(9)
@@ -120,7 +120,7 @@ for eps in range(10):
         #except the fore grippers that have a greater action space
         action[6:] = ratio_residual_force*action_RL[6]*np.ones(3) + ratio_residual_force
 
-        next_state_image, next_state_hand, reward, done = env.step_sim(action, step)
+        next_state_image, next_state_hand, reward, done = env.step_sim(action, step, geom_body_ID) 
 
 
         episode_reward += reward
