@@ -95,7 +95,7 @@ class Mujoco_prototype():
         
             pre_grip = np.copy(self.pos_final[6:])
 
-            for i in range(3000):
+            for i in range(5000):
                 
                 #generate next step of the path planner
                 pos, _ = position_planner.next()
@@ -153,7 +153,7 @@ class Mujoco_prototype():
                     
                     #since the objects change dimention, we change the reward depending on their dimensions 
                     #arg/(1/maxx_dimension) = arg*max_dimension
-                    s = (-np.log(1/0.8 - 1) + 4)*(max_dimension +0.03)
+                    s = (-np.log(1/0.8 - 1) + 4)*(max_dimension + 0.03)
                 
                     reward_from_distance = fun.expit(s*final_distance - 4)
 
@@ -177,7 +177,7 @@ class Mujoco_prototype():
                             else:
                                 resulting_height = 0.2
 
-                            reward_from_height = 10*resulting_height
+                            reward_from_height = 100*resulting_height
 
                         else:
                             reward_from_height = 0
