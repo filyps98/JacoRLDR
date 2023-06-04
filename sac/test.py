@@ -85,12 +85,9 @@ for eps in range(10):
     light._rand_textures()
     light._rand_lights()
 
-    state_image, state_hand = env.get_state()
-    episode_reward = 0
-
      #I don't want to be too close by the target
     #target_estimated_pos = (target_pos + np.array([0 , 0 , 0.1])).tolist()
-    target_estimated_pos = target_pos + (np.array([0.1 , 0.1, 0]*(np.random.rand(3)-0.5)+np.array([0 , 0 , 0.25]))).tolist()
+    target_estimated_pos = target_pos + (np.array([0.1 , 0.1, 0]*(np.random.rand(3)-0.5)+np.array([0 , 0 , 0.15]))).tolist()
     #target_estimated_orientation = list(target_orient)
     target_estimated_orientation = [0, 0, 0]
     initial_gripper_force = [5,5,5]
@@ -105,6 +102,10 @@ for eps in range(10):
     
 
     _, _, _, _ = env.step_sim(scripted_action, -1, max_steps, geom_body_ID)
+
+    target_state, z_height, max_dimension = env.get_limit_target_pos(geom_body_ID)
+    state_image, state_hand = env.get_state(target_state,initial_gripper_force[0])
+    episode_reward = 0
 
 
     action = np.zeros(9)

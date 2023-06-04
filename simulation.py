@@ -132,19 +132,18 @@ class Mujoco_prototype():
                 #if error_pos_int < error_limit:
                 if (error_pos_int < 0.04 and i > 1500):
 
+                    #I send the target position and the grip as a state
                     target, z_height, max_dimension = self.get_limit_target_pos(target_geom_ID)
-                    next_state_image, next_state_hand = self.get_state(target)
+                    next_state_image, next_state_hand = self.get_state(target,self.pos_final[6])
 
                     #Evaluate new target position
                     
                     resulting_height = (target[2] - z_height)
-                
 
                     #re-get the feedback
                     feedback = self.interface.get_feedback()
                     ee_xyz = self.robot_config.Tx("EE", q=feedback["q"])
 
-                    
                     #Adding distance
                     final_distance = 1/(np.linalg.norm(ee_xyz - target[:3]))
                     
@@ -153,23 +152,32 @@ class Mujoco_prototype():
                     s = (-np.log(1/0.8 - 1) + 4)*(max_dimension + 0.03)
                 
                     reward_from_distance = fun.expit(s*final_distance - 4)
-                    
-                    if(resulting_height > 0):
-                        reward_from_height = 50*resulting_height
-                    
-                    else: 
-                        reward_from_height = 0
-                    
 
-                    reward = reward_from_distance + reward_from_height
+                    #I insert the gripper reward
+                    reward_gripper = 0 
+                    reward_from_height = 0
+
+                    if reward_from_distance > 0.8:
+
+                        #It has to close when it comes near
+                        reward_gripper = 1 - self.pos_step[6]/8
+                    
+                        if(resulting_height > 0):
+                            reward_from_height = 50*resulting_height
+                        
+                        else: 
+                            reward_from_height = 0
+                        
+
+                    reward = reward_from_distance + reward_from_height + reward_gripper
 
                     if number_step >= 0:
 
 
-                        #wandb.log({f'Force Reward_{number_step}':reward_from_force})
+                        wandb.log({f'Force Reward_{number_step}':reward_gripper})
                         wandb.log({f'Height Reward_{number_step}':reward_from_height})
                         wandb.log({f'Distance Reward_{number_step}':reward_from_distance})
-                        #wandb.log({f'Force Gripper_{number_step}':np.sum(self.pos_step[6:])})
+                        
 
                         wandb.log({f'Step Reward_{number_step}':reward})
 
@@ -177,14 +185,14 @@ class Mujoco_prototype():
                     return next_state_image, next_state_hand, reward, False
 
             target, z_height, max_dimension = self.get_limit_target_pos(target_geom_ID)
-            next_state_image, next_state_hand = self.get_state(target)
+            next_state_image, next_state_hand = self.get_state(target,self.pos_final[6])
             return next_state_image, next_state_hand, -1, True
 
 
         except:
             print("Exception")
             target, z_height, max_dimension = self.get_limit_target_pos(target_geom_ID)
-            next_state_image, next_state_hand = self.get_state(target)
+            next_state_image, next_state_hand = self.get_state(target,self.pos_final[6])
             return next_state_image, next_state_hand, -1, True
             
 
@@ -209,7 +217,7 @@ class Mujoco_prototype():
 
         return position_planner, orientation_path
 
-    def get_state(self,target):
+    def get_state(self,target,grip_amplitude):
 
         #image
         image = self.get_image()
@@ -222,7 +230,7 @@ class Mujoco_prototype():
         
         #hand_status = np.concatenate((force, pos_hand, orient_hand), axis = None)
 
-        hand_status = np.concatenate((pos_hand, orient_hand,target), axis = None)
+        hand_status = np.concatenate((pos_hand, orient_hand,grip_amplitude, target), axis = None)
 
         return image, hand_status
 

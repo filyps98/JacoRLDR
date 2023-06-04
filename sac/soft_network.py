@@ -19,7 +19,7 @@ class SoftQNetwork(nn.Module):
         self.pooling1 = nn.MaxPool2d(kernel_size= 2, stride = 2)
         self.linear1 = nn.Linear(4096,480)
 
-        self.linear_bn_0_1 = nn.BatchNorm1d(num_features=9)
+        self.linear_bn_0_1 = nn.BatchNorm1d(num_features=10)
         self.linear_bn_0_2 = nn.BatchNorm1d(num_features=7)
         self.linear_bn_0_3 = nn.BatchNorm1d(num_features=550)
 
@@ -29,7 +29,7 @@ class SoftQNetwork(nn.Module):
         self.final_linear_bn = nn.BatchNorm1d(num_features=128)
 
         #Linear Part
-        self.linear_1 = nn.Linear(9,64)
+        self.linear_1 = nn.Linear(10,64)
         self.linear_2 = nn.Linear(64,64)
         self.linear_3 = nn.Linear(64,32)
 
