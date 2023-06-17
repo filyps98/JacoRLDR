@@ -54,7 +54,7 @@ class Mujoco_prototype():
             null_controllers=[damping],
             vmax= None,  # [m/s, rad/s]
             # control all DOF [x, y, z, alpha, beta, gamma]
-            ctrlr_dof=[True, True, True, True, True, True],
+            ctrlr_dof=[True, True, True, False, False, True],
         )
 
         # get the end-effector's initial position
@@ -153,32 +153,21 @@ class Mujoco_prototype():
                 
                     reward_from_distance = fun.expit(s*final_distance - 4)
 
-                    #I insert the gripper reward
-                    reward_gripper = 0 
-                    reward_from_height = 0
-
-                    if reward_from_distance > 0.8:
-
-                        #It has to close when it comes near
-                        reward_gripper = 1 - self.pos_step[6]/8
                     
-                        if(resulting_height > 0):
-                            reward_from_height = 50*resulting_height
+                    if(resulting_height > 0):
+                        reward_from_height = 50*resulting_height
                         
-                        else: 
-                            reward_from_height = 0
+                    else: 
+                        reward_from_height = 0
                         
 
-                    reward = reward_from_distance + reward_from_height + reward_gripper
+                    reward = reward_from_distance + reward_from_height
 
                     if number_step >= 0:
 
 
-                        wandb.log({f'Force Reward_{number_step}':reward_gripper})
                         wandb.log({f'Height Reward_{number_step}':reward_from_height})
                         wandb.log({f'Distance Reward_{number_step}':reward_from_distance})
-                        
-
                         wandb.log({f'Step Reward_{number_step}':reward})
 
 

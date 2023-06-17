@@ -102,7 +102,8 @@ while True:
 
     action = np.zeros(9, dtype=np.float64)
 
-    state_image, state_hand = env.get_state()
+    target_state, z_height, max_dimension = env.get_limit_target_pos(geom_body_ID)
+    state_image, state_hand = env.get_state(target_state, initial_gripper_force[0])
 
     shift_orientation = (target_orient[0]/3, target_orient[1]/3, target_orient[2]/3)
 
