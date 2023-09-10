@@ -130,7 +130,7 @@ class Mujoco_prototype():
                 #when it reaches a new position save the image
                 #even if you don't input anythin at the strt it takes a picture
                 #if error_pos_int < error_limit:
-                if (error_pos_int < 0.04 and i > 1500):
+                if (error_pos_int < 0.06 and i > 1500):
 
                     #I send the target position and the grip as a state
                     target, z_height, max_dimension = self.get_limit_target_pos(target_geom_ID)
@@ -153,7 +153,10 @@ class Mujoco_prototype():
                 
                     reward_from_distance = fun.expit(s*final_distance - 4)
 
-                    
+                    #Adding gripper reward, the closer to the target the more I want it to close fingers
+                    reward_gripper = (1 - self.pos_step[6]/8)*reward_from_distance
+
+                    #I caculate the height reward
                     if(resulting_height > 0):
                         reward_from_height = 50*resulting_height
                         
@@ -161,13 +164,14 @@ class Mujoco_prototype():
                         reward_from_height = 0
                         
 
-                    reward = reward_from_distance + reward_from_height
+                    reward = reward_from_distance + reward_from_height + reward_gripper
 
                     if number_step >= 0:
 
 
                         wandb.log({f'Height Reward_{number_step}':reward_from_height})
                         wandb.log({f'Distance Reward_{number_step}':reward_from_distance})
+                        wandb.log({f'Gripper Reward_{number_step}':reward_gripper})
                         wandb.log({f'Step Reward_{number_step}':reward})
 
 
@@ -219,7 +223,8 @@ class Mujoco_prototype():
         
         #hand_status = np.concatenate((force, pos_hand, orient_hand), axis = None)
 
-        hand_status = np.concatenate((pos_hand, orient_hand,grip_amplitude, target), axis = None)
+        #Normalize the grip amplitude to avoid instability in the network
+        hand_status = np.concatenate((pos_hand, orient_hand,grip_amplitude/8, target), axis = None)
 
         return image, hand_status
 
