@@ -49,7 +49,7 @@ class PolicyNetwork(nn.Module):
 
     def forward_CNN(self, state):
 
-        x = F.relu(self.conv_gen1(x))
+        x = F.relu(self.conv_gen1(state))
         x = F.relu(self.conv_gen1(x))
         x = F.relu(self.conv_gen2(x))
         x = self.pooling1(x)
