@@ -1,0 +1,30 @@
+wandb_version: 1
+
+algorithm:
+  desc: null
+  value: JacoRL2
+_wandb:
+  desc: null
+  value:
+    python_version: 3.7.4
+    cli_version: 0.15.10
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1697353952.856219
+    t:
+      1:
+      - 1
+      - 41
+      - 55
+      2:
+      - 1
+      - 41
+      - 55
+      3:
+      - 16
+      - 23
+      4: 3.7.4
+      5: 0.15.10
+      8:
+      - 5

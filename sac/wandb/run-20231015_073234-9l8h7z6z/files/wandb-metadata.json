@@ -1,0 +1,148 @@
+{
+    "os": "Linux-5.4.0-150-generic-x86_64-with-debian-buster-sid",
+    "python": "3.7.4",
+    "heartbeatAt": "2023-10-15T07:32:35.366219",
+    "startedAt": "2023-10-15T07:32:34.667422",
+    "docker": null,
+    "cuda": "10.2.89",
+    "args": [],
+    "state": "running",
+    "program": "train.py",
+    "codePathLocal": "train.py",
+    "codePath": "sac/train.py",
+    "git": {
+        "remote": "git@github.com:filyps98/JacoRLDR.git",
+        "commit": "451a043740b248f581b2cf161e4445cf58ecebb0"
+    },
+    "email": "pippo.ronco@gmail.com",
+    "root": "/root/home/JacoRLDR",
+    "host": "97f9cd7a23a9",
+    "username": "root",
+    "executable": "/opt/conda/bin/python",
+    "cpu_count": 10,
+    "cpu_count_logical": 20,
+    "cpu_freq": {
+        "current": 1200.0601499999998,
+        "min": 1200.0,
+        "max": 4560.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 1200.011,
+            "min": 1200.0,
+            "max": 4700.0
+        },
+        {
+            "current": 1200.015,
+            "min": 1200.0,
+            "max": 4700.0
+        },
+        {
+            "current": 1199.999,
+            "min": 1200.0,
+            "max": 4500.0
+        },
+        {
+            "current": 1200.175,
+            "min": 1200.0,
+            "max": 4600.0
+        },
+        {
+            "current": 1200.253,
+            "min": 1200.0,
+            "max": 4500.0
+        },
+        {
+            "current": 1200.07,
+            "min": 1200.0,
+            "max": 4500.0
+        },
+        {
+            "current": 1200.473,
+            "min": 1200.0,
+            "max": 4600.0
+        },
+        {
+            "current": 1200.023,
+            "min": 1200.0,
+            "max": 4500.0
+        },
+        {
+            "current": 1200.079,
+            "min": 1200.0,
+            "max": 4500.0
+        },
+        {
+            "current": 1200.124,
+            "min": 1200.0,
+            "max": 4500.0
+        },
+        {
+            "current": 1200.349,
+            "min": 1200.0,
+            "max": 4700.0
+        },
+        {
+            "current": 1200.016,
+            "min": 1200.0,
+            "max": 4700.0
+        },
+        {
+            "current": 1200.002,
+            "min": 1200.0,
+            "max": 4500.0
+        },
+        {
+            "current": 1200.007,
+            "min": 1200.0,
+            "max": 4600.0
+        },
+        {
+            "current": 1200.357,
+            "min": 1200.0,
+            "max": 4500.0
+        },
+        {
+            "current": 1200.021,
+            "min": 1200.0,
+            "max": 4500.0
+        },
+        {
+            "current": 1200.01,
+            "min": 1200.0,
+            "max": 4600.0
+        },
+        {
+            "current": 1200.028,
+            "min": 1200.0,
+            "max": 4500.0
+        },
+        {
+            "current": 1199.992,
+            "min": 1200.0,
+            "max": 4500.0
+        },
+        {
+            "current": 1200.011,
+            "min": 1200.0,
+            "max": 4500.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 915.3232879638672,
+            "used": 284.9829635620117
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 3090",
+            "memory_total": 25444548608
+        }
+    ],
+    "memory": {
+        "total": 125.51591491699219
+    }
+}

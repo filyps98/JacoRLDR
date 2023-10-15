@@ -17,6 +17,8 @@ class PolicyNetwork(nn.Module):
         self.log_std_max = log_std_max
 
         #CNN partx = F.relu(self.conv_gen2(x))
+        self.batch_norm_1= nn.BatchNorm2d(256)
+        self.batch_norm_2= nn.BatchNorm2d(512)
         self.conv_gen1 = nn.Conv2d(in_channels=256, out_channels=256, kernel_size = 1, stride = 1)
         self.conv_gen2 = nn.Conv2d(in_channels=256, out_channels=512, kernel_size = 3, stride = 2)
         self.conv_gen3 = nn.Conv2d(in_channels=512, out_channels=512, kernel_size = 1, stride = 1)
@@ -49,13 +51,19 @@ class PolicyNetwork(nn.Module):
 
     def forward_CNN(self, state):
 
-        x = F.relu(self.conv_gen1(state))
+        x = self.batch_norm_1(state)
         x = F.relu(self.conv_gen1(x))
+        x = self.batch_norm_1(x)
+        x = F.relu(self.conv_gen1(x))
+        x = self.batch_norm_1(x)
         x = F.relu(self.conv_gen2(x))
         x = self.pooling1(x)
+        x = self.batch_norm_2(x)
         x = F.relu(self.conv_gen3(x))
+        x = self.batch_norm_2(x)
         x = F.relu(self.conv_gen3(x))
         x = self.pooling1(x)
+        x = self.batch_norm_2(x)
         x = F.relu(self.conv_gen4(x))
         x = x.view(x.size(0), -1)
         x = F.relu(self.linear1(x))
